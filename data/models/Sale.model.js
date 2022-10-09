@@ -1,29 +1,29 @@
 import { DataType } from "sequelize";
 import { sequelize } from "../connection.js";
 
-const ItemSale = sequelize.define(
-  "ItemSales",
+const Sale = sequelize.define(
+  "Sales",
   {
-    idItemSale: {
+    idSale: {
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
       unique: true,
     },
-    price: {
+    paymentMethod: {
+      type: DataType.STRING,
+      allowNull: false,
+    },
+    total: {
       type: DataType.FLOAT,
       allowNull: false,
     },
-    amount: {
-        type: DataType.INTEGER,
-        allowNull: false,
-      },
   },
   { timestamps: true }
 );
 
-ItemSale.idItem = ItemSale.belongsTo(Item.idItem);
-ItemSales.idSale = ItemSales.belongsTo(Sale.idSale);
+Sale.idClient = Sale.belongsTo(Client.idClient);
+Sale.idCard = Sale.belongsTo(Card.idCard);
 
-export default { ItemSale };
+export default { Sale };
