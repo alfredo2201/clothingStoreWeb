@@ -1,10 +1,10 @@
 import  DataType  from "sequelize";
-import  sequelize  from "../connection.js";
+import  {sequelize}  from "../connection.js";
 
-const Manager = sequelize.define(
+export const Manager = sequelize.define(
   "Managers",
   {
-    idClient: {
+    idManager: {
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -26,6 +26,7 @@ const Manager = sequelize.define(
     email: {
       type: DataType.STRING,
       allowNull: false,
+      unique: true,
     },
     password: {
       type: DataType.STRING,
@@ -35,4 +36,6 @@ const Manager = sequelize.define(
   { timestamps: true }
 );
 
-export default { Manager };
+await Manager.sync();
+
+// export default { Manager };

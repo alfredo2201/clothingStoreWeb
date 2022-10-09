@@ -1,7 +1,7 @@
 import  DataType from "sequelize";
-import  sequelize  from "../connection.js";
+import  {sequelize}  from "../connection.js";
 
-const Item = sequelize.define(
+export const Item = sequelize.define(
   "Items",
   {
     idItem: {
@@ -35,4 +35,5 @@ const Item = sequelize.define(
   { timestamps: true }
 );
 
-export default { Item };
+Item.sync();
+// export default { Item };

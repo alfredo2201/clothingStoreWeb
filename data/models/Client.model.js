@@ -1,7 +1,7 @@
-import  DataType from "sequelize";
-import  sequelize  from "../connection.js";
+import DataType from "sequelize";
+import { sequelize } from "../connection.js";
 
-const Client = sequelize.define(
+export const Client = sequelize.define(
   "Clients",
   {
     idClient: {
@@ -30,13 +30,19 @@ const Client = sequelize.define(
     email: {
       type: DataType.STRING,
       allowNull: false,
+      unique: true,
     },
     password: {
       type: DataType.STRING,
       allowNull: false,
     },
   },
-  { timestamps: true }
+  {
+    tableName: 'clients',
+    timestamps: true,
+  }
 );
 
-export default { Client };
+await Client.sync();
+
+// export default { Client };

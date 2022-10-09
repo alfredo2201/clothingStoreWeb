@@ -1,7 +1,9 @@
 import  DataType  from "sequelize";
-import  sequelize  from "../connection.js";
+import  {sequelize}  from "../connection.js";
+import { Client } from "./Client.model.js";
+import { Card } from "./Card.model.js";
 
-const Sale = sequelize.define(
+export const Sale = sequelize.define(
   "Sales",
   {
     idSale: {
@@ -23,7 +25,13 @@ const Sale = sequelize.define(
   { timestamps: true }
 );
 
-Sale.idClient = Sale.belongsTo(Client.idClient);
-Sale.idCard = Sale.belongsTo(Card.idCard);
+Sale.belongsTo(Client, {
+  foreignKey: 'idClient'
+});
+Sale.belongsTo(Card, {
+  foreignKey: 'idCard'
+});
 
-export default { Sale };
+await Sale.sync();
+
+// export default { Sale };
