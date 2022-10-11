@@ -5,18 +5,18 @@ import { ejecuteCardTest } from './testModels/cardTest.js';
 import { ejecuteSaleTest } from './testModels/saleTest.js';
 import { ejecuteItemSaleTest } from './testModels/itemSaleTest.js';
 //Pruebas de cliente
-// await ejecuteTest();
+//await ejecuteTest();
 //Priuebas de Items
-// await ejecuteTestItem();
+//await ejecuteTestItem();
 
 //Pruebas de Manager
-// await ejecuteManagerTest();
+//await ejecuteManagerTest();
 
 // Prueba Card (EJECUTE PRIMERO 'ejecuteTest()') para tener clientes
-// await ejecuteCardTest();
+//await ejecuteCardTest();
 
 //prueba de sales (debe primero ejecutar ejecuteTest y ejecuteCardTest);
-// await ejecuteSaleTest();
+//await ejecuteSaleTest();
 
 //prueba de item sales (debe de haber ejecuta todas las pruebas anteriores)
-await ejecuteItemSaleTest();
+//await ejecuteItemSaleTest();

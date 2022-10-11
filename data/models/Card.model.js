@@ -30,6 +30,7 @@ export const Card = sequelize.define(
 
 Card.belongsTo(Client, {
   foreignKey:'idClient',  
+  allowNull: false
 });
 
 await Card.sync();

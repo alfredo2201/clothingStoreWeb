@@ -26,10 +26,12 @@ export const Sale = sequelize.define(
 );
 
 Sale.belongsTo(Client, {
-  foreignKey: 'idClient'
+  foreignKey: 'idClient',
+  allowNull: false
 });
 Sale.belongsTo(Card, {
-  foreignKey: 'idCard'
+  foreignKey: 'idCard',
+  allowNull: false
 });
 
 await Sale.sync();
