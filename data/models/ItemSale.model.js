@@ -4,7 +4,7 @@ import { Item } from "./Item.model.js";
 import { Sale } from "./Sale.model.js";
 
 export const ItemSale = sequelize.define(
-  "ItemSales",
+  "ItemSale",
   {
     idItemSale: {
       type: DataType.INTEGER,

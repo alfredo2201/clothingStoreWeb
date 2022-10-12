@@ -2,7 +2,7 @@ import DataType from "sequelize";
 import { sequelize } from "../connection.js";
 
 export const Client = sequelize.define(
-  "Clients",
+  "Client",
   {
     idClient: {
       type: DataType.INTEGER,
@@ -45,4 +45,4 @@ export const Client = sequelize.define(
 
 await Client.sync();
 
-// export default { Client };
+export default { Client };

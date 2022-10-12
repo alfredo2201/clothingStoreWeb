@@ -1,4 +1,4 @@
-import {Manager} from '../data/models/Manager.model.js'
+import {Admin} from '../data/models/Manager.model.js'
 
 export const ejecuteManagerTest =async () =>{
     console.log('Se crean los Manager');
@@ -19,7 +19,7 @@ export const ejecuteManagerTest =async () =>{
 }
 
 const createManager = async() =>{
-    await Manager.create({
+    await Admin.create({
         userName: 'Manager1',
         name: 'man1',
         lastName: 'm1',
@@ -27,7 +27,7 @@ const createManager = async() =>{
         password: 'askjdnaksjdnasjkd'
     });
 
-    await Manager.create({
+    await Admin.create({
         userName: 'Manager2',
         name: 'man2',
         lastName: 'm2',
@@ -37,14 +37,14 @@ const createManager = async() =>{
 }
 
 const getAllManagers = async() =>{
-    const managers = await Manager.findAll({
+    const managers = await Admin.findAll({
         attributes: ['userName', 'name', 'lastName', 'email']
     });
     return managers;
 }
 
 const updateManager = async()=>{
-    const manager = await Manager.findOne({
+    const manager = await Admin.findOne({
         where: {idManager: 1}
     });
     console.log('Manager antes de actualizar: ', manager.dataValues);
@@ -55,5 +55,5 @@ const updateManager = async()=>{
 }
 
 const deleteManager = async() =>{
-    await Manager.destroy({where: {idManager:1}})
+    await Admin.destroy({where: {idManager:1}})
 }

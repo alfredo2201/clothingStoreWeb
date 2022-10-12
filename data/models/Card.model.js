@@ -3,7 +3,7 @@ import  {sequelize}  from "../connection.js";
 import { Client } from "./Client.model.js";
 
 export const Card = sequelize.define(
-  "Cards",
+  "Card",
   {
     idCard: {
       type: DataType.INTEGER,

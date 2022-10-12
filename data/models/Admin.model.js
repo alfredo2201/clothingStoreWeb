@@ -1,10 +1,10 @@
 import  DataType  from "sequelize";
 import  {sequelize}  from "../connection.js";
 
-export const Manager = sequelize.define(
-  "Managers",
+export const Admin = sequelize.define(
+  "Admin",
   {
-    idManager: {
+    idAdmin: {
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -36,6 +36,6 @@ export const Manager = sequelize.define(
   { timestamps: true }
 );
 
-await Manager.sync();
+await Admin.sync();
 
 // export default { Manager };

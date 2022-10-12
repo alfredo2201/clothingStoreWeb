@@ -1,11 +1,12 @@
 import {ejecuteTest} from './testModels/clientTest.js'
-import { ejecuteTestItem } from './testModels/itemTest.js';
-import { ejecuteManagerTest } from './testModels/managerTest.js';
-import { ejecuteCardTest } from './testModels/cardTest.js';
-import { ejecuteSaleTest } from './testModels/saleTest.js';
-import { ejecuteItemSaleTest } from './testModels/itemSaleTest.js';
+//import { ejecuteTestItem } from './testModels/itemTest.js';
+//import { ejecuteManagerTest } from './testModels/managerTest.js';
+//import { ejecuteCardTest } from './testModels/cardTest.js';
+//import { ejecuteSaleTest } from './testModels/saleTest.js';
+//import { ejecuteItemSaleTest } from './testModels/itemSaleTest.js';
 //Pruebas de cliente
-//await ejecuteTest();
+await ejecuteTest();
+
 //Priuebas de Items
 //await ejecuteTestItem();
 

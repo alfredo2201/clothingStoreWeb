@@ -1,4 +1,5 @@
-import { Client } from '../data/models/Client.model.js'
+import * as ClientRepo from "../data/repositories/client.repository.js"
+
 
 export const ejecuteTest = async () => {
     // se crean clientes
@@ -24,7 +25,7 @@ export const ejecuteTest = async () => {
 
 //crear cliente
 const createClient = async () => {
-    await Client.create({
+    await ClientRepo.register({
         userName: 'comprador',
         name: "client1",
         lastName: "lastname1",
@@ -33,7 +34,7 @@ const createClient = async () => {
         password: 'akjsdna'
     });
 
-    await Client.create({
+    await ClientRepo.register({
         userName: 'comprador2',
         name: "client2",
         lastName: "lastname2",
@@ -42,7 +43,7 @@ const createClient = async () => {
         password: 'askjdnakjsd'
     })
 
-    await Client.create({
+    await ClientRepo.register({
         userName: 'comprador3',
         name: "client3",
         lastName: "lastname3",
@@ -54,15 +55,11 @@ const createClient = async () => {
 }
 
 const getAllClients = async () => {
-    const clients = await Client.findAll({
-        attributes: ['userName', 'name', 'lastName', 'address', 'email']
-    });
-
-    return clients
+    return -1
 }
 
 const updateCliente = async () => {
-    const client = await Client.findOne({ idClient: 1 });
+    const client = await ClientRepo.findOne({ idClient: 1 });
     console.log('cliente sin actualizar: ', client.dataValues);
     await client.update(
         { 
@@ -75,5 +72,5 @@ const updateCliente = async () => {
 }
 
 const deleteClient = async () => {
-    await Client.destroy({ where: {idClient: 1}});
+    //await ClientRepo.deleteOne({idClient: 1});
 }

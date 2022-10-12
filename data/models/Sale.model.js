@@ -4,7 +4,7 @@ import { Client } from "./Client.model.js";
 import { Card } from "./Card.model.js";
 
 export const Sale = sequelize.define(
-  "Sales",
+  "Sale",
   {
     idSale: {
       type: DataType.INTEGER,
