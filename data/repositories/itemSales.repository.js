@@ -4,25 +4,26 @@ const register = async(itemSale) =>{
     if(!itemSale){
         res.send({message: 'error itemSale'})
     }
-    const {idItem, price, stock} = itemSale;
+    const {idItem, idSale, price, stock} = itemSale;
     await ItemSale.create({
-        idItem, 
+        idItem,
+        idSale, 
         price, 
         stock
     });
 } 
 
 const findAll = async() =>{
-    const itemSales = await ItemSale.findAll();
+    const item = await ItemSale.findAll();
     return itemSales;
 }
 
 //busca por price, id, stock
 const findOne = async(search) =>{
-    const {price, stock, idItemSale} = search; 
+    const {price, stock, idItem} = search; 
     const itemSale = await ItemSale.findOne({
         where: {$or:[{
-            idItemSale,
+            idItem,
         },
         {
             price
@@ -35,22 +36,22 @@ const findOne = async(search) =>{
     return itemSale;
 }
 
-const deleteOne = async(idItemSale) =>{
+const deleteOne = async(idItem) =>{
     return await ItemSale.destroy({where: 
         {
-            idItemSale
+            idItem
         }
     });
 }
 
 const update = async(newData) =>{
-    const {idItemSale, stock} = newData;
+    const {idItem, stock} = newData;
 
     return await Item.update({
         stock
     },
     {
-        where: {idItemSale}
+        where: {idItem}
     }
     );
 }
