@@ -45,4 +45,4 @@ export const Client = sequelize.define(
 
 await Client.sync();
 
-export default { Client };
+export default  Client ;

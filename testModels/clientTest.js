@@ -55,19 +55,13 @@ const createClient = async () => {
 }
 
 const getAllClients = async () => {
-    return -1
+    return ClientRepo.findAll();
 }
 
 const updateCliente = async () => {
-    const client = await ClientRepo.findOne({ idClient: 1 });
-    console.log('cliente sin actualizar: ', client.dataValues);
-    await client.update(
-        { 
-            name: 'clienteActulizado'
-        },
-        { 
-            where: { idCliente: 1 }
-        })
+    const client = await ClientRepo.findOne({ idClient: 2 });
+    console.log('cliente sin actualizar: ', client.dataValues);    
+    await ClientRepo.update(client.dataValues)
     console.log('cliente actualizado: ', client.dataValues);
 }
 
