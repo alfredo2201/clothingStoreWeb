@@ -22,11 +22,11 @@ const findAll = async () => {
 
 //busca por category, id or size
 const findOne = async (search) => {
-    // const { size, category, idItem } = search;
+    const { size, category, idItem } = search;
     // const item = await 
     // const item = await Item.findOne({where: {idItem: search}});
     const item = await Item.findOne({
-        where: or({idItem: search}, {name: search}, {category: search})
+        where: or({ idItem }, { size }, { category })
     })
     return item;
 }
@@ -52,7 +52,7 @@ const update = async (newData) => {
     );
 }
 
-export {
+export default {
     register,
     findAll,
     findOne,

@@ -13,6 +13,22 @@ export const ItemSale = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    idSale:{
+      type: DataType.INTEGER,
+      allowNull: false,
+      references:{
+        model: Sale,
+        key:'idSale'
+      }
+    },
+    idItem:{
+      type: DataType.INTEGER,
+      allowNull: false,
+      references:{
+        model: Item,
+        key:'idItem'
+      }
+    },
     price: {
       type: DataType.FLOAT,
       allowNull: false,
@@ -25,11 +41,4 @@ export const ItemSale = sequelize.define(
   { timestamps: true }
 );
 
-ItemSale.belongsTo(Item, {
-  foreignKey: 'idItem'
-});
-ItemSale.belongsTo(Sale, {
-  foreignKey: 'idSale'
-})
 
-await ItemSale.sync();

@@ -25,15 +25,5 @@ export const Sale = sequelize.define(
   { timestamps: true }
 );
 
-Sale.belongsTo(Client, {
-  foreignKey: 'idClient',
-  allowNull: false
-});
-Sale.belongsTo(Card, {
-  foreignKey: 'idCard',
-  allowNull: false
-});
-
-await Sale.sync();
 
 // export default { Sale };

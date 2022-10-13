@@ -28,13 +28,3 @@ export const Card = sequelize.define(
   { timestamps: true }
 );
 
-Card.belongsTo(Client, {
-  foreignKey:'idClient',  
-  allowNull: false
-});
-
-await Card.sync();
-
-
-// Card.idClient = Card.belongsTo(Client.idClient);
-// export default { Card };

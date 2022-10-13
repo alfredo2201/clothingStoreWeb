@@ -1,5 +1,6 @@
 import DataType from "sequelize";
 import { sequelize } from "../connection.js";
+import { Card } from "./Card.model.js";
 
 export const Client = sequelize.define(
   "Client",
@@ -43,6 +44,3 @@ export const Client = sequelize.define(
   }
 );
 
-await Client.sync();
-
-export default  Client ;

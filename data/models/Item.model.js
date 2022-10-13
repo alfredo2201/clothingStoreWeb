@@ -34,6 +34,3 @@ export const Item = sequelize.define(
   },
   { timestamps: true }
 );
-
-Item.sync();
-// export default { Item };

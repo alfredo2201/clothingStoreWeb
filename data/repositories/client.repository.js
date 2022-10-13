@@ -1,4 +1,4 @@
-import Client from "../models/Client.model.js";
+import { Client } from "../models/Client.model.js";
 
 const register = async (value) => {
   if (!value) return new Error("Client is required");
@@ -72,9 +72,9 @@ const findAll = async () => {
 };
 
 export {
-    register,
-    update,
-    deleteOne,
-    findOne,
-    findAll
+  register,
+  update,
+  deleteOne,
+  findOne,
+  findAll
 };

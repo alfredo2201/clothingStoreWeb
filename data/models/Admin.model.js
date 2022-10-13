@@ -36,6 +36,4 @@ export const Admin = sequelize.define(
   { timestamps: true }
 );
 
-await Admin.sync();
 
-// export default { Manager };
