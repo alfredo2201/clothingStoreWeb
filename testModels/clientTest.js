@@ -66,5 +66,5 @@ const updateCliente = async () => {
 }
 
 const deleteClient = async () => {
-    //await ClientRepo.deleteOne({idClient: 1});
+    await ClientRepo.deleteOne({idClient: 1});
 }

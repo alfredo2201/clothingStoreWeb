@@ -23,7 +23,7 @@ export const Card = sequelize.define(
     expirationDate: {
       type: DataType.STRING,
       allowNull: false,
-    },
+    }
   },
   { timestamps: true }
 );

@@ -22,7 +22,7 @@ const update = async (value) => {
   const client = await Client.findOne({
     where: {
       idClient: {
-        [Op.eq]: value.id,
+        [Op.eq]: value.idClient,
       },
     },
   });
@@ -39,7 +39,7 @@ const update = async (value) => {
 const deleteOne = async (value) => {
   if (!value) return new Error("Client is required");
   await Client.destroy({
-    where: { idClient: value.id },
+    where: { idClient: value.idClient },
   })
     .then("Client deleted successfully")
     .catch(() => {
