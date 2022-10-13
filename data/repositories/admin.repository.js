@@ -13,7 +13,7 @@ const findAll = async() =>{
 }
 
 const findOne = async(idAdmin) =>{
-    if(!admin){
+    if(!idAdmin){
         console.log('error');
     }
     const admin = await Admin.findOne({where: {idAdmin}});

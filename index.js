@@ -1,17 +1,21 @@
 import {ejecuteTest} from './testModels/clientTest.js'
-//import { ejecuteTestItem } from './testModels/itemTest.js';
-//import { ejecuteManagerTest } from './testModels/managerTest.js';
-//import { ejecuteCardTest } from './testModels/cardTest.js';
-//import { ejecuteSaleTest } from './testModels/saleTest.js';
-//import { ejecuteItemSaleTest } from './testModels/itemSaleTest.js';
+import { ejecuteTestItem } from './testModels/itemTest.js';
+import {ejecuteManagerTest} from './testModels/managerTest.js';
+import { ejecuteManagerTest } from './testModels/managerTest.js';
+import { ejecuteCardTest } from './testModels/cardTest.js';
+import { ejecuteSaleTest } from './testModels/saleTest.js';
+import { ejecuteItemSaleTest } from './testModels/itemSaleTest.js';
+
 //Pruebas de cliente
-await ejecuteTest();
+// await ejecuteTest();
+// const item = await findOne('camiseta1');
+// console.log(JSON.stringify(item));
 
 //Priuebas de Items
-//await ejecuteTestItem();
+// await ejecuteTestItem();
 
 //Pruebas de Manager
-//await ejecuteManagerTest();
+// await ejecuteManagerTest();
 
 // Prueba Card (EJECUTE PRIMERO 'ejecuteTest()') para tener clientes
 //await ejecuteCardTest();

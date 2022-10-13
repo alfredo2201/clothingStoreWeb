@@ -1,4 +1,5 @@
-import {Admin} from '../data/models/Manager.model.js'
+import {Admin} from '../data/models/Admin.model.js';
+import {findAll, findOne, deleteOne, register, update} from '../data/repositories/admin.repository.js';
 
 export const ejecuteManagerTest =async () =>{
     console.log('Se crean los Manager');
@@ -19,41 +20,38 @@ export const ejecuteManagerTest =async () =>{
 }
 
 const createManager = async() =>{
-    await Admin.create({
-        userName: 'Manager1',
+    await register({
+        userName: 'admin1',
         name: 'man1',
         lastName: 'm1',
-        email: 'manager@gmail.com',
+        email: 'admin@gmail.com',
         password: 'askjdnaksjdnasjkd'
     });
 
-    await Admin.create({
-        userName: 'Manager2',
+    await register({
+        userName: 'admin2',
         name: 'man2',
         lastName: 'm2',
-        email: 'manager2@gmail.com',
+        email: 'admin2@gmail.com',
         password: 'askjdnaksjdnasjkd'
     });
 }
 
 const getAllManagers = async() =>{
-    const managers = await Admin.findAll({
+    const managers = await findAll({
         attributes: ['userName', 'name', 'lastName', 'email']
     });
     return managers;
 }
 
 const updateManager = async()=>{
-    const manager = await Admin.findOne({
-        where: {idManager: 1}
-    });
+    const manager = await findOne(1);
     console.log('Manager antes de actualizar: ', manager.dataValues);
-    manager.update({
-        name: 'manager actualizado'
-    })
+    manager.name = 'manager actualizado'
+    update(manager);
     console.log('Manager actualizado: ', manager.dataValues);
 }
 
 const deleteManager = async() =>{
-    await Admin.destroy({where: {idManager:1}})
+    await deleteOne(1);
 }

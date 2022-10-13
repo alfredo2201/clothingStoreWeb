@@ -1,10 +1,11 @@
-import { Item } from "../models/Item.model";
+import { or } from "sequelize";
+import { Item } from "../models/Item.model.js";
 
-const register = async(item) =>{
-    if(!item){
-        res.send({message: 'error item'})
+const register = async (item) => {
+    if (!item) {
+        res.send({ message: 'error item' })
     }
-    const {name, category, size, price, stock} = item;
+    const { name, category, size, price, stock } = item;
     await Item.create({
         name,
         category,
@@ -14,53 +15,47 @@ const register = async(item) =>{
     });
 }
 
-const findAll = async() =>{
+const findAll = async () => {
     const items = await Item.findAll();
     return items;
 }
 
 //busca por category, id or size
-const findOne = async(search) =>{
-    const {size, category, idItem} = search; 
+const findOne = async (search) => {
+    // const { size, category, idItem } = search;
+    // const item = await 
+    // const item = await Item.findOne({where: {idItem: search}});
     const item = await Item.findOne({
-        where: {$or:[{
-            idItem,
-        },
-        {
-            category
-        },
-        {
-            size
-        }
-    ]}
+        where: or({idItem: search}, {name: search}, {category: search})
     })
     return item;
 }
 
-const deleteOne = async(idItem) =>{
-    return await Item.destroy({where: 
+const deleteOne = async (idItem) => {
+    return await Item.destroy({
+        where:
         {
             idItem
         }
     });
 }
 
-const update = async(newData) =>{
-    const {idItem,name, category, size, price, stock} = newData;
+const update = async (newData) => {
+    const { idItem, name, category, size, price, stock } = newData;
 
     return await Item.update({
-         name, category, size, price, stock
+        name, category, size, price, stock
     },
-    {
-        where: {idItem}
-    }
+        {
+            where: { idItem }
+        }
     );
 }
 
 export {
     register,
     findAll,
-    findOne, 
+    findOne,
     deleteOne,
     update
 }
