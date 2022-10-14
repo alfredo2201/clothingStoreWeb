@@ -14,7 +14,7 @@ export const Sale = sequelize.define(
       unique: true,
     },
     paymentMethod: {
-      type: DataType.STRING,
+      type: DataType.STRING(30),
       allowNull: false,
     },
     total: {

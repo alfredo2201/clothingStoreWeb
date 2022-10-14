@@ -1,5 +1,5 @@
-import  DataType  from "sequelize";
-import  {sequelize}  from "../connection.js";
+import DataType from "sequelize";
+import { sequelize } from "../connection.js";
 import { Client } from "./Client.model.js";
 
 export const Card = sequelize.define(
@@ -13,18 +13,17 @@ export const Card = sequelize.define(
       unique: true,
     },
     nameOwner: {
-      type: DataType.STRING,
+      type: DataType.STRING(80),
       allowNull: false,
     },
     cardNumber: {
-      type: DataType.STRING,
+      type: DataType.STRING(16),
       allowNull: false,
     },
     expirationDate: {
-      type: DataType.STRING,
+      type: DataType.STRING(5),
       allowNull: false,
-    }
+    },
   },
   { timestamps: true }
 );
-

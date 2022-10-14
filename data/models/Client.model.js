@@ -13,34 +13,36 @@ export const Client = sequelize.define(
       unique: true,
     },
     userName: {
-      type: DataType.STRING,
+      type: DataType.STRING(50),
       allowNull: false,
     },
     name: {
-      type: DataType.STRING,
+      type: DataType.STRING(30),
       allowNull: false,
     },
     lastName: {
-      type: DataType.STRING,
+      type: DataType.STRING(30),
       allowNull: false,
     },
     address: {
-      type: DataType.STRING,
+      type: DataType.STRING(100),
       allowNull: false,
     },
     email: {
       type: DataType.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
-      type: DataType.STRING,
+      type: DataType.STRING(150),
       allowNull: false,
     },
   },
   {
-    tableName: 'clients',
+    tableName: "clients",
     timestamps: true,
   }
 );
-

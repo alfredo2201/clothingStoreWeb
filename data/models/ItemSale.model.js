@@ -13,22 +13,6 @@ export const ItemSale = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    // idSale:{
-    //   type: DataType.INTEGER,
-    //   allowNull: false,
-    //   references:{
-    //     model: Sale,
-    //     key:'idSale'
-    //   }
-    // },
-    // idItem:{
-    //   type: DataType.INTEGER,
-    //   allowNull: false,
-    //   references:{
-    //     model: Item,
-    //     key:'idItem'
-    //   }
-    // },
     price: {
       type: DataType.FLOAT,
       allowNull: false,

@@ -12,15 +12,15 @@ export const Item = sequelize.define(
       unique: true,
     },
     name: {
-      type: DataType.STRING,
-      allowNull: false,
+      type: DataType.STRING(60),
+      allowNull: false      
     },
     category: {
-      type: DataType.STRING,
+      type: DataType.STRING(30),
       allowNull: false,
     },
     size: {
-      type: DataType.STRING,
+      type: DataType.STRING(3),
       allowNull: false,
     },
     price: {
