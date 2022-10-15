@@ -1,6 +1,7 @@
 import DataType from "sequelize";
 import { sequelize } from "../connection.js";
 import { Card } from "./Card.model.js";
+import bcrypt from 'bcrypt';
 
 export const Client = sequelize.define(
   "Client",
@@ -44,5 +45,11 @@ export const Client = sequelize.define(
   {
     tableName: "clients",
     timestamps: true,
+    hooks:{
+      beforeCreate: async(client)=>{
+        const salt = await bcrypt.genSalt(10);
+        client.password = await bcrypt.hash(client.password, salt);
+      }
+    }
   }
 );

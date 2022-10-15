@@ -22,12 +22,12 @@ const findAll = async () => {
 
 //busca por category, id or size
 const findOne = async (search) => {
-    const { size, category, idItem } = search;
+    const { idItem } = search;
     // const item = await 
-    // const item = await Item.findOne({where: {idItem: search}});
-    const item = await Item.findOne({
-        where: or({ idItem }, { size }, { category })
-    })
+    const item = await Item.findOne({where: {idItem: search}});
+    // const item = await Item.findOne({
+    //     where: or({ idItem: search }, { size: search }, { category: search })
+    // })
     return item;
 }
 

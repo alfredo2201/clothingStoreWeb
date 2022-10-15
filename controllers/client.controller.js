@@ -9,12 +9,12 @@ import {
 
 const registerClient = async (req, res) => {
     if (!req.body) {
-        return res.status(400).send('Bad Request');
+        return res.status(400).send('Bad Request 1');
     }
 
     const { userName, name, lastName, address, email, password } = req.body;
     if (!userName || !name || !lastName || !address || !email || !password) {
-        return res.status(400).send('Bad Request');
+        return res.status(400).send('Bad Request 2');
     }
 
     const newClient = Client.build({
@@ -23,6 +23,7 @@ const registerClient = async (req, res) => {
     
     await register(newClient);
 
+    res.status(201).send('Cliente Creado');
 }
 
 const findAllClients = async (req, res) => {
@@ -30,15 +31,15 @@ const findAllClients = async (req, res) => {
     if (!clients) {
         return res.send('Error');
     }
-    return clients;
+    res.send(clients);
 }
 
 const findOneClient = async (req, res) => {
-    if (!req.body || !req.param) {
+    if (!req.body || !req.params) {
         return res.send('Error');
     }
 
-    const { idClient } = req.param;
+    const { idClient } = req.params;
     //no tiene ningún parámetro para buscar
     if (!idClient) {
         return res.send('Error');
@@ -46,15 +47,15 @@ const findOneClient = async (req, res) => {
 
     const client = await findOne({ idClient});
 
-    return client;
+    res.send(client);
 }
 
 const deleteOneClient = async (req, res) => {
-    if (!req.param) {
+    if (!req.params) {
         return res.send('Error');
     }
 
-    const { idClient } = req.param;
+    const { idClient } = req.params;
     if (!idClient) {
         return res.send('Error');
     }
@@ -75,15 +76,20 @@ const deleteOneClient = async (req, res) => {
 }
 
 const updateClient = async (req, res) => {
-    if (!req.body || req.param) {
-        return res.send('Error');
+    if (!req.body || !req.params) {
+        return res.send('Error 1');
     }
-    const { idClient } = req.param;
+
+    const { idClient } = req.params;
     const data = req.body;
 
-    const client = await findOne({ idClient }).dataValues;
+    const client = await findOne(idClient);
 
-    const newClient = { ...client, ...data };
+    if(!client){
+        return res.send('Error Client not Found 2');
+    }
+
+    const newClient = { ...client.dataValues, ...data };
 
     const result = await update(newClient);
 
@@ -91,7 +97,7 @@ const updateClient = async (req, res) => {
         return res.send('no se actualizó nada');
     }
 
-    return res.send('cliente actualizadoo);
+    return res.send('cliente actualizado');
 }
 
 export default {

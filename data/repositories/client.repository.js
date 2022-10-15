@@ -18,21 +18,15 @@ const register = async (value) => {
 };
 
 const update = async (value) => {
-  if (!value) return new Error("Client is required");
-  const client = await Client.findOne({
-    where: {
-      idClient: {
-        [Op.eq]: value.idClient,
-      },
-    },
-  });
-  if (!client) return new Error("Client not found");
-  const { userName, name, lastName, address, email, password } = value;
-  Client.update({
+  const { idClient,userName, name, lastName, address } = value;
+  await Client.update({
     userName: userName,
     name: name,
     lastName: lastName,
     address: address,
+  },
+  {
+    where: {idClient}
   });
 };
 
@@ -48,24 +42,26 @@ const deleteOne = async (value) => {
 };
 
 const findOne = async (value) => {
-  if (!value) return new Error("Client is required");
-  const { idClient } = value;
+  // if (!value) return new Error("Client is required");
+  // const { idClient } = value;
   try {
-    const client = await Client.findAll({
+    const client = await Client.findOne({
       where: {
-        idClient: idClient,
+        idClient: value,
       },
     });
-    if (client.length > 0) return client;
+    // if (client.length > 0)
+    return client;
   } catch (e) {
     throw new Error("Client not found");
   }
 };
+
 const findAll = async () => {
   try {
     const client = await Client.findAll({
     });
-    if (client.length > 0) return client;
+    return client;
   } catch (e) {
     throw new Error("Client not found");
   }

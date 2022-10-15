@@ -1,16 +1,16 @@
 import { Router } from 'express';
-import itemController from '../controllers/item.controller';
+import itemController from '../controllers/item.controller.js';
 
 const router = Router();
 
-router.get('/', itemController.findAllItems);
+router.get('/card', itemController.findAllItems);
 
-router.get('/:idItem', itemController.findOneItem);
+router.get('/card/:idCard', itemController.findOneItem);
 
-router.post('/', itemController.registerItem);
+router.post('/card', itemController.registerItem);
 
-router.put('/:idItem', itemController.updateItem);
+router.put('/card/:idCard', itemController.updateItem);
 
-router.delete('/:idItem', itemController.deleteOneItem);
+router.delete('/card/:idCard', itemController.deleteOneItem);
 
 export default router;
