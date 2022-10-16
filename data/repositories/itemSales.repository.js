@@ -1,26 +1,26 @@
-import {ItemSale} from "../models/ItemSale.model";
+import {ItemSale} from "../models/ItemSale.model.js";
 
 const register = async(itemSale) =>{
     if(!itemSale){
         res.send({message: 'error itemSale'})
     }
-    const {idItem, idSale, price, stock} = itemSale;
+    const {idItem, idSale, price, amount} = itemSale;
     await ItemSale.create({
         idItem,
         idSale, 
         price, 
-        stock
+        amount
     });
 } 
 
 const findAll = async() =>{
     const item = await ItemSale.findAll();
-    return itemSales;
+    return item;
 }
 
-//busca por price, id, stock
+//busca por price, id, amount
 const findOne = async(search) =>{
-    const {price, stock, idItem} = search; 
+    const {price, amount, idItem} = search; 
     const itemSale = await ItemSale.findOne({
         where: {$or:[{
             idItem,
@@ -29,7 +29,7 @@ const findOne = async(search) =>{
             price
         },
         {
-            stock
+            amount
         }
     ]}
     })
@@ -45,10 +45,10 @@ const deleteOne = async(idItem) =>{
 }
 
 const update = async(newData) =>{
-    const {idItem, stock} = newData;
+    const {idItem, amount} = newData;
 
     return await Item.update({
-        stock
+        amount
     },
     {
         where: {idItem}

@@ -27,3 +27,34 @@ const registerSale = async(req, res) =>{
     }
 }
 
+const findAllSales= async (req, res) => {
+    const sales = await findAll();
+    if (!sales) {
+        return res.send('Error');
+    }
+    res.send(sales);
+}
+
+const findOneSale = async (req, res) => {
+    if (!req.body || !req.params) {
+        return res.send('Error');
+    }
+
+    const { idSale } = req.params;
+    //no tiene ningún parámetro para buscar
+    if (!idSale) {
+        return res.send('Error');
+    }
+
+    const sale = await findOne({ idSale});
+
+    res.send(sale);
+}
+
+
+export default {
+    registerSale,
+    findAllSales,
+    findOneSale
+};
+
