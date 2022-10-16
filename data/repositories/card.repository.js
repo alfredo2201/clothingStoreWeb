@@ -3,7 +3,8 @@ import { Card } from "../models/Card.model.js";
 const register = async (value) => {
   const { nameOwner, cardNumber, expirationDate, idClient } = value;
   await Card.create({
-    nameOwner, cardNumber, expirationDate, idClient
+    nameOwner, cardNumber, expirationDate,
+    idClient
   });
   // if (!value) return new Error("Values are required");
   // const { nameOwner, cardNumber, expirationDate } = value;
@@ -65,6 +66,7 @@ const findOne = async (value) => {
 const findAll = async () => {
   return await Card.findAll();
 }
+
 export default {
   register,
   update,

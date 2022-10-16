@@ -29,13 +29,13 @@ const registerCard = async (req, res) => {
         //     idClient: client.idClient
         // });
 
-        await cardRepository.register({
+        const result = await cardRepository.register({
             nameOwner, 
             cardNumber, 
             expirationDate,
-            idClient: client
+            idClient
         });
-        return res.status(201).send('Registed Card');
+        return res.status(201).send(`Registed Card, ${result}`);
     } catch (error) {
         res.send(error.message);
     }
