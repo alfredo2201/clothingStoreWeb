@@ -62,12 +62,12 @@ const deleteOneSale = async (req, res) => {
             return res.send({ message: 'error' });
         }
 
-        const sale = await saleRepository.findOne(idSale);
+        const sale = await findOne(idSale);
         if (!sale) {
             return res.send({ message: 'sale Not Found' });
         }
 
-        const result = await saleRepository.deleteOne(idSale);
+        const result = await deleteOne(idSale);
 
         if (result === 0) {
             return res.send('sale Not Deleted');

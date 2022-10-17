@@ -5,7 +5,7 @@ const registerItem = async (req, res, next) => {
     try {
         if (!req.body) {
             // throw new Error('Bad request 1');
-            const error = new Error('Bad request 1');
+            const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error)
         }
@@ -46,7 +46,7 @@ const findAllItems = async (req, res, next) => {
     }
 }
 
-const findOneItem = async (req, res) => {
+const findOneItem = async (req, res, next) => {
     try {
         if (!req.params) {
             const error = new Error('Bad request');
@@ -58,7 +58,9 @@ const findOneItem = async (req, res) => {
         // const { category, size } = req.body;
         //no tiene ningún parámetro para buscar
         if (!idItem) {
-            return res.send('Error');
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
         }
 
         const item = await itemRepository.findOne(idItem);
@@ -71,11 +73,11 @@ const findOneItem = async (req, res) => {
 
         res.send(item);
     } catch (error) {
-        res.send(error.message);
+        next(error);
     }
 }
 
-const deleteOneItem = async (req, res) => {
+const deleteOneItem = async (req, res, next) => {
     try {
         if (!req.params) {
             const error = new Error('Bad request');
@@ -105,11 +107,11 @@ const deleteOneItem = async (req, res) => {
 
         res.send({ message: 'Deleted Item' });
     } catch (error) {
-        res.send(error.message);
+        next(error);
     }
 }
 
-const updateItem = async (req, res) => {
+const updateItem = async (req, res, next) => {
     try {
         if (!req.body || !req.params) {
             const error = new Error('Bad request');
@@ -137,7 +139,7 @@ const updateItem = async (req, res) => {
 
         return res.send({ message: 'item actualizado' });
     } catch (error) {
-        res.send({ message: error.message });
+        next(error);
     }
 }
 

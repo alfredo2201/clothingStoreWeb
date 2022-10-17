@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const isAuthClient = async(req, res, next) =>{
     let token = req.headers['x-access-token'] || req.headers['authorization'];
     if(!token){
-        res.send({message: 'the client is not authorized'});
+        res.send({message: 'cliente no autorizado'});
     }
 
     if(token.startsWith('Bearer ')){
