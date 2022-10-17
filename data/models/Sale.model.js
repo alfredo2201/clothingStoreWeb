@@ -1,7 +1,5 @@
 import  DataType  from "sequelize";
 import  {sequelize}  from "../connection.js";
-import { Client } from "./Client.model.js";
-import { Card } from "./Card.model.js";
 
 export const Sale = sequelize.define(
   "Sale",
@@ -25,5 +23,3 @@ export const Sale = sequelize.define(
   { timestamps: true }
 );
 
-
-// export default { Sale };

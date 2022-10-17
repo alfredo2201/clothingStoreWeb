@@ -1,6 +1,5 @@
 import DataType from "sequelize";
 import { sequelize } from "../connection.js";
-import { Client } from "./Client.model.js";
 
 export const Card = sequelize.define(
   "Card",

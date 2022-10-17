@@ -1,23 +1,19 @@
 import { Card } from "../models/Card.model.js";
 
 const register = async (value) => {
+  if (!value) return new Error("Values are required");
   const { nameOwner, cardNumber, expirationDate, idClient } = value;
-  await Card.create({
-    nameOwner, cardNumber, expirationDate,
-    idClient
+  const cardCreated = Card.build({
+    idClient,
+    nameOwner,
+    cardNumber,
+    expirationDate,
   });
-  // if (!value) return new Error("Values are required");
-  // const { nameOwner, cardNumber, expirationDate } = value;
-  // const cardCreated = Card.build({
-  //   nameOwner,
-  //   cardNumber,
-  //   expirationDate
-  // })
-  // await cardCreated
-  //   .save()
-  //   .then(() => "Card successfully saved")
-  //   .catch(() => "Card failed to save");
-}
+  return await cardCreated
+    .save()
+    .then(() => cardCreated.dataValues)
+    .catch(() => "Card failed to save");
+};
 
 const update = async (value) => {
   if (!value) return new Error("Values are required");
@@ -33,26 +29,31 @@ const update = async (value) => {
   Card.update({
     nameOwner,
     cardNumber,
-    expirationDate
+    expirationDate,
   });
 };
 
 const deleteOne = async (value) => {
-  // if (!value) return new Error("Values are required");
+  if (!value) return new Error("Values are required");
+  const {idCard, idClient} = value;
   return await Card.destroy({
-    where: { idCard: value.idCard },
+    where: { 
+      idCard: idCard,
+      idClient: idClient
+    },
   })
-  // .then("Card deleted successfully")
-  // .catch(() => {
-  //   throw new Error("Error deleting Card");
-  // });
+    .then("Card deleted successfully")
+    .catch(() => {
+      throw new Error("Error deleting Card");
+    });
 };
 
 const findOne = async (value) => {
-  // if (!value) return new Error("values ​​are required");
+  if (!value) return new Error("values are required");
   const { idCard } = value;
   try {
     const card = await Card.findOne({
+      attributes: ["nameOwner", "cardNumber", "expirationDate"],
       where: {
         idCard: idCard,
       },
@@ -63,14 +64,22 @@ const findOne = async (value) => {
   }
 };
 
-const findAll = async () => {
-  return await Card.findAll();
-}
+const findAll = async (value) => {
+  if (!value) return new Error("values are required");
+  const {idClient} = value
+  const results = await Card.findAll({
+    attributes: ["nameOwner", "cardNumber", "expirationDate"],
+    where: {
+      idClient: idClient,
+    },
+  });
+  return results;
+};
 
 export default {
   register,
   update,
   deleteOne,
   findOne,
-  findAll
+  findAll,
 };

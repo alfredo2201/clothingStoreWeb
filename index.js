@@ -4,8 +4,8 @@ import routerClient from './routes/client.route.js';
 import routerCard from './routes/card.route.js';
 import routerLogin from './routes/auth.route.js';
 import { handleError } from './middlewares/handleError.js';
-// import {executeAssociations} from './data/models/associations.js';
-// await executeAssociations();
+import {executeAssociations} from './data/models/associations.js';
+await executeAssociations();
 
 const app = express();
 
