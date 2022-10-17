@@ -8,4 +8,6 @@ router.get('/sale/:idSale', saleController.findOneSale);
 
 router.post('/sale', saleController.registerSale);
 
+router.delete('/sale/:idSale', saleController.deleteOneSale);
+
 export default router;

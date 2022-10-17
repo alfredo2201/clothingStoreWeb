@@ -51,10 +51,38 @@ const findOneSale = async (req, res) => {
     res.send(sale);
 }
 
+const deleteOneSale = async (req, res) => {
+    try {
+        if (!req.params) {
+            return res.send('Error');
+        }
+
+        const { idSale} = req.params;
+        if (!idSale) {
+            return res.send({ message: 'error' });
+        }
+
+        const sale = await saleRepository.findOne(idSale);
+        if (!sale) {
+            return res.send({ message: 'sale Not Found' });
+        }
+
+        const result = await saleRepository.deleteOne(idSale);
+
+        if (result === 0) {
+            return res.send('sale Not Deleted');
+        }
+
+        res.send({ message: 'Deleted sale' });
+    } catch (error) {
+        res.send(error.message);
+    }
+}
 
 export default {
     registerSale,
     findAllSales,
-    findOneSale
+    findOneSale,
+    deleteOneSale
 };
 

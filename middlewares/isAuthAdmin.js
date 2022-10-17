@@ -8,6 +8,7 @@ export const isAuthAdmin = async(req, res, next) =>{
     if(token.startsWith('Bearer ')){
         token = token.slice(7, token.lenght);
     }
+    
     if(token){ //verificamos token
         jwt.verify(token, process.env.SECRET_KEY_ADMIN, (error, decode)=>{
             if(error){

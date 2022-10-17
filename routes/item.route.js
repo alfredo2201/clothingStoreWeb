@@ -3,14 +3,14 @@ import itemController from '../controllers/item.controller.js';
 
 const router = Router();
 
-router.get('/card', itemController.findAllItems);
+router.get('/item', itemController.findAllItems);
 
-router.get('/card/:idCard', itemController.findOneItem);
+router.get('/item/:idItem', itemController.findOneItem);
 
-router.post('/card', itemController.registerItem);
+router.post('/item', itemController.registerItem);
 
-router.put('/card/:idCard', itemController.updateItem);
+router.put('/item/:idItem', itemController.updateItem);
 
-router.delete('/card/:idCard', itemController.deleteOneItem);
+router.delete('/item/:idItem', itemController.deleteOneItem);
 
 export default router;

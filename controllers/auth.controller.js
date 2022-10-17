@@ -1,5 +1,5 @@
 // import clientRepository from '../repositories/client.repository.js';
-import { Client } from '../models/Client.model.js';
+import { Client } from '../data/models/Client.model.js';
 import jwt from 'jsonwebtoken';
 
 const login = async(req, res) =>{
