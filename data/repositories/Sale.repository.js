@@ -22,9 +22,8 @@ const findAll = async (value) => {
     where: {
       idClient
     },
-    include:{
+     include:{
         model: Client,
-        as: "Client",
         attributes:["userName","email"],
         where:{
             idClient
