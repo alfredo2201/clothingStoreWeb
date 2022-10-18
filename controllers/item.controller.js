@@ -22,7 +22,7 @@ const registerItem = async (req, res, next) => {
             name, category, size, price, stock
         })
 
-        const result = await itemRepository.register(newItem);
+        await itemRepository.register(newItem);
 
         res.send('Registed Item');
     } catch (error) {
@@ -63,7 +63,7 @@ const findOneItem = async (req, res, next) => {
             next(error);
         }
 
-        const item = await itemRepository.findOne(idItem);
+        const item = await itemRepository.findOne({idItem});
 
         if (!item) {
             const error = new Error('Item not fount');
@@ -92,14 +92,14 @@ const deleteOneItem = async (req, res, next) => {
             next(error);
         }
 
-        const item = await itemRepository.findOne(idItem);
+        const item = await itemRepository.findOne({idItem});
         if (!item) {
             const error = new Error('Item not found');
             error.httpStatusCode = 400;
             next(error);
         }
 
-        const result = await itemRepository.deleteOne(idItem);
+        const result = await itemRepository.deleteOne({idItem});
 
         if (result === 0) {
             return res.send('Item Not Deleted');
@@ -121,7 +121,7 @@ const updateItem = async (req, res, next) => {
         const { idItem } = req.params;
         const data = req.body;
 
-        const item = await itemRepository.findOne(idItem);
+        const item = await itemRepository.findOne({idItem});
 
         if (!item) {
             const error = new Error('Item Not Found');
@@ -131,7 +131,7 @@ const updateItem = async (req, res, next) => {
 
         const newItem = { ...item.dataValues, ...data };
 
-        const result = await itemRepository.update(newItem);
+        const result = await itemRepository.update(newItem, idItem);
 
         if (result === 0) {
             return res.send('no se actualizó nada');

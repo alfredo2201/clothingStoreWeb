@@ -116,7 +116,7 @@ const updateClient = async (req, res, next) => {
         const { idClient } = req.params;
         const data = req.body;
 
-        const client = await findOne(idClient);
+        const client = await findOne({idClient});
 
         if (!client) {
             const error = new Error('Client not found');
@@ -126,7 +126,7 @@ const updateClient = async (req, res, next) => {
 
         const newClient = { ...client.dataValues, ...data };
 
-        const result = await update(newClient);
+        const result = await update(newClient, idClient);
 
         if (result === 0) {
             const error = new Error('Client not found');
