@@ -1,5 +1,6 @@
 import { Item } from "../models/Item.model.js";
 import {ItemSale} from "../models/ItemSale.model.js";
+import { or } from "sequelize";
 
 const register = async(value) =>{
     if(!value) return new Error("Values are required")
@@ -12,46 +13,52 @@ const register = async(value) =>{
     });
 } 
 
-const findAll = async(value) =>{
-    if(!value) return new Error("Values are required")
-    const {idSale} = value
-    const item = await ItemSale.findAll({
-        attributes: ["price", "amount"],
-        where: {
-            idSale
-        },
-        include: {
-            model: Item,
-            as: "item",            
-            attributes: ["name", "category", "price", "size"]
-        }
-    });
+const findAll = async() =>{
+    // if(!value) return new Error("Values are required")
+    // const {idSale} = value
+    const item = await ItemSale.findAll();
+    // const item = await ItemSale.findAll({
+    //     attributes: ["price", "amount"],
+    //     where: {
+    //         idSale
+    //     },
+    //     include: {
+    //         model: Item,
+    //         as: "item",            
+    //         attributes: ["name", "category", "price", "size"]
+    //     }
+    // });
     return item;
 }
 
 //busca por price, id, amount
 const findOne = async(search) =>{
-    const {price, amount, idItem} = search; 
-    const itemSale = await ItemSale.findOne({
-        where: {$or:[{
-            idItem,
-        },
-        {
-            price
-        },
-        {
-            amount
-        }
-    ]}
-    })
+    const {price, amount, idItem, idItemSale} = search; 
+    const itemSale = await ItemSale.findOne({idItemSale});
+    // const itemSale = await ItemSale.findOne({
+    //     where: {$or:[{
+    //         idItem,
+    //     },
+    //     {
+    //         price
+    //     },
+    //     {
+    //         amount
+    //     }
+    // ]}
+    // })
+    // const ite = await ItemSale.findOne({where:{
+    //     or({idItem}, {amount})
+    // }})
     return itemSale;
 }
 
-const deleteOne = async(idItem) =>{
-    if(!idItem) return new Error("Values are required")
+const deleteOne = async(data) =>{
+    const {idItemSale} = data;
+    // if(!idItemSle) return new Error("Values are required")
     return await ItemSale.destroy({where: 
         {
-            idItem
+            idItemSale
         }
     });
 }

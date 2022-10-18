@@ -1,5 +1,6 @@
 import DataType from "sequelize";
 import { sequelize } from "../connection.js";
+import bcrypt from 'bcrypt'
 
 export const Admin = sequelize.define(
   "Admin",
@@ -39,5 +40,16 @@ export const Admin = sequelize.define(
       allowNull: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true ,
+    hooks:{
+      beforeCreate: async(admin)=>{
+        const salt = await bcrypt.genSalt(10);
+        admin.password = await bcrypt.hash(admin.password, salt);
+      }
+    }
+  }
 );
+
+Admin.prototype.verifyPassword = function(password){
+  return bcrypt.compareSync(password, this.password);
+}

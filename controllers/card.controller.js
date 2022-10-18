@@ -7,9 +7,10 @@ const registerCard = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
-        const {nameOwner, cardNumber, expirationDate, idClient } = req.body;
+        const { nameOwner, cardNumber, expirationDate, idClient } = req.body;
         //busco al cliente
         var client = await findOne(idClient);
         console.log(client.dataValues);
@@ -17,24 +18,28 @@ const registerCard = async (req, res, next) => {
             const error = new Error('Bad request Client not exist');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
         //vericico que nada esté vacio
         if (!nameOwner || !cardNumber || !expirationDate) {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
         //valido la tarjeta
         if (!(cardNumber.length === 16)) {
             const error = new Error('Error in Card Number');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
         const result = await cardRepository.register(req.body)
-        if(!result){
+        if (!result) {
             const error = new Error('Error to create card');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
         return res.status(201).send(`Registed Card`);
     } catch (error) {
@@ -48,9 +53,24 @@ const findAllCards = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
-        const {idClient} = req.body
-        const cards = await cardRepository.findAll({idClient});
+        const { idClient } = req.body
+
+        if (!idClient) {
+            const error = new Error('Bad request1');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
+        }
+        const cards = await cardRepository.findAll({ idClient });
+
+        if (!cards) {
+            const error = new Error('Error found the cards');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
+        }
         return res.status(200).send(cards);
     } catch (error) {
         next(error)
@@ -63,6 +83,7 @@ const finOneCard = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const { idCard } = req.params;
@@ -71,6 +92,7 @@ const finOneCard = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const card = await cardRepository.findOne({ idCard });
@@ -79,6 +101,7 @@ const finOneCard = async (req, res, next) => {
             const error = new Error('Card not found');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         return res.status(200).send(card);
@@ -93,9 +116,17 @@ const deleteCard = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
-        const { idCard, idClient} = req.body;
-        const result = await cardRepository.deleteOne({ idCard,idClient });
+        const { idCard, idClient } = req.body;
+
+        if (!idCard || !idClient) {
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
+        }
+        const result = await cardRepository.deleteOne({ idCard, idClient });
 
         if (result === 0) {
             const error = new Error('Card not deleted');
@@ -115,16 +146,18 @@ const updateCard = async (req, res, next) => {
             const error = new Error('Bad Request');
             error.httpStatusCode = 404;
             next(error);
+            return;
         }
 
         const { idCard } = req.params;
         const data = req.body;
 
-        const card = await cardRepository.findOne({ idCard });        
+        const card = await cardRepository.findOne({ idCard });
         if (!card) {
             const error = new Error('Card not found');
             error.httpStatusCode = 404;
             next(error);
+            return;
         }
 
         const newCard = { ...card.dataValues, ...data };
@@ -132,7 +165,8 @@ const updateCard = async (req, res, next) => {
         if (!client) {
             const error = new Error('Client not exist');
             error.httpStatusCode = 404;
-            next(error);            
+            next(error);
+            return;
         }
 
         const result = await cardRepository.update(newCard);
@@ -140,6 +174,7 @@ const updateCard = async (req, res, next) => {
             const error = new Error('Card not updated');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
         return res.status(200).send({ message: 'updated card' });
     } catch (error) {

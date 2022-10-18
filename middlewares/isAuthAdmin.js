@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 export const isAuthAdmin = async(req, res, next) =>{
-    let token = req.headers['x-access-token'] || req.headers['authorization'];
+    try {
+        let token = req.headers['x-access-token'] || req.headers['authorization'];
     if(!token){
-        res.send({message: 'the client is not authorized'});
+        return res.send({message: 'the user is not authorized'});
     }
 
     if(token.startsWith('Bearer ')){
@@ -17,5 +18,8 @@ export const isAuthAdmin = async(req, res, next) =>{
             req.decode = decode;
             next();
         });
+    }
+    } catch (error) {
+        return res.status(400).send({ message: 'token error' });
     }
 }

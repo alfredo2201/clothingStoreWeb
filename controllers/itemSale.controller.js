@@ -7,27 +7,47 @@ import {
     update
 } from '../data/repositories/itemSales.repository.js';
 
+import itemRepository from '../data/repositories/item.repository.js';
+
 const registerItemSale = async (req, res, next) => {
     try {
         if (!req.body) {
             const error = new Error('Bad Request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
-    
-        const { price, amount } = req.body;
-        if (!price || !amount) {
+
+        const { amount, idItem } = req.body;
+        if (!amount || !idItem) {
             const error = new Error('Bad Request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
-    
+
+        const item = await itemRepository.findOne({ idItem });
+        if (!item) {
+            const error = new Error('Bad Request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
+        }
+
+        // if(typeof(amount) !== 'number'){
+        //     const error = new Error('amounth must be a number');
+        //     error.httpStatusCode = 400;
+        //     next(error);
+        //     return;
+        // }
+        //amount * idItem.price = total.price
+        const price = amount * item.price;
         const newItemSale = ItemSale.build({
-            price, amount
+            price, amount, idItem
         })
-        
+
         await register(newItemSale);
-    
+
         res.status(201).send('ItemSale Creado');
     } catch (error) {
         next(error);
@@ -37,29 +57,38 @@ const registerItemSale = async (req, res, next) => {
 const findAllItemSale = async (req, res, next) => {
     try {
         const itemsSale = await findAll();
-    if (!itemsSale) {
-        return res.send('Error');
-    }
-    res.send(itemsSale);
+        if (!itemsSale) {
+            const error = new Error('Bad Request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
+        }
+        res.send(itemsSale);
     } catch (error) {
-        next(error);
+        res.send(error.message);
     }
 }
 
 const findOneItemSale = async (req, res, next) => {
     try {
         if (!req.body || !req.params) {
-            return res.send('Error');
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
         }
-    
+
         const { idItemSale } = req.params;
         //no tiene ningún parámetro para buscar
         if (!idItemSale) {
-            return res.send('Error');
+            const error = new Error('itemSale not fount');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
         }
-    
-        const itemSale = await findOne({ idItemSale});
-    
+
+        const itemSale = await findOne({ idItemSale });
+
         res.send(itemSale);
     } catch (error) {
         next(error);
@@ -69,26 +98,38 @@ const findOneItemSale = async (req, res, next) => {
 const deleteOneItemSale = async (req, res, next) => {
     try {
         if (!req.params) {
-            return res.send('Error');
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
         }
-    
+
         const { idItemSale } = req.params;
         if (!idItemSale) {
-            return res.send('Error');
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
         }
-    
-        const itemSale = await findOne({ idItemSale });
-        if (!itemSale) {
-            return res.send('no existe');
+
+        // const itemSale = await findOne({ idItemSale });
+        if (!idItemSale) {
+            const error = new Error('itemSale not found');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
         }
-    
+
         const result = await deleteOne({ idItemSale });
-    
+
         if (result === 0) {
-            return res.send('no se eliminó nada');
+            const error = new Error('ItemSale not deleted');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
         }
-    
-        res.send('ItemSale eliminado');
+
+        res.send({ message: 'Deleted itemSale' });
     } catch (error) {
         next(error);
     }
@@ -98,27 +139,33 @@ const deleteOneItemSale = async (req, res, next) => {
 const updateItemSale = async (req, res, next) => {
     try {
         if (!req.body || !req.params) {
-            return res.send('Error 1');
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
         }
-    
+
         const { idItemSale } = req.params;
         const data = req.body;
-    
+
         const itemSale = await findOne(idItemSale);
-    
-        if(!itemSale){
-            return res.send('Error ItemSale not Found 2');
+
+        if (!itemSale) {
+            const error = new Error('ItemSale Not Found');
+            error.httpStatusCode = 400;
+            next(error);
         }
-    
+
         const newItemSale = { ...itemSale.dataValues, ...data };
-    
+
         const result = await update(newItemSale);
-    
+
         if (result === 0) {
-            return res.send('no se actualizó nada');
+            const error = new Error('ItemSale not updated');
+            error.httpStatusCode = 400;
+            next(error);
         }
-    
-        return res.send('ItemSale actualizado');
+
+        return res.send({ message: 'itemSale Updated' });
     } catch (error) {
         next(error);
     }

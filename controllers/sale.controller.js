@@ -7,89 +7,117 @@ import {
   update,
 } from "../data/repositories/Sale.repository.js";
 
-const registerSale = async (req, res) => {
+const registerSale = async (req, res, next) => {
   try {
     if (!req.body) {
-      const error = new Error("Bad request");
+      const error = new Error('Bad Request');
       error.httpStatusCode = 400;
       next(error);
+      return;
     }
 
     const { paymentMethod, total, idClient, idCard } = req.body;
 
     if (!paymentMethod || !total || !idClient || !idCard) {
-      const error = new Error("Bad request");
+      const error = new Error('Error');
       error.httpStatusCode = 400;
       next(error);
+      return;
     }
 
     await register({ paymentMethod, total, idClient, idCard });
 
-    res.status(201).send("Cliente Creado");
+    res.status(201).send("Sale was created");
   } catch (error) {
     res.send(error.message);
   }
 };
 
-const findAllSales = async (req, res) => {
+const findAllSales = async (req, res, next) => {
   try {
     if (!req.body) {
       const error = new Error("Bad request");
       error.httpStatusCode = 400;
       next(error);
+      return;
     }
     const {idClient} = req.body;
     const sales = await findAll({idClient});
     if (!sales) {
-      return res.send("Error");
+      const error = new Error('Error');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
     }
     res.send(sales);
   } catch (error) {
-    res.send(error.message);
+    next(error.message);
   }
 };
 
-const findOneSale = async (req, res) => {
-  if (!req.body || !req.params) {
-    return res.send("Error");
+const findOneSale = async (req, res, next) => {
+  try{
+    if (!req.body || !req.params) {
+      const error = new Error('Sale not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+
+    const { idSale } = req.params;
+    //no tiene ningún parámetro para buscar
+    if (!idSale) {
+      const error = new Error('Sale not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+
+    const sale = await findOne({ idSale });
+
+    res.send(sale);
+  } catch (error) {
+    next(error);
   }
+}
 
-  const { idSale } = req.params;
-  //no tiene ningún parámetro para buscar
-  if (!idSale) {
-    return res.send("Error");
-  }
-
-  const sale = await findOne({ idSale });
-
-  res.send(sale);
-};
-
-const deleteOneSale = async (req, res) => {
+const deleteOneSale = async (req, res, next) => {
   try {
     if (!req.params) {
-      return res.send("Error");
+      const error = new Error('Bad request');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
     }
 
     const { idSale } = req.params;
     if (!idSale) {
-      return res.send({ message: "error" });
+      const error = new Error('Sale not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
     }
 
     const sale = await findOne(idSale);
     if (!sale) {
-      return res.send({ message: "sale Not Found" });
+      const error = new Error('Sale not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
     }
 
     const result = await deleteOne(idSale);
 
     if (result === 0) {
-      return res.send("sale Not Deleted");
+      const error = new Error('Sale not deleted');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
     }
 
-    res.send({ message: "Deleted sale" });
+    res.send({ message: 'Sale was deleted' });
   } catch (error) {
-    res.send(error.message);
+    next(error.message);
   }
 };
 

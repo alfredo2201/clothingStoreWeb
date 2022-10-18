@@ -13,6 +13,7 @@ const registerClient = async (req, res, next) => {
             const error = new Error('Bad Request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const { userName, name, lastName, address, email, password } = req.body;
@@ -20,6 +21,7 @@ const registerClient = async (req, res, next) => {
             const error = new Error('Error');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const newClient = Client.build({
@@ -75,7 +77,9 @@ const findOneClient = async (req, res, next) => {
 const deleteOneClient = async (req, res, next) => {
     try {
         if (!req.params) {
-            return res.send('Error');
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
         }
 
         const { idClient } = req.params;
@@ -95,12 +99,12 @@ const deleteOneClient = async (req, res, next) => {
         const result = await deleteOne({ idClient });
 
         if (result === 0) {
-            const error = new Error('Bad request');
+            const error = new Error('Client not deleted');
             error.httpStatusCode = 400;
             next(error);
         }
 
-        res.send('cliente eliminado');
+        res.send({ message: 'Deleted Client' });
     } catch (error) {
         next(error);
     }
@@ -134,7 +138,7 @@ const updateClient = async (req, res, next) => {
             next(error);
         }
 
-        return res.send('cliente actualizado');
+        return res.send('client Updated');
     } catch (error) {
         next(error);
     }

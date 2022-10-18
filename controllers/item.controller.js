@@ -5,9 +5,10 @@ const registerItem = async (req, res, next) => {
     try {
         if (!req.body) {
             // throw new Error('Bad request 1');
-            const error = new Error('Bad request');
+            const error = new Error('Bad request no body');
             error.httpStatusCode = 400;
             next(error)
+            return;
         }
 
         const { name, category, size, price, stock } = req.body;
@@ -16,6 +17,7 @@ const registerItem = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const newItem = Item.build({
@@ -24,7 +26,7 @@ const registerItem = async (req, res, next) => {
 
         await itemRepository.register(newItem);
 
-        res.send('Registed Item');
+        res.status(201).send('Item Creado');
     } catch (error) {
         next(error);
     }
@@ -39,10 +41,11 @@ const findAllItems = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
         res.send(items);
     } catch (error) {
-        res.send(error.message);
+        next(error);
     }
 }
 
@@ -52,6 +55,7 @@ const findOneItem = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const { idItem } = req.params;
@@ -61,6 +65,7 @@ const findOneItem = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const item = await itemRepository.findOne({idItem});
@@ -69,6 +74,7 @@ const findOneItem = async (req, res, next) => {
             const error = new Error('Item not fount');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         res.send(item);
@@ -83,6 +89,7 @@ const deleteOneItem = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const { idItem } = req.params;
@@ -90,6 +97,7 @@ const deleteOneItem = async (req, res, next) => {
             const error = new Error('Bad request');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
 
         const item = await itemRepository.findOne({idItem});
@@ -102,7 +110,9 @@ const deleteOneItem = async (req, res, next) => {
         const result = await itemRepository.deleteOne({idItem});
 
         if (result === 0) {
-            return res.send('Item Not Deleted');
+            const error = new Error('Item not deleted');
+            error.httpStatusCode = 400;
+            next(error);
         }
 
         res.send({ message: 'Deleted Item' });
@@ -134,16 +144,18 @@ const updateItem = async (req, res, next) => {
         const result = await itemRepository.update(newItem, idItem);
 
         if (result === 0) {
-            return res.send('no se actualizó nada');
+            const error = new Error('Item not updated');
+            error.httpStatusCode = 400;
+            next(error);
         }
 
-        return res.send({ message: 'item actualizado' });
+        return res.send({ message: 'item Updated' });
     } catch (error) {
         next(error);
     }
 }
 
-export default {
+export default {//discord
     registerItem,
     findAllItems,
     findOneItem,

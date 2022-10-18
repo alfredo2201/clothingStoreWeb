@@ -8,7 +8,7 @@ router.get('/admin/:idAdmin', adminController.findOneAdmin);
 
 router.post('/admin', adminController.registerAdmin);
 
-router.put('/admin/:idAdmin', adminController.updateAdmin);
+// router.put('/admin/:idAdmin', adminController.updateAdmin);
 
 router.delete('/admin/:idAdmin', adminController.deleteOneAdmin);
 

@@ -7,100 +7,150 @@ import {
   update,
 } from "../data/repositories/admin.repository.js";
 
-const registerAdmin = async (req, res) => {
-  if (!req.body) {
-    return res.status(400).send("Bad Request 1");
+const registerAdmin = async (req, res, next) => {
+  try {
+    if (!req.body) {
+      const error = new Error('Bad Request');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+
+    const { userName, name, lastName, email, password } = req.body;
+    
+    if (!userName || !name || !lastName || !email || !password) {
+      const error = new Error('Bad request');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+
+    await register({userName, name, lastName, email, password});
+
+    res.status(201).send("Administrador Creado");
+  } catch (error) {
+    next(error);
   }
+}
 
-  const { userName, name, lastName, email, password } = req.body;
-  if (!userName || !name || !lastName || !email || !password) {
-    return res.status(400).send("Bad Request 2");
+
+const findAllAdmins = async (req, res, next) => {
+  try {
+    const admins = await findAll();
+    if (!admins) {
+      const error = new Error('admins not founds');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+    res.send(admins);
+  } catch (error) {
+    res.send(error.message);
   }
+}
 
-  const newAdmin = Admin.build({
-    userName,
-    name,
-    lastName,
-    email,
-    password,
-  });
 
-  await register(newAdmin);
+const findOneAdmin = async (req, res, next) => {
+  try {
+    if (!req.body || !req.params) {
+      const error = new Error('Bad Request');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
 
-  res.status(201).send("Administrador Creado");
+    const { idAdmin } = req.params;
+    //no tiene ningún parámetro para buscar
+    if (!idAdmin) {
+      const error = new Error('Admin not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+
+    const admin = await findOne({ idAdmin });
+
+    res.send(admin);
+  } catch (error) {
+    next(error);
+  }
+}
+
+const deleteOneAdmin = async (req, res, next) => {
+  try {
+    if (!req.params) {
+      const error = new Error('Bad Request');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+    const { idAdmin } = req.params;
+      if (!idAdmin) {
+        const error = new Error('Bad Request');
+        error.httpStatusCode = 400;
+        next(error);
+        return;
+      }
+
+      const admin = await findOne({ idAdmin });
+      if (!admin) {
+        const error = new Error('Admin not found');
+        error.httpStatusCode = 400;
+        next(error);
+        return;
+      }
+
+      const result = await deleteOne({ idAdmin });
+
+      if (result === 0) {
+        const error = new Error('Admin not deleted');
+        error.httpStatusCode = 400;
+        next(error);
+        return;
+      }
+
+      res.send("admin eliminado");
+  } catch (error) {
+    next(error)
+  }
 };
 
-const findAllAdmins = async (req, res) => {
-  const admins = await findAll();
-  if (!admins) {
-    return res.send("Error");
+const updateAdmin = async (req, res, next) => {
+  try {
+    if (!req.body || !req.params) {
+      const error = new Error('Bad Request');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+  
+    const { idAdmin } = req.params;
+    const data = req.body;
+  
+    const admin = await findOne(idAdmin);
+  
+    if (!admin) {
+      const error = new Error('Admin not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+  
+    const newAdmin = { ...admin.dataValues, ...data };
+  
+    const result = await update(newAdmin);
+  
+    if (result === 0) {
+      const error = new Error('admin not updated');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+  
+    return res.send("admin actualizado");
+  } catch (error) {
+    next(error);
   }
-  res.send(admins);
-};
-
-const findOneAdmin = async (req, res) => {
-  if (!req.body || !req.params) {
-    return res.send("Error");
-  }
-
-  const { idAdmin } = req.params;
-  //no tiene ningún parámetro para buscar
-  if (!idAdmin) {
-    return res.send("Error");
-  }
-
-  const admin = await findOne({ idAdmin });
-
-  res.send(admin);
-};
-
-const deleteOneAdmin = async (req, res) => {
-  if (!req.params) {
-    return res.send("Error");
-  }
-
-  const { idAdmin } = req.params;
-  if (!idAdmin) {
-    return res.send("Error");
-  }
-
-  const admin = await findOne({ idAdmin });
-  if (!admin) {
-    return res.send("no existe");
-  }
-
-  const result = await deleteOne({ idAdmin });
-
-  if (result === 0) {
-    return res.send("no se eliminó nada");
-  }
-
-  res.send("admin eliminado");
-};
-
-const updateAdmin = async (req, res) => {
-  if (!req.body || !req.params) {
-    return res.send("Error 1");
-  }
-
-  const { idAdmin } = req.params;
-  const data = req.body;
-
-  const admin = await findOne(idAdmin);
-
-  if (!admin) {
-    return res.send("Error Admin not Found 2");
-  }
-
-  const newAdmin = { ...admin.dataValues, ...data };
-
-  const result = await update(newAdmin);
-
-  if (result === 0) {
-    return res.send("no se actualizó nada");
-  }
-
-  return res.send("admin actualizado");
 };
 
 export default {

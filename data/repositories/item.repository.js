@@ -16,7 +16,7 @@ const register = async (value) => {
 
 const findAll = async () => {
   const items = await Item.findAll({
-    attributes:["name","category","size","price","stock"], 
+    attributes:["idItem","name","category","size","price","stock"], 
   });
   return items;
 };
@@ -26,7 +26,7 @@ const findOne = async (search) => {
   const { idItem } = search;
   // const item = await
   const item = await Item.findOne({ 
-    attributes:["name","category","size","price","stock"], 
+    attributes:["idItem","name","category","size","price","stock"], 
     where: { 
         idItem
     } 
