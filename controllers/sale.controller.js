@@ -64,7 +64,7 @@ const findOneSale = async (req, res, next) => {
       return;
     }
 
-    const { idSale } = req.params;
+    const { idSale, idClient } = req.body;
     //no tiene ningún parámetro para buscar
     if (!idSale) {
       const error = new Error('Sale not found');
@@ -73,7 +73,14 @@ const findOneSale = async (req, res, next) => {
       return;
     }
 
-    const sale = await findOne({ idSale });
+    if (!idClient) {
+      const error = new Error('Client not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
+
+    const sale = await findOne({ idSale, idClient  });
 
     res.send(sale);
   } catch (error) {
@@ -83,14 +90,14 @@ const findOneSale = async (req, res, next) => {
 
 const deleteOneSale = async (req, res, next) => {
   try {
-    if (!req.params) {
+    if (!req.body) {
       const error = new Error('Bad request');
       error.httpStatusCode = 400;
       next(error);
       return;
     }
 
-    const { idSale } = req.params;
+    const { idSale, idClient } = req.body;
     if (!idSale) {
       const error = new Error('Sale not found');
       error.httpStatusCode = 400;
@@ -98,6 +105,12 @@ const deleteOneSale = async (req, res, next) => {
       return;
     }
 
+    if (!idClient) {
+      const error = new Error('Client not found');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
     const sale = await findOne(idSale);
     if (!sale) {
       const error = new Error('Sale not found');
@@ -106,7 +119,7 @@ const deleteOneSale = async (req, res, next) => {
       return;
     }
 
-    const result = await deleteOne(idSale);
+    const result = await deleteOne({idClient, idSale});
 
     if (result === 0) {
       const error = new Error('Sale not deleted');

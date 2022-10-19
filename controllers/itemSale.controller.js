@@ -18,8 +18,8 @@ const registerItemSale = async (req, res, next) => {
             return;
         }
 
-        const { amount, idItem } = req.body;
-        if (!amount || !idItem) {
+        const { amount, idItem, idSale} = req.body;
+        if (!amount || !idItem || !idSale) {
             const error = new Error('Bad Request');
             error.httpStatusCode = 400;
             next(error);
@@ -33,22 +33,14 @@ const registerItemSale = async (req, res, next) => {
             next(error);
             return;
         }
-
-        // if(typeof(amount) !== 'number'){
-        //     const error = new Error('amounth must be a number');
-        //     error.httpStatusCode = 400;
-        //     next(error);
-        //     return;
-        // }
-        //amount * idItem.price = total.price
         const price = amount * item.price;
-        const newItemSale = ItemSale.build({
-            price, amount, idItem
+        const itemSale = ItemSale.build({
+            price, amount, idItem, idSale
         })
 
-        await register(newItemSale);
+        const newItemSale = await register(itemSale);
 
-        res.status(201).send('ItemSale Creado');
+        res.status(201).send(newItemSale);
     } catch (error) {
         next(error);
     }
@@ -56,7 +48,14 @@ const registerItemSale = async (req, res, next) => {
 
 const findAllItemSale = async (req, res, next) => {
     try {
-        const itemsSale = await findAll();
+        if (!req.body) {
+            const error = new Error('Bad request');
+            error.httpStatusCode = 400;
+            next(error);
+            return;
+        }
+        const {idSale} = req.body
+        const itemsSale = await findAll({idSale});
         if (!itemsSale) {
             const error = new Error('Bad Request');
             error.httpStatusCode = 400;

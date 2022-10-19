@@ -4,9 +4,9 @@ import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
 import { isAuthClient } from '../middlewares/isAuthClient.js';
 const router = Router();
 
-router.get('/sale', isAuthClient,saleController.findAllSales);
+router.get('/sales', isAuthClient,saleController.findAllSales);
 
-router.get('/itemSale/:idItemSale', isAuthClient ,saleController.findOneSale);
+router.get('/sale', isAuthClient ,saleController.findOneSale);
 
 router.post('/sale', isAuthClient ,saleController.registerSale);
 

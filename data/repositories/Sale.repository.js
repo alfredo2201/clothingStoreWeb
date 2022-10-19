@@ -21,13 +21,6 @@ const findAll = async (value) => {
     attributes: ["paymentMethod", "total"],
     where: {
       idClient
-    },
-     include:{
-        model: Client,
-        attributes:["userName","email"],
-        where:{
-            idClient
-        }
     }
   });
   return sales;
@@ -39,14 +32,13 @@ const findOne = async (value) => {
   const { idSale, idClient } = value;
   try {
     const sale = await Sale.findAll({
+      attributes: ["paymentMethod", "total","idClient"],
       where: {
-        idSale: {
-          [Op.eq]: idSale,
-        },
-        idClient,
+        idSale,
+        idClient
       },
     });
-    if (sale.length === 0) return sale;
+    return sale;
   } catch (e) {
     return new Error("Sale not found");
   }
