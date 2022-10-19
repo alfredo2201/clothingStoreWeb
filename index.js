@@ -14,6 +14,7 @@ const app = express();
 
 app.use(express.urlencoded());
 app.use(express.json());
+//whitelist, path publicos
 
 app.use(routerAdmin);
 app.use(routerItemSale);

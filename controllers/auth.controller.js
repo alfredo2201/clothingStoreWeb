@@ -17,9 +17,6 @@ const login = async(req, res, next) =>{
     
         const client = await Client.findOne({where:{email}});
         if(client){
-            // if(!client){
-            //     return res.send({message: 'client not found'});
-            // }
         
             //verificar contraseña del usuario
             if(!client.verifyPassword(password)){
@@ -29,7 +26,7 @@ const login = async(req, res, next) =>{
             //generar token
             const token = jwt.sign({idClient: client.idClient,userName: client.userName},
                 process.env.SECRET_KEY_CLIENT, {
-                    expiresIn: '30m'
+                    expiresIn: '1d'
                 });
             return res.send({
                 message: 'successful',
@@ -44,7 +41,7 @@ const login = async(req, res, next) =>{
             }
             const token = jwt.sign({idAdmin: admin.idAdmin, useraName: admin.userName},
                 process.env.SECRET_KEY_ADMIN, {
-                    expiresIn: '30m'
+                    expiresIn: '1d'
                 });
             return res.send({
                 message: 'successful Admin',
