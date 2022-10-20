@@ -1,13 +1,13 @@
 import {Router} from 'express';
 import clientController from '../controllers/client.controller.js'
-import validataionClient from '../helper/validataionClient.js';
 import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
 import { isAuthClient } from '../middlewares/isAuthClient.js';
+import validationClient from '../helper/validationClient.js';
 const router = Router();
 
 router.get('/client', isAuthAdmin, clientController.findAllClients);
 router.get('/client/:idClient', isAuthAdmin ,clientController.findOneClient);
-router.post('/client',validataionClient.validationRegisterClient ,clientController.registerClient);
+router.post('/client', validationClient.validationRegisterClient ,clientController.registerClient);
 router.put('/client/:idClient', isAuthClient, clientController.updateClient);
 router.delete('/client/:idClient', isAuthAdmin, clientController.deleteOneClient);
 

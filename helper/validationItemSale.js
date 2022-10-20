@@ -1,6 +1,6 @@
 import{check, validationResult} from "express-validator";
 
-const validationItemSale = async(req, res) =>{
+const validationRegisterItemSale = async(req, res) =>{
     await check('price', 'invalid price').notEmpty().isNumeric().isFloat().run(req);
     await check('amount', 'invalid amount').notEmpty().isNumeric().isInt().run(req);
 
@@ -12,5 +12,5 @@ const validationItemSale = async(req, res) =>{
 }
 
 export default{
-    validationItemSale
+    validationRegisterItemSale
 }
