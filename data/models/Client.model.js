@@ -3,7 +3,7 @@ import { sequelize } from "../connection.js";
 import bcrypt from 'bcrypt';
 
 export const Client = sequelize.define(
-  "Client",
+  "clients",
   {
     idClient: {
       type: DataType.INTEGER,

@@ -7,8 +7,8 @@ import { Admin } from "./Admin.model.js";
 
 export const executeAssociations = async () => {
   //Relacion de muchos a muchos entre Sales e Items
-  Sale.belongsToMany(Item, { foreignKey: "idSale", through: ItemSale });
-  Item.belongsToMany(Sale, { foreignKey: "idItem", through: ItemSale });
+  Sale.belongsToMany(Item, {foreignKey: "idItem", through: 'ItemSale' });
+  Item.belongsToMany(Sale, {foreignKey: "idSale", through: 'ItemSale' });
   //Relacion con Clients y Cards
   Client.hasMany(Card, { foreignKey: "idClient", allowNull: false});
   Card.belongsTo(Client, { foreignKey: "idClient", allowNull: false});
@@ -21,9 +21,9 @@ export const executeAssociations = async () => {
 
   await Client.sync();
   await Admin.sync();
-  await Item.sync();
   await Card.sync();
   await Sale.sync();
+  await Item.sync();
   await ItemSale.sync();
 };
 

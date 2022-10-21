@@ -3,7 +3,7 @@ import { sequelize } from "../connection.js";
 import bcrypt from 'bcrypt'
 
 export const Admin = sequelize.define(
-  "Admin",
+  "admins",
   {
     idAdmin: {
       type: DataType.INTEGER,

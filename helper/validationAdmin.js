@@ -14,9 +14,7 @@ const validationRegisterAdmin = async(req, res, next) =>{
         //se envian los errores
         return res.send(result);
     }
-    return res.send({msg: 'valid admin'});
-    // const {email} = req.body;
-    // const client = await Client.findOne({where: {email}});
+    next()
 }
 
 export default {

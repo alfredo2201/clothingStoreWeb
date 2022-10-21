@@ -11,7 +11,7 @@ const validateRegisterItem = async(req, res, next) =>{
         //se envian los errores
         return res.send(result);
     }
-    return res.send({msg: 'valid item'});
+    next()
 }
 
 export default {

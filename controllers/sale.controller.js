@@ -80,11 +80,11 @@ const findOneSale = async (req, res, next) => {
       return;
     }
 
-    const sale = await findOne({ idSale, idClient  });
+    const sale = await findOne({ idSale, idClient });
 
     res.send(sale);
   } catch (error) {
-    next(error);
+    next(error.message);
   }
 }
 

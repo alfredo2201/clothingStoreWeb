@@ -1,6 +1,6 @@
 import {check, validationResult} from "express-validator";
 
-const validationAuth = async(req, res) => {
+const validationAuth = async(req, res, next) => {
     await check('email', 'invalid email').isEmail().notEmpty().run(req);
     await check('password','password must have min Length 8, 1 lowercase, 1 uppercase and 1 number').isLength({max: 150, min: 8}).run(req);
 
@@ -8,7 +8,7 @@ const validationAuth = async(req, res) => {
     if (!result.isEmpty()) {
         return res.send(result);
     }
-    return res.send({msg: 'valid Auth'});
+    next();
 }
 
 export default {

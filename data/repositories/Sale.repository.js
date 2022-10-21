@@ -1,6 +1,4 @@
 import { Sale } from "../models/Sale.model.js";
-import { Client } from "../models/Client.model.js";
-import { where } from "sequelize";
 
 const register = async (sale) => {
   if (!sale) return new Error("values are required");
@@ -10,18 +8,22 @@ const register = async (sale) => {
     idCard,
     paymentMethod,
     total,
-  }).then(() => "Sale successfully created")
-  .catch(() => "Sale failed to create");
+    include: { ItemSale },
+  })
+    .then(() => "Sale successfully created")
+    .catch(() => "Sale failed to create");
 };
 
 const findAll = async (value) => {
   if (!value) return new Error("values are required");
   const { idClient } = value;
   const sales = await Sale.findAll({
-    attributes: ["paymentMethod", "total"],
     where: {
-      idClient
-    }
+      idClient,
+    },
+    include: {
+      model: Item,
+    },
   });
   return sales;
 };
@@ -32,10 +34,12 @@ const findOne = async (value) => {
   const { idSale, idClient } = value;
   try {
     const sale = await Sale.findAll({
-      attributes: ["paymentMethod", "total","idClient"],
       where: {
         idSale,
-        idClient
+        idClient,
+      },
+      include: {
+        model: Item,
       },
     });
     return sale;
@@ -46,11 +50,11 @@ const findOne = async (value) => {
 
 const deleteOne = async (value) => {
   if (!value) return new Error("Sale is required");
-  const {idSale, idClient} = value
+  const { idSale, idClient } = value;
   await Sale.destroy({
-    where: { 
-        idSale,
-        idClient
+    where: {
+      idSale,
+      idClient,
     },
   })
     .then("Sale deleted successfully")
@@ -61,7 +65,7 @@ const deleteOne = async (value) => {
 
 const update = async (value) => {
   if (!value) return new Error("Sale is required");
-  const {idSale} = value;
+  const { idSale } = value;
   const sale = await Sale.findOne({
     where: {
       idSale: {

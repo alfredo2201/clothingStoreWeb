@@ -1,6 +1,6 @@
 import {check, validationResult} from 'express-validator';
 
-const validateRegisterSale = async(req, res) => {
+const validateRegisterSale = async(req, res, next) => {
     await check('payMethod', 'invalid payMethod').notEmpty().isLength({max:50}).isString().run(req);
     await check('total', 'invalid total').notEmpty().isNumeric().isFloat().run(req);
 
@@ -8,7 +8,7 @@ const validateRegisterSale = async(req, res) => {
     if(!result.isEmpty()){
         return res.send(result);
     }
-    return res.send({msg: 'valid sale'});
+    next()
 }
 
 export default {

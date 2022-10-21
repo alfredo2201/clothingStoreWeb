@@ -1,6 +1,5 @@
 import { Item } from "../models/Item.model.js";
 import { ItemSale } from "../models/ItemSale.model.js";
-import { or } from "sequelize";
 
 const register = async (value) => {
   if (!value) return new Error("Values are required");
@@ -21,7 +20,8 @@ const findAll = async (value) => {
       attributes: ["price", "amount", "idItem"],
       where: {
         idSale,
-      },      
+      }, 
+      include: { model: Item }     
     },
   );
   return item;
