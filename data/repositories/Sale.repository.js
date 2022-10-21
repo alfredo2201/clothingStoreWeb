@@ -1,16 +1,23 @@
 import { Sale } from "../models/Sale.model.js";
+import {Item}  from "../models/Item.model.js";
 
 const register = async (sale) => {
   if (!sale) return new Error("values are required");
-  const { paymentMethod, total, idClient, idCard } = sale;
-  await Sale.create({
+  const { paymentMethod, total, idClient, idCard, item} = sale;
+
+  const items = await Item.findOne({
+    where: {
+      idItem: item.idItem
+    }
+  })
+
+  const newSale = await Sale.create({
     idClient,
     idCard,
     paymentMethod,
     total,
-    include: { ItemSale },
   })
-    .then(() => "Sale successfully created")
+    .then(async () => await newSale.addItem(items))
     .catch(() => "Sale failed to create");
 };
 
@@ -19,11 +26,11 @@ const findAll = async (value) => {
   const { idClient } = value;
   const sales = await Sale.findAll({
     where: {
-      idClient,
+      idClient
     },
-    include: {
-      model: Item,
-    },
+    include: [{
+      model:Item
+    }]
   });
   return sales;
 };
@@ -38,9 +45,9 @@ const findOne = async (value) => {
         idSale,
         idClient,
       },
-      include: {
-        model: Item,
-      },
+      include: [{
+        model:Item
+      }],
     });
     return sale;
   } catch (e) {

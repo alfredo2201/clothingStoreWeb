@@ -16,18 +16,18 @@ const registerSale = async (req, res, next) => {
       return;
     }
 
-    const { paymentMethod, total, idClient, idCard } = req.body;
+    const { paymentMethod, total, idClient, idCard, Item } = req.body;
+    let item = Item
 
-    if (!paymentMethod || !total || !idClient || !idCard) {
+    if (!paymentMethod || !total || !idClient || !idCard || !item) {
       const error = new Error('Error');
       error.httpStatusCode = 400;
       next(error);
       return;
     }
 
-    await register({ paymentMethod, total, idClient, idCard });
-
-    res.status(201).send("Sale was created");
+    const sale = await register({ paymentMethod, total, idClient, idCard, item });
+    res.status(201).send(sale);
   } catch (error) {
     res.send(error.message);
   }
