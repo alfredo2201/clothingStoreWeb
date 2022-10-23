@@ -1,7 +1,6 @@
 import { Card } from "../models/Card.model.js";
 
 const register = async (value) => {
-  if (!value) return new Error("Values are required");
   const { nameOwner, cardNumber, expirationDate, idClient, lastCardNumbers} = value;
   const cardCreated = await Card.create({
     idClient,
@@ -13,14 +12,9 @@ const register = async (value) => {
     returning: true
   });
   return cardCreated;
-  // return await cardCreated
-  //   .save()
-  //   .then(() => cardCreated.dataValues)
-  //   .catch(() => "Card failed to save");
 };
 
 const update = async (value) => {
-  if (!value) return new Error("Values are required");
   const card = await Card.findOne({
     where: {
       idCard: {
@@ -30,15 +24,16 @@ const update = async (value) => {
   });
   if (!card) return new Error("Values are required");
   const { nameOwner, cardNumber, expirationDate } = value;
-  Card.update({
+  const cardUpdated = await Card.update({
     nameOwner,
     cardNumber,
     expirationDate,
+  }, {
+    returning: true,
   });
 };
 
 const deleteOne = async (value) => {
-  if (!value) return new Error("Values are required");
   const {idCard, idClient} = value;
   return await Card.destroy({
     where: { 
@@ -46,16 +41,10 @@ const deleteOne = async (value) => {
       idClient: idClient
     },
   })
-    .then("Card deleted successfully")
-    .catch(() => {
-      throw new Error("Error deleting Card");
-    });
 };
 
 const findOne = async (value) => {
-  if (!value) return new Error("values are required");
   const { idCard } = value;
-  try {
     const card = await Card.findOne({
       attributes: ["nameOwner", "cardNumber", "expirationDate"],
       where: {
@@ -63,13 +52,9 @@ const findOne = async (value) => {
       },
     });
     return card;
-  } catch (e) {
-    throw new Error("Card not found");
-  }
 };
 
 const findAll = async (value) => {
-  if (!value) return new Error("values are required");
   const {idClient} = value
   const results = await Card.findAll({
     attributes: ["nameOwner", "cardNumber", "expirationDate"],
