@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import cardController from '../controllers/card.controller.js';
 import { isAuthClient } from '../middlewares/isAuthClient.js';
-import validationCard from '../helper/validationCard.js'
+import validationCard from '../middlewares/validationCard.js';
 import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
 const router = Router();
 

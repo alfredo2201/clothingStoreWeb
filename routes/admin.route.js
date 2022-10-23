@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import adminController from '../controllers/admin.controller.js';
-import validationAdmin from '../helper/validationAdmin.js'
+import validationAdmin from '../middlewares/validationAdmin.js';
 const router = Router();
 
 router.get('/admin', adminController.findAllAdmins);

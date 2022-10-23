@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import itemController from '../controllers/item.controller.js';
 import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
-import validationItem from '../helper/validationItem.js';
+import validationItem from '../middlewares/validationClient.js';
 const router = Router();
 
 router.get('/item', itemController.findAllItems);
