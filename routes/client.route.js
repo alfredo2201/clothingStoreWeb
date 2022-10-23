@@ -5,10 +5,15 @@ import { isAuthClient } from '../middlewares/isAuthClient.js';
 import validationClient from '../helper/validationClient.js';
 const router = Router();
 
-router.get('/client', isAuthAdmin, clientController.findAllClients);
-router.get('/client/:idClient', isAuthAdmin ,clientController.findOneClient);
+router.get('/client',
+//  isAuthAdmin, 
+ clientController.findAllClients);
+router.get('/client/:idClient',
+//  isAuthAdmin ,
+clientController.findOneClient);
 router.post('/client', validationClient.validationRegisterClient ,clientController.registerClient);
-router.put('/client/:idClient', isAuthClient, clientController.updateClient);
+// router.put('/client/:idClient', isAuthClient, clientController.updateClient);
+router.put('/client/:idClient', clientController.updateClient);
 router.delete('/client/:idClient', isAuthAdmin, clientController.deleteOneClient);
 
 export default router;

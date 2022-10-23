@@ -3,31 +3,35 @@ import { Client } from "../models/Client.model.js";
 const register = async (value) => {
   if (!value) return new Error("Client is required");
   const { userName, name, lastName, address, email, password } = value;
-  const client = Client.build({
+  const client = await Client.create({
     userName: userName,
     name: name,
     lastName: lastName,
     address: address,
     email: email,
     password: password,
+  },{
+    returning: true
   });
-  await client
-    .save()
-    .then(() => "Client successfully created")
-    .catch(() => "Client failed to create");
+  return client;
+  // return result = await client.save();
+    // .then(() => "Client successfully created")
+    // .catch(() => "Client failed to create");
 };
 
 const update = async (value, idClient) => {
   const { userName, name, lastName, address } = value;
-  await Client.update({
+  const updatedClient = await Client.update({
     userName: userName,
     name: name,
     lastName: lastName,
     address: address,
   },
   {
-    where: {idClient}
+    where: {idClient},
+    returning: true
   });
+  return updatedClient;
 };
 
 const deleteOne = async (value) => {

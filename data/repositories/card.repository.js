@@ -2,17 +2,21 @@ import { Card } from "../models/Card.model.js";
 
 const register = async (value) => {
   if (!value) return new Error("Values are required");
-  const { nameOwner, cardNumber, expirationDate, idClient } = value;
-  const cardCreated = Card.build({
+  const { nameOwner, cardNumber, expirationDate, idClient, lastCardNumbers} = value;
+  const cardCreated = await Card.create({
     idClient,
     nameOwner,
     cardNumber,
     expirationDate,
+    lastCardNumbers
+  },{
+    returning: true
   });
-  return await cardCreated
-    .save()
-    .then(() => cardCreated.dataValues)
-    .catch(() => "Card failed to save");
+  return cardCreated;
+  // return await cardCreated
+  //   .save()
+  //   .then(() => cardCreated.dataValues)
+  //   .catch(() => "Card failed to save");
 };
 
 const update = async (value) => {

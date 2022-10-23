@@ -3,46 +3,27 @@ import { findOne } from '../data/repositories/client.repository.js';
 
 const registerCard = async (req, res, next) => {
     try {
-        if (!req.body) {
-            const error = new Error('Bad request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-
-        const { nameOwner, cardNumber, expirationDate, idClient } = req.body;
+        const {nameOwner, cardNumber, expirationDate, idClient } = req.body;
+        const lastCardNumbers = cardNumber.slice(12, 16);
         //busco al cliente
         var client = await findOne(idClient);
-        console.log(client.dataValues);
-        if (!client) {//si el clinente no existe
+        if (!client) {
+            //si el clinente no existe
             const error = new Error('Bad request Client not exist');
             error.httpStatusCode = 400;
             next(error);
             return;
         }
-        //vericico que nada esté vacio
-        if (!nameOwner || !cardNumber || !expirationDate) {
-            const error = new Error('Bad request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-        //valido la tarjeta
-        if (!(cardNumber.length === 16)) {
-            const error = new Error('Error in Card Number');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-        const result = await cardRepository.register(req.body)
-        if (!result) {
+        const newCard = await cardRepository.register({ nameOwner, cardNumber, expirationDate, idClient, lastCardNumbers});
+        if (!newCard) {
             const error = new Error('Error to create card');
             error.httpStatusCode = 400;
             next(error);
             return;
         }
-        return res.status(201).send(`Registed Card`);
+        return res.status(201).send({nameOwner:newCard.nameOwner, card: `************${newCard.lastCardNumbers}`});
     } catch (error) {
+        // error.shttpStatusCode = 500;
         next(error);
     }
 }

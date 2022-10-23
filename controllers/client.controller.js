@@ -28,9 +28,9 @@ const registerClient = async (req, res, next) => {
             userName, name, lastName, address, email, password
         })
 
-        await register(newClient);
-
-        res.status(201).send('Cliente Creado');
+        const result = await register(newClient);
+        console.log(result);
+        res.status(201).send(result);
     } catch (error) {
         next(error);
     }
@@ -116,10 +116,10 @@ const updateClient = async (req, res, next) => {
         if (!req.body || !req.params) {
             return res.send('Error 1');
         }
-
+        //mesa: mesa que 
         const { idClient } = req.params;
         const data = req.body;
-
+        //fieldStripping
         const client = await findOne({idClient});
 
         if (!client) {
@@ -127,7 +127,7 @@ const updateClient = async (req, res, next) => {
             error.httpStatusCode = 400;
             next(error);
         }
-
+        //mesa
         const newClient = { ...client.dataValues, ...data };
 
         const result = await update(newClient, idClient);

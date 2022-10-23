@@ -1,5 +1,6 @@
 import DataType from "sequelize";
 import { sequelize } from "../connection.js";
+import bcrypt from 'bcrypt';
 
 export const Card = sequelize.define(
   "cards",
@@ -16,13 +17,27 @@ export const Card = sequelize.define(
       allowNull: false,
     },
     cardNumber: {
-      type: DataType.STRING(16),
+      type: DataType.STRING(250),
+      allowNull: false,
+    },
+    lastCardNumbers:{
+      type:DataType.STRING(4),
       allowNull: false,
     },
     expirationDate: {
-      type: DataType.STRING(5),
+      type: DataType.STRING(150),
       allowNull: false,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    hooks: {
+      beforeCreate: async (card) => {
+        const salt = await bcrypt.genSalt(10);
+        console.log('pasó el salt');
+        card.expirationDate = await bcrypt.hash(card.expirationDate, salt);
+        card.cardNumber = await bcrypt.hash(card.cardNumber, salt);
+      }
+    }
+  }
 );

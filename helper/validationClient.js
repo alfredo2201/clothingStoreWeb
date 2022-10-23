@@ -20,5 +20,6 @@ const validationRegisterClient = async(req, res, next) =>{
 }
 
 export default {
-    validationRegisterClient
+    validationRegisterClient,
+    
 }
