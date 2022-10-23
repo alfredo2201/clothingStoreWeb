@@ -1,14 +1,14 @@
 import { Admin } from '../models/Admin.model.js'
 
 const register = async (admin) => {
-    if (!admin) {
-        console.log('error');
-    }
-    await Admin.create(admin);
+    
+    return await Admin.create(admin, {returning: true});
 }
 
 const findAll = async () => {
-    const admins = await Admin.findAll();
+    const admins = await Admin.findAll({
+        attributes: ["idAdmin","username", "name","lastName","email"],
+    });
     return admins;
 }
 
@@ -16,22 +16,24 @@ const findOne = async (idAdmin) => {
     if (!idAdmin) {
         console.log('error');
     }
-    const admin = await Admin.findOne({ where: { idAdmin } });
+    const admin = await Admin.findOne({
+        attributes: ["idAdmin","username", "name","lastName","email"],
+        where: {idAdmin: idAdmin}});
     return admin;
 }
 
 const deleteOne = async (idAdmin) => {
-    return await Admin.destroy({ where: { idAdmin } });
+    // const { idAdmin } = idAdmin;
+    return await Admin.destroy({ where: { idAdmin: idAdmin} });
 }
 
 const update = async (newData) => {
-    const { idAdmin, userName, name, lastName, email, password } = newData;
+    const { idAdmin, userName, name, lastName, email} = newData;
     return await Admin.update({
         userName,
         name,
         lastName,
         email,
-        password
     },
         {
             where: { idAdmin }

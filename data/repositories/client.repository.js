@@ -19,8 +19,8 @@ const register = async (value) => {
     // .catch(() => "Client failed to create");
 };
 
-const update = async (value, idClient) => {
-  const { userName, name, lastName, address } = value;
+const update = async (value) => {
+  const { idClient ,userName, name, lastName, address } = value;
   const updatedClient = await Client.update({
     userName: userName,
     name: name,
@@ -31,45 +31,39 @@ const update = async (value, idClient) => {
     where: {idClient},
     returning: true
   });
+
   return updatedClient;
 };
 
 const deleteOne = async (value) => {
   if (!value) return new Error("Client is required");
-  await Client.destroy({
-    where: { idClient: value.idClient },
+  const {idClient} = value;
+  return await Client.destroy({
+    where: { idClient},
   })
-    .then("Client deleted successfully")
-    .catch(() => {
-      throw new Error("Error deleting client");
-    });
+    // .then("Client deleted successfully")
+    // .catch(() => {
+    //   throw new Error("Error deleting client");
+    // });
 };
 
 const findOne = async (value) => {
-  if (!value) return new Error("Client is required");
-  try {
+  // if (!value) return new Error("Client is required");
     const {idClient} = value;
     const client = await Client.findOne({
-      attributes: ["username", "name","lastName","address","email"],
+      attributes: ["idClient","username", "name","lastName","address","email"],
       where: {
         idClient
       },
     });
-    return client.dataValues;
-  } catch (e) {
-    return new Error("Client not found");
-  }
+    return client;
 };
 
 const findAll = async () => {
-  try {
     const client = await Client.findAll({
       attributes: ["username", "name","lastName","address","email"]
     });
     return client;
-  } catch (e) {
-    throw new Error("Client not found");
-  }
 };
 
 export {

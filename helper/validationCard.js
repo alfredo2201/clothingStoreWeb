@@ -15,6 +15,17 @@ const validationRegisterCard = async(req, res, next) => {
     next()
 }
 
+
+const validateidCard = async(req, res, next) =>{
+    await check('idCard', 'invalid Card').notEmpty().isInt().run(req);
+    let result = validationResult(req);
+    if(!result.isEmpty()){
+        return res.send(result);
+    }
+    next();
+}
+
 export default {
-    validationRegisterCard
+    validationRegisterCard,
+    validateidCard
 }

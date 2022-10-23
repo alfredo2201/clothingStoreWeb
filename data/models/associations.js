@@ -10,13 +10,13 @@ export const executeAssociations = async () => {
   Sale.belongsToMany(Item, {foreignKey: "idSale", through: 'ItemSale' });
   Item.belongsToMany(Sale, {foreignKey: "idItem", through: 'ItemSale' });
   //Relacion con Clients y Cards
-  Client.hasMany(Card, { foreignKey: "idClient", allowNull: false});
+  Client.hasMany(Card, { foreignKey: "idClient", allowNull: false, onDelete: 'CASCADE'});
   Card.belongsTo(Client, { foreignKey: "idClient", allowNull: false});
   //Relacion entre Clients y Sales
   Client.hasMany(Sale, { foreignKey: "idClient", allowNull: false});
   Sale.belongsTo(Client, { foreignKey: "idClient", allowNull: false});
   //Relacion entre Cards y Sales
-  Card.hasMany(Sale, { foreignKey: "idCard", allowNull: false });
+  Card.hasMany(Sale, { foreignKey: "idCard", allowNull: false, onDelete: 'CASCADE'});
   Sale.belongsTo(Card, { foreignKey: "idCard", allowNull: false });
 
   await Client.sync();

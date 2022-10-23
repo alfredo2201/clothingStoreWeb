@@ -5,13 +5,12 @@ const router = Router();
 
 router.get('/admin', adminController.findAllAdmins);
 
+router.post('/admin', validationAdmin.validationRegisterAdmin ,adminController.registerAdmin)
+
 router.get('/admin/:idAdmin', adminController.findOneAdmin);
 
-//router.post('/admin', adminController.registerAdmin);
-router.post('/admin', validationAdmin.validationRegisterAdmin, adminController.registerAdmin);
+router.put('/admin/:idAdmin', validationAdmin.validationUpdateAdmin, adminController.updateAdmin);
 
-// router.put('/admin/:idAdmin', adminController.updateAdmin);
-
-router.delete('/admin/:idAdmin', adminController.deleteOneAdmin);
+router.delete('/admin/:idAdmin', validationAdmin.validateidAdmin, adminController.deleteOneAdmin);
 
 export default router;

@@ -10,6 +10,16 @@ const validateRegisterSale = async(req, res, next) => {
     next()
 }
 
+const validateidSale = async(req, res, next) =>{
+    await check('idSale', 'invalid sale').notEmpty().isInt().run(req);
+    let result = validationResult(req);
+    if(!result.isEmpty()){
+        return res.send(result);
+    }
+    next();
+}
+
 export default {
-    validateRegisterSale
+    validateRegisterSale,
+    validateidSale
 }

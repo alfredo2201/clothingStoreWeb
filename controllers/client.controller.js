@@ -17,20 +17,26 @@ const registerClient = async (req, res, next) => {
         }
 
         const { userName, name, lastName, address, email, password } = req.body;
-        if (!userName || !name || !lastName || !address || !email || !password) {
-            const error = new Error('Error');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
+        // if (!userName || !name || !lastName || !address || !email || !password) {
+        //     const error = new Error('Error');
+        //     error.httpStatusCode = 400;
+        //     next(error);
+        //     return;
+        // }
 
         const newClient = Client.build({
             userName, name, lastName, address, email, password
-        })
+        });
 
         const result = await register(newClient);
-        console.log(result);
-        res.status(201).send(result);
+        res.status(201).send({
+            userName: result.userName,
+            name: result.name,
+            lastName: result.lastName,
+            address: result.address,
+            email: result.email
+        });
+
     } catch (error) {
         next(error);
     }
@@ -52,11 +58,11 @@ const findAllClients = async (req, res, next) => {
 
 const findOneClient = async (req, res, next) => {
     try {
-        if (!req.body || !req.params) {
-            const error = new Error('Client not found');
-            error.httpStatusCode = 400;
-            next(error);
-        }
+        // if (!req.body || !req.params) {
+        //     const error = new Error('Client not found');
+        //     error.httpStatusCode = 400;
+        //     next(error);
+        // }
 
         const { idClient } = req.params;
         //no tiene ningún parámetro para buscar
@@ -76,18 +82,18 @@ const findOneClient = async (req, res, next) => {
 
 const deleteOneClient = async (req, res, next) => {
     try {
-        if (!req.params) {
-            const error = new Error('Bad request');
-            error.httpStatusCode = 400;
-            next(error);
-        }
+        // if (!req.params) {
+        //     const error = new Error('Bad request');
+        //     error.httpStatusCode = 400;
+        //     next(error);
+        // }
 
         const { idClient } = req.params;
-        if (!idClient) {
-            const error = new Error('Client not found');
-            error.httpStatusCode = 400;
-            next(error);
-        }
+        // if (!idClient) {
+        //     const error = new Error('Client not found');
+        //     error.httpStatusCode = 400;
+        //     next(error);
+        // }
 
         const client = await findOne({ idClient });
         if (!client) {
@@ -96,15 +102,18 @@ const deleteOneClient = async (req, res, next) => {
             next(error);
         }
 
-        const result = await deleteOne({ idClient });
-
+        const result = await deleteOne({ idClient: client.idClient });
+        
         if (result === 0) {
             const error = new Error('Client not deleted');
             error.httpStatusCode = 400;
             next(error);
         }
 
-        res.send({ message: 'Deleted Client' });
+        res.send({
+            msg: "Deleted Client",
+            client
+        });
     } catch (error) {
         next(error);
     }
@@ -113,9 +122,9 @@ const deleteOneClient = async (req, res, next) => {
 
 const updateClient = async (req, res, next) => {
     try {
-        if (!req.body || !req.params) {
-            return res.send('Error 1');
-        }
+        // if (!req.body || !req.params) {
+        //     return res.send('Error 1');
+        // }
         //mesa: mesa que 
         const { idClient } = req.params;
         const data = req.body;
@@ -126,11 +135,13 @@ const updateClient = async (req, res, next) => {
             const error = new Error('Client not found');
             error.httpStatusCode = 400;
             next(error);
+            return;
         }
+        console.log(client.dataValues);
         //mesa
         const newClient = { ...client.dataValues, ...data };
 
-        const result = await update(newClient, idClient);
+        const result = await update(newClient);
 
         if (result === 0) {
             const error = new Error('Client not found');
@@ -138,7 +149,13 @@ const updateClient = async (req, res, next) => {
             next(error);
         }
 
-        return res.send('client Updated');
+        return res.send({
+            idClient: newClient.idClient,
+            userName: newClient.userName,
+            name: newClient.name,
+            address: newClient.address,
+            email: newClient.email
+        });
     } catch (error) {
         next(error);
     }
