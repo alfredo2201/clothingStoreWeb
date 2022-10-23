@@ -9,7 +9,11 @@ import * as ItemSale from "../data/repositories/itemSales.repository.js";
 
 const registerSale = async (req, res, next) => {
   try {
-    const { paymentMethod, total, idClient, idCard, items } = req.body;
+    const { paymentMethod, idClient, idCard, items } = req.body;
+    let total = 0
+    for (let item of items) {
+      total += item.amount * item.price
+    }
     const sale = await register({ paymentMethod, total, idClient, idCard });
     for (let object of items) {
       ItemSale.register({        
