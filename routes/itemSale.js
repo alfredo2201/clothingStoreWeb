@@ -10,7 +10,7 @@ router.get('/itemSale', isAuthClient ,itemSaleController.findAllItemSale);
 router.get('/itemSale/:idItemSale' , isAuthClient,itemSaleController.findOneItemSale);
 
 //router.post('/itemSale', validationItemSale.validationRegisterItemSale , isAuthClient,itemSaleController.registerItemSale);
-router.post('/itemSale', validationItemSale.validationRegisterItemSale ,itemSaleController.registerItemSale);
+router.post('/itemSale' ,itemSaleController.registerItemSale);
 
 router.delete('/itemSale/:idItemSale', isAuthClient, itemSaleController.deleteOneItemSale);
 

@@ -4,12 +4,13 @@ import { ItemSale } from "../models/ItemSale.model.js";
 const register = async (value) => {
   if (!value) return new Error("Values are required");
   const { idItem, idSale, price, amount } = value;
-  return await ItemSale.create({
-    price,
-    amount,
-    idItem,
-    idSale,
-  });
+  const itemSale =  ItemSale.build({
+    idSale:idSale,
+    idItem:idItem,  
+    price: price,
+    amount: amount,
+  })
+  await itemSale.save()
 };
 
 const findAll = async (value) => {

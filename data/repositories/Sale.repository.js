@@ -1,25 +1,18 @@
 import { Sale } from "../models/Sale.model.js";
 import {Item}  from "../models/Item.model.js";
 
-const register = async (sale) => {
-  if (!sale) return new Error("values are required");
-  const { paymentMethod, total, idClient, idCard, item} = sale;
+const register = async (value) => {
+  if (!value) return new Error("values are required");
+  const { paymentMethod, total, idClient, idCard} = value;
 
-  const items = await Item.findOne({
-    where: {
-      idItem: item.idItem
-    }
-  })
-
-  const newSale = await Sale.create({
-    idClient,
+  const sale = await Sale.create({
     idCard,
+    idClient,
     paymentMethod,
-    total,
+    total
   })
-    .then(async () => await newSale.addItem(items))
-    .catch(() => "Sale failed to create");
-};
+  return sale
+}
 
 const findAll = async (value) => {
   if (!value) return new Error("values are required");
