@@ -3,7 +3,7 @@ export const isAuthAdmin = async(req, res, next) =>{
     try {
         let token = req.headers['x-access-token'] || req.headers['authorization'];
     if(!token){
-        return res.send({message: 'the user is not authorized'});
+        return res.status(404).send({message: 'the user is not authorized'});
     }
 
     if(token.startsWith('Bearer ')){

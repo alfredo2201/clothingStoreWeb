@@ -27,14 +27,8 @@ app.use(routerSale);
 app.use('/auth',routerLogin);
 
 
-//middleware para errores
 app.use(handleError)
 
 app.listen(3000, ()=>{
     console.log('Server Listening');
-    // const a = '1234567890123456';
-    // const b = a.slice(0, 14);
-    // const c = a.slice(14, 16);
-    // console.log('b->',b, 'c->', c);
-    // console.log('result ->', b+c);
 });

@@ -5,10 +5,8 @@ const registerCard = async (req, res, next) => {
     try {
         const {nameOwner, cardNumber, expirationDate, idClient } = req.body;
         const lastCardNumbers = cardNumber.slice(12, 16);
-        //busco al cliente
         var client = await findOne(idClient);
         if (!client) {
-            //si el clinente no existe
             const error = new Error('Bad request Client not exist');
             error.httpStatusCode = 400;
             next(error);
@@ -23,7 +21,6 @@ const registerCard = async (req, res, next) => {
         }
         return res.status(201).send({nameOwner:newCard.nameOwner, card: `************${newCard.lastCardNumbers}`});
     } catch (error) {
-        // error.shttpStatusCode = 500;
         next(error);
     }
 }

@@ -10,7 +10,7 @@ router.get('/client/:idClient', isAuthAdmin,validationClient.validateidClient, i
     clientController.findOneClient);
 
 router.post('/client', validationClient.validationRegisterClient ,clientController.registerClient);
-// router.put('/client/:idClient', isAuthClient, clientController.updateClient);
+
 router.put('/client/:idClient', isAuthClient,validationClient.validationUpdateClient,clientController.updateClient);
 
 router.delete('/client/:idClient', isAuthAdmin, validationClient.validateidClient ,clientController.deleteOneClient);

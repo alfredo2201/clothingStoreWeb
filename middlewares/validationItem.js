@@ -8,8 +8,7 @@ const validateRegisterItem = async(req, res, next) =>{
 
     let result = validationResult(req);
     if(!result.isEmpty()){
-        //se envian los errores
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next()
 }
@@ -23,7 +22,7 @@ const validationUpdateItem = async(req, res, next) =>{
     await check('stock', 'invalid stock').optional().isInt().run(req);
     let result = validationResult(req);
     if(!result.isEmpty()){
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next();
 }
@@ -32,7 +31,7 @@ const validateidItem = async(req, res, next) =>{
     await check('idItem', 'invalid Item').notEmpty().isInt().run(req);
     let result = validationResult(req);
     if(!result.isEmpty()){
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next();
 }

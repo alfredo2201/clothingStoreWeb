@@ -10,7 +10,7 @@ const validationRegisterCard = async(req, res, next) => {
     let result = validationResult(req);
 
     if (!result.isEmpty()) {
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next()
 }
@@ -20,7 +20,7 @@ const validateidCard = async(req, res, next) =>{
     await check('idCard', 'invalid Card').notEmpty().isInt().run(req);
     let result = validationResult(req);
     if(!result.isEmpty()){
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next();
 }

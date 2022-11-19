@@ -3,7 +3,7 @@ export const isAuthUser = async(req, res, next) => {
     try {
         let token = req.headers['x-acces-token'] || req.headers['autorizhation'];
         if(!token){
-            return res.send({message: 'the user does not exist'});
+            return res.status(404).send({message: 'the user does not exist'});
         }
 
         if(token.startsWith('Bearer ')){

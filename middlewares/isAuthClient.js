@@ -4,7 +4,7 @@ export const isAuthClient = async (req, res, next) => {
     try {
         let token = req.headers['x-access-token'] || req.headers['authorization'];
         if (!token) {
-            return res.send({ message: 'the user is not autorized' });
+            return res.status(404).send({ message: 'the user is not autorized' });
         }
 
         if (token.startsWith('Bearer ')) {
