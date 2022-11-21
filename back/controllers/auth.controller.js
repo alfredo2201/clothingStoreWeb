@@ -18,7 +18,6 @@ const login = async (req, res, next) => {
         const client = await Client.findOne({ where: { email } });
         if (client) {
 
-            //verificar contraseña del usuario
             if (!client.verifyPassword(password)) {
                 return res.send({ message: 'incorrect password' });
             }

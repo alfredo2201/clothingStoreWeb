@@ -9,7 +9,6 @@ router.get('/itemSale', isAuthClient ,itemSaleController.findAllItemSale);
 
 router.get('/itemSale/:idItemSale' , isAuthClient,itemSaleController.findOneItemSale);
 
-//router.post('/itemSale', validationItemSale.validationRegisterItemSale , isAuthClient,itemSaleController.registerItemSale);
 router.post('/itemSale' ,isAuthClient, validationItemSale.validateidItemSale, itemSaleController.registerItemSale);
 
 router.put('/itemSale', isAuthClient, validationItemSale.validationUpdateItemSale, itemSaleController.updateItemSale);

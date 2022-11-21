@@ -6,7 +6,7 @@ const validationAuth = async(req, res, next) => {
 
     let result = validationResult(req);
     if (!result.isEmpty()) {
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next();
 }

@@ -11,8 +11,7 @@ const validationRegisterAdmin = async(req, res, next) =>{
 
     let result = validationResult(req);
     if(!result.isEmpty()){
-        //se envian los errores
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next()
 }
@@ -26,7 +25,7 @@ const validationUpdateAdmin = async(req, res, next) =>{
     await check('password','password must have min Length 8, 1 lowercase, 1 uppercase and 1 number').optional().isLength({max: 150, min: 8}).run(req);
     let result = validationResult(req);
     if(!result.isEmpty()){
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next();
 }
@@ -35,7 +34,7 @@ const validateidAdmin = async(req, res, next) =>{
     await check('idAdmin', 'invalid Admin').notEmpty().isInt().run(req);
     let result = validationResult(req);
     if(!result.isEmpty()){
-        return res.send(result);
+        return res.status(400).send(result);
     }
     next();
 }

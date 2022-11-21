@@ -9,21 +9,7 @@ import {
 
 const registerClient = async (req, res, next) => {
     try {
-        if (!req.body) {
-            const error = new Error('Bad Request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-
         const { userName, name, lastName, address, email, password } = req.body;
-        // if (!userName || !name || !lastName || !address || !email || !password) {
-        //     const error = new Error('Error');
-        //     error.httpStatusCode = 400;
-        //     next(error);
-        //     return;
-        // }
-
         const newClient = Client.build({
             userName, name, lastName, address, email, password
         });
@@ -58,20 +44,7 @@ const findAllClients = async (req, res, next) => {
 
 const findOneClient = async (req, res, next) => {
     try {
-        // if (!req.body || !req.params) {
-        //     const error = new Error('Client not found');
-        //     error.httpStatusCode = 400;
-        //     next(error);
-        // }
-
-        const { idClient } = req.params;
-        //no tiene ningún parámetro para buscar
-        if (!idClient) {
-            const error = new Error('Client not found');
-            error.httpStatusCode = 400;
-            next(error);
-        }
-
+        const { idClient } = req.params
         const client = await findOne({ idClient });
 
         res.send(client);
@@ -81,19 +54,8 @@ const findOneClient = async (req, res, next) => {
 }
 
 const deleteOneClient = async (req, res, next) => {
-    try {
-        // if (!req.params) {
-        //     const error = new Error('Bad request');
-        //     error.httpStatusCode = 400;
-        //     next(error);
-        // }
-
+    try {        
         const { idClient } = req.params;
-        // if (!idClient) {
-        //     const error = new Error('Client not found');
-        //     error.httpStatusCode = 400;
-        //     next(error);
-        // }
 
         const client = await findOne({ idClient });
         if (!client) {
@@ -122,13 +84,8 @@ const deleteOneClient = async (req, res, next) => {
 
 const updateClient = async (req, res, next) => {
     try {
-        // if (!req.body || !req.params) {
-        //     return res.send('Error 1');
-        // }
-        //mesa: mesa que 
         const { idClient } = req.params;
         const data = req.body;
-        //fieldStripping
         const client = await findOne({idClient});
 
         if (!client) {

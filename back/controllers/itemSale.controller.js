@@ -11,13 +11,6 @@ import itemRepository from '../data/repositories/item.repository.js';
 
 const registerItemSale = async (req, res, next) => {
     try {
-        if (!req.body) {
-            const error = new Error('Bad Request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-
         const { amount, idItem, idSale} = req.body;
         if (!amount || !idItem || !idSale) {
             const error = new Error('Bad Request');
@@ -48,12 +41,6 @@ const registerItemSale = async (req, res, next) => {
 
 const findAllItemSale = async (req, res, next) => {
     try {
-        if (!req.body) {
-            const error = new Error('Bad request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
         const {idSale} = req.body
         const itemsSale = await findAll({idSale});
         if (!itemsSale) {
@@ -70,13 +57,6 @@ const findAllItemSale = async (req, res, next) => {
 
 const findOneItemSale = async (req, res, next) => {
     try {
-        if (!req.body || !req.params) {
-            const error = new Error('Bad request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-
         const { idItemSale } = req.params;
         //no tiene ningún parámetro para buscar
         if (!idItemSale) {
@@ -96,13 +76,6 @@ const findOneItemSale = async (req, res, next) => {
 
 const deleteOneItemSale = async (req, res, next) => {
     try {
-        if (!req.params) {
-            const error = new Error('Bad request');
-            error.httpStatusCode = 400;
-            next(error);
-            return;
-        }
-
         const { idItemSale } = req.params;
         if (!idItemSale) {
             const error = new Error('Bad request');
