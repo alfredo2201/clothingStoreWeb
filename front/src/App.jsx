@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import NavBar from './componets/NavBar/NavBar'
-import './App.css'
+import NavBar from './components/NavBar/NavBar'
+import Carrusel from './components/Carrusel/Carrusel'
+import ListProducts from './components/ListProducts/ListProducts'
+import Footer from './components/Footer/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
       <NavBar></NavBar>
+      <Carrusel></Carrusel>
+      <ListProducts></ListProducts>
+      <Footer></Footer>
     </div>
   )
 }
