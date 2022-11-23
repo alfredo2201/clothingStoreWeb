@@ -1,17 +1,24 @@
-import { useState } from 'react'
-import NavBar from './components/NavBar/NavBar'
-import Carrusel from './components/Carrusel/Carrusel'
-import ListProducts from './components/ListProducts/ListProducts'
-import Footer from './components/Footer/Footer'
+import { ReactDOM } from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import Shop from "./pages/Shop";
+import NoPage from "./pages/NoPage";
+import Layout from "./pages/Layout";
+
 
 function App() {
   return (
-    <div className="App">
-      <NavBar></NavBar>
-      <Carrusel></Carrusel>
-      <ListProducts></ListProducts>
-      <Footer></Footer>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="aboutUs" element={<AboutUs />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
