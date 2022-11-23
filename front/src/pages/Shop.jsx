@@ -7,7 +7,7 @@ import Footer from "../components/Footer/Footer";
 const Shop = () => {
   return (
     <div>
-      <NavBar></NavBar>
+      {/* <NavBar></NavBar> */}
       <h1>Parte del Shop</h1>
     </div>
   );

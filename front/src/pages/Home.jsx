@@ -7,10 +7,10 @@ import Footer from "../components/Footer/Footer";
 const Home = () => {
   return (
     <div>
-      <NavBar></NavBar>
+      {/* <NavBar></NavBar> */}
       <Carrusel></Carrusel>
       <ListProducts></ListProducts>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 };

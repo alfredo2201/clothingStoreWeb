@@ -31,6 +31,8 @@ const login = async (req, res, next) => {
                 message: 'successful',
                 idClient: client.idClient,
                 userName: client.userName,
+                name: client.name,
+                email: client.email,
                 token: token
             })
         }
@@ -49,6 +51,9 @@ const login = async (req, res, next) => {
                 token: token
             })
         }
+        return res.status(404).send({
+            message: 'Unsuccess login'
+        })
     } catch (error) {
         next(error)
     }

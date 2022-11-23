@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import routerItem from './routes/item.route.js';
 import routerClient from './routes/client.route.js';
 import routerCard from './routes/card.route.js';
@@ -12,7 +13,7 @@ await executeAssociations();
 
 const app = express();
 
-
+app.use(cors());
 app.use(express.urlencoded());
 app.use(express.json());
 //whitelist, path publicos
