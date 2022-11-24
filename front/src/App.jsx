@@ -8,6 +8,7 @@ import { ClientContextProvider } from './context/client/ClientProvider'
 import NavBar from "./components/NavBar/NavBar";
 import Login from "./pages/Login";
 import Footer from "./components/Footer/Footer";
+import SingleShop from "./components/ShopSingle/ShopSingle";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="aboutUs" element={<AboutUs />} />
         <Route path="shop" element={<Shop />} />
         <Route path="auth/login" element={<Login />} />
+        <Route path="singleShop" element={<SingleShop />} />
         <Route path="*" element={<NoPage />} />
         {/* </Route> */}
       </Routes>

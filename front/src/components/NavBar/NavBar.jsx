@@ -17,9 +17,9 @@ const NavBar = () => {
     <>
     <nav className="navbar navbar-expand-lg navbar-light shadow">
       <div className="container d-flex justify-content-between align-items-center">
-        <a className="img-fluid" href="index.html">
+        <Link className="img-fluid" to="">
           <img className="nav-image" src="../src/assets/img/dapi.png" />
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler border-0"
@@ -86,7 +86,7 @@ const NavBar = () => {
       </div>
     </nav>
 
-    <div className="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade bg-white" id="templatemo_search" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg" role="document">
             <div className="w-100 pt-1 mb-5 text-right">
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

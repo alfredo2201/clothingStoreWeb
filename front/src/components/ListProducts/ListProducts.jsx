@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import TitleList from "../TitleList/TitleList";
 
 const ListProducts = () => {
@@ -15,7 +16,7 @@ const ListProducts = () => {
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_01.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -25,13 +26,14 @@ const ListProducts = () => {
                             </div>
                         </div>
                     </div>
+                    {/*Componente*/}
                     <div className="col-md-3">
                         <div className="card mb-4 product-wap rounded-0">
                             <div className="card rounded-0">
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_02.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -41,13 +43,14 @@ const ListProducts = () => {
                             </div>
                         </div>
                     </div>
+                    {/*Componente*/}
                     <div className="col-md-3">
                         <div className="card mb-4 product-wap rounded-0">
                             <div className="card rounded-0">
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_03.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,13 +60,14 @@ const ListProducts = () => {
                             </div>
                         </div>
                     </div>
+                    {/*Componente*/}
                     <div className="col-md-3">
                         <div className="card mb-4 product-wap rounded-0">
                             <div className="card rounded-0">
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_04.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -73,13 +77,14 @@ const ListProducts = () => {
                             </div>
                         </div>
                     </div>
+                                {/*Componente*/}
                     <div className="col-md-3">
                         <div className="card mb-4 product-wap rounded-0">
                             <div className="card rounded-0">
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_05.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -95,7 +100,7 @@ const ListProducts = () => {
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_06.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,7 +116,7 @@ const ListProducts = () => {
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_07.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -127,7 +132,7 @@ const ListProducts = () => {
                                 <img className="card-img rounded-0 img-fluid" src="../src/assets/img/shop_08.jpg"/>
                                 <div className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul className="list-unstyled">
-                                        <li><a className="btn btn-success text-white mt-2" href="shop-single.html"><i className="fas fa-cart-plus"></i></a></li>
+                                        <li><Link className="btn btn-success text-white mt-2" to="/singleShop"><i className="fas fa-cart-plus"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
