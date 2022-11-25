@@ -14,19 +14,15 @@ export const useClient = () => {
 }
 
 export const ClientContextProvider = ({ children }) => {
-    // const [client, setClient] = useState({
-    //     idClient: '',
-    //     userName: '',
-    //     name: '',
-    //     email: '',
-    //     token: '',
-    // })
+    const [client, setClient] = useState(null);
 
     (()=>{
-        console.log('client->', JSON.parse(window.localStorage.getItem('client')))
+        const jsonDataClient = JSON.parse(window.localStorage.getItem('client'))
+        if(jsonDataClient !== null && client === null){
+            setClient(jsonDataClient)
+        }
+        // setClient(JSON.parse(window.localStorage.getItem('client')))
     })();
-
-    const [client, setClient] = useState(null);
 
     const loadClient = async (client) => {
         await setClient(client)

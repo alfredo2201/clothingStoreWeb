@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Navigate, redirect } from 'react-router-dom';
 import { login } from '../../api/login';
 import { useClient } from '../../context/client/ClientProvider';
-import  {useLogin}  from '../../hooks/LoginHook';
+import { useLogin } from '../../hooks/LoginHook';
+
 const index = () => {
-    
     const {
         client,
         email,
@@ -22,6 +22,13 @@ const index = () => {
                     <Navigate to='/' replace={true} />
                 )
             }
+
+            {/* {
+                (client !== null) ?
+                    <h2>{clientLogin}</h2>
+                    :
+                    null
+            } */}
             <form onSubmit={handleSubmit}>
                 <label name='email'>Email</label>
                 <input

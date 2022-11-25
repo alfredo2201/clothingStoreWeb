@@ -30,6 +30,7 @@ const handleSubmit = async (event) => {
             const dataClient = {
                 idClient: data.data.idClient,
                 userName: data.data.userName,
+                name: data.data.name,
                 email: data.data.email
             }
 
