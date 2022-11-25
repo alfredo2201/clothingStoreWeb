@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import TitleList from "../TitleList/TitleList";
+import TitleList from "./TitleList/TitleList";
 import ProductPost from "./ProductPost/ProductPost";
 import { v4 as uuidv4 } from "uuid";
 
@@ -62,8 +61,14 @@ const ListProducts = () => {
       <div className="row">
         <div className="col-lg-12">
           <div className="row">
-            {data.map((item)=>(<ProductPost key={item.id} srcImage={item.srcImage} name={item.name} price={item.price}></ProductPost>))        
-            }
+            {data.map((item) => (
+              <ProductPost
+                key={item.id}
+                srcImage={item.srcImage}
+                name={item.name}
+                price={item.price}
+              ></ProductPost>
+            ))}
           </div>
         </div>
       </div>

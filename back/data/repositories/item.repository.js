@@ -22,6 +22,18 @@ const findAll = async () => {
   return items;
 };
 
+const findAllForPage = async (pages) => {
+  const {perPage,offSet} = pages;
+  const items = await Item.findAll({
+    attributes: ["idItem", "name", "category", "size", "price", "stock"],
+    offset: offSet,
+    limit: perPage,
+    
+  });
+  return items;
+};
+
+
 //busca por category, id or size
 const findOne = async (search) => {
   const { idItem } = search;
@@ -72,4 +84,5 @@ export default {
   findOne,
   deleteOne,
   update,
+  findAllForPage
 };

@@ -5,8 +5,7 @@ import { ClientContext } from '../context/client/ClientContext'
 const Login = () => {
     const client = useContext(ClientContext)
     return (
-        <div>
-            {/* <h1>{client}</h1> */}
+        <div>            
             <LoginForm/>
         </div>
     )

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ButtonSize from "./ButtonSize/ButtonShop";
 
 const sizes = {
     S:"S",
@@ -9,8 +10,9 @@ const sizes = {
     XXXL:"XXXL",
 }
 
-const SelectSize = () => {
-    // const [size, setSize] = useState("")
+const SelectSize = (props) => {
+  const {size} = props
+  // const [size, setSize] = useState("")
   return (
     <div className="col-auto">
       <ul className="list-inline pb-3">
@@ -24,7 +26,14 @@ const SelectSize = () => {
           />
         </li>
         {/* //Estas de aqui deben de ser componentes */}
-        <li className="list-inline-item">
+        {/* { */}
+         <ButtonSize value={sizes.S}></ButtonSize>
+         <ButtonSize value={sizes.M}></ButtonSize>
+         <ButtonSize value={sizes.L}></ButtonSize>       
+         <ButtonSize value={sizes.XL}></ButtonSize>
+        
+
+        {/* <li className="list-inline-item">
           <span className="btn btn-success btn-size" onClick={() => console.log("Hola que tal")}>{sizes.S}</span>
         </li>
         <li className="list-inline-item">
@@ -35,7 +44,7 @@ const SelectSize = () => {
         </li>
         <li className="list-inline-item">
           <span className="btn btn-success btn-size">{sizes.XL}</span>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
