@@ -30,6 +30,7 @@ $(document).ready(function() {
       return false;
     });
     $('#btn-minus').click(function(){
+      console.log("Entra -> - ")
       var val = $("#var-value").html();
       val = (val=='1')?val:val-1;
       $("#var-value").html(val);
@@ -37,6 +38,7 @@ $(document).ready(function() {
       return false;
     });
     $('#btn-plus').click(function(){
+      console.log("Entra -> + ")
       var val = $("#var-value").html();
       val++;
       $("#var-value").html(val);

@@ -25,11 +25,13 @@ $(document).ready(function() {
 
     // Product detail
     $('.product-links-wap a').click(function(){
+      console.log('Entra aqui -> .product-links-wap a')
       var this_src = $(this).children('img').attr('src');
       $('#product-detail').attr('src',this_src);
       return false;
     });
     $('#btn-minus').click(function(){
+      console.log('Entra aqui -> -')
       var val = $("#var-value").html();
       val = (val=='1')?val:val-1;
       $("#var-value").html(val);
@@ -37,6 +39,7 @@ $(document).ready(function() {
       return false;
     });
     $('#btn-plus').click(function(){
+      console.log('Entra aqui -> +')
       var val = $("#var-value").html();
       val++;
       $("#var-value").html(val);
