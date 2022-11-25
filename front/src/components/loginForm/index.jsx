@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
+import { Navigate, redirect } from 'react-router-dom';
 import { login } from '../../api/login';
+import { useClient } from '../../context/client/ClientProvider';
+import  {useLogin}  from '../../hooks/LoginHook';
 const index = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    
+    const {
+        client,
+        email,
+        password,
+        handleChangeEmail,
+        handleChangePassword,
+        handleSubmit } = useLogin()
 
-    const handleChangePassword = (event) => {
-        setPassword(event.target.value)
-    }
-
-    const handleChangeEmail = (event) => {
-        setEmail(event.target.value);
-    }
-
-    const handleSubmit = async(event) => {
-        event.preventDefault();
-        try {
-            const data = await login(email, password);
-        window.localStorage.setItem('token', data.data.token);
-        } catch (error) {
-            console.log(error);
-        }
-    }
     return (
         <div>
+            {
+                //redirecciona si hay un usuario
+                (client !== null) && (
+                    // console.log('clientL ->', client)
+                    <Navigate to='/' replace={true} />
+                )
+            }
             <form onSubmit={handleSubmit}>
                 <label name='email'>Email</label>
                 <input

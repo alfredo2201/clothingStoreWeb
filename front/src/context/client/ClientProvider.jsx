@@ -14,11 +14,22 @@ export const useClient = () => {
 }
 
 export const ClientContextProvider = ({ children }) => {
-    const [client, setClient] = useState('chanchito')
+    // const [client, setClient] = useState({
+    //     idClient: '',
+    //     userName: '',
+    //     name: '',
+    //     email: '',
+    //     token: '',
+    // })
 
-    const loadClient = async () => {
-        console.log('loading client')
-        //obtener cliente
+    (()=>{
+        console.log('client->', JSON.parse(window.localStorage.getItem('client')))
+    })();
+
+    const [client, setClient] = useState(null);
+
+    const loadClient = async (client) => {
+        await setClient(client)
     }
 
     const updateClient = () => {

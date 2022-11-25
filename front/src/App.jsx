@@ -15,6 +15,7 @@ function App() {
 
     <div >
       <NavBar />
+      <ClientContextProvider>
       <Routes>
         {/* <Route path="/" element={<Layout />} /> */}
         <Route path="/" element={<Layout />} />
@@ -26,6 +27,7 @@ function App() {
         <Route path="*" element={<NoPage />} />
         {/* </Route> */}
       </Routes>
+      </ClientContextProvider>
       <Footer/>
     </div >
   )
