@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       {/* <NavBar></NavBar> */}
       <Carrusel></Carrusel>
-      <ListProducts></ListProducts>
+      <ListProducts title="Check at our products"></ListProducts>
       {/* <Footer></Footer> */}
     </div>
   );

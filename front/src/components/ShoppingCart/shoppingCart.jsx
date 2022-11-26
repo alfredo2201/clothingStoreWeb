@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 const ShoppingCart = () => {
-  const [cart, setCart] = useState(20);
+  const [cart, setCart] = useState(0);
 
   return (
     <a className="nav-icon position-relative text-decoration-none" href="#">

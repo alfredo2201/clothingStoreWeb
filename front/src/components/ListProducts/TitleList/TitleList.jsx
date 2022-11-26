@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import Categories from "../Categories/Categories";
 
-const TitleList = () => {
-    const [title, setTitle] = useState("Check at our products")
+const TitleList = (props) => {
+  const { title } = props;
   return (
     <section className="container py-4">
       <div className="row text-left">
@@ -12,8 +13,9 @@ const TitleList = () => {
           <hr></hr>
         </div>
       </div>
+      {title == "Categories" ? <Categories></Categories> : ""}
     </section>
   );
 };
 
-export default TitleList
+export default TitleList;

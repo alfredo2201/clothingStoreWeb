@@ -28,9 +28,9 @@ const findAllForPage = async (pages) => {
     attributes: ["idItem", "name", "category", "size", "price", "stock"],
     offset: offSet,
     limit: perPage,
-    
   });
-  return items;
+  const count = await Item.count()
+  return {items,count};
 };
 
 
