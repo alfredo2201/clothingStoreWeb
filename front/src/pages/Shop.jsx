@@ -15,6 +15,11 @@ const Shop = () => {
 
       <ListProducts title="Categories"></ListProducts>
       
+      {/* {        
+        (client === null) ?
+        <h1>No ha iniciado sesion</h1>:
+        <h2>{client.name}</h2>
+      } */}
     </div>
   );
 };

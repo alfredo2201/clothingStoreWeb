@@ -19,7 +19,8 @@ const findAll = async () => {
   const items = await Item.findAll({
     attributes: ["idItem", "name", "category", "size", "price", "stock"],
   });
-  return items;
+  const count = await Item.count()
+  return {items,count};
 };
 
 const findAllForPage = async (pages) => {
