@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ButtonSize from "./ButtonSize/ButtonShop";
+import ButtonShop from "./ButtonSize/ButtonShop";
 
 const sizes = {
     S:"S",
@@ -11,8 +11,12 @@ const sizes = {
 }
 
 const SelectSize = (props) => {
-  const {size} = props
-  // const [size, setSize] = useState("")
+  // const {size} = props
+  const [active, setActive] = useState()
+
+  const handleOnClick = () =>{
+
+  }
   return (
     <div className="col-auto">
       <ul className="list-inline pb-3">
@@ -27,24 +31,14 @@ const SelectSize = (props) => {
         </li>
         {/* //Estas de aqui deben de ser componentes */}
         {/* { */}
-         <ButtonSize value={sizes.S}></ButtonSize>
-         <ButtonSize value={sizes.M}></ButtonSize>
-         <ButtonSize value={sizes.L}></ButtonSize>       
-         <ButtonSize value={sizes.XL}></ButtonSize>
-        
-
-        {/* <li className="list-inline-item">
-          <span className="btn btn-success btn-size" onClick={() => console.log("Hola que tal")}>{sizes.S}</span>
-        </li>
-        <li className="list-inline-item">
-          <span className="btn btn-success btn-size">{sizes.M}</span>
-        </li>
-        <li className="list-inline-item">
-          <span className="btn btn-success btn-size">{sizes.L}</span>
-        </li>
-        <li className="list-inline-item">
-          <span className="btn btn-success btn-size">{sizes.XL}</span>
-        </li> */}
+        {/* Hay que arreglar esto para que cuando seleccione
+        una talla se deshabilite, pero cuando haga click en otra
+        se deshabilite la otra y habilite la primera que toco */}
+         <ButtonShop value={sizes.S} onClick={handleOnClick}></ButtonShop>
+         <ButtonShop value={sizes.M} onClick={handleOnClick}></ButtonShop>
+         <ButtonShop value={sizes.L} onClick={handleOnClick}></ButtonShop>       
+         <ButtonShop value={sizes.XL}onClick={handleOnClick}></ButtonShop>
+      
       </ul>
     </div>
   );

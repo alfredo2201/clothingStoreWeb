@@ -11,7 +11,7 @@ const Shop = () => {
   const {client} = useClient();
   return (
     <div>
-      {/* <NavBar></NavBar> */}
+      <Carrusel></Carrusel>
 
       <ListProducts title="Categories"></ListProducts>
       

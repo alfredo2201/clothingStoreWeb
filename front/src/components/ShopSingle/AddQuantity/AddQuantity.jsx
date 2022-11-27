@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-
+import React, {useRef, useState} from "react";
 
 const AddQuantity = () => {
     const [quanity, setQuantity] = useState(1);
-
+    const btnRemove = useRef()
+    const btnAdd = useRef()
     const add = () =>{
-        setQuantity(quanity +1)
+        setQuantity(quanity +1)        
     }
 
     const remove = () =>{
@@ -23,17 +23,17 @@ const AddQuantity = () => {
             id="product-quanity"
             value="1"
           />
-        </li>
+        </li>        
         <li className="list-inline-item">
-          <span className="btn btn-success" id="btn-minus" onClick={remove}>
+          <button className="btn btn-success" id="btn-minus" ref={btnRemove} onClick={remove}>
             -
-          </span>
+          </button>
         </li>
         <li className="list-inline-item">
           <span className="badge bg-secondary" id="var-value">{quanity}</span>
         </li>
         <li className="list-inline-item">
-          <span className="btn btn-success" id="btn-plus" onClick={add}>
+          <span type="" className="btn btn-success" id="btn-plus" ref={btnAdd} onClick={add}>
             +
           </span>
         </li>

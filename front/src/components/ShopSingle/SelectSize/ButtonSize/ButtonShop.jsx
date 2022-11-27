@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
-const ButtonSize = (props) => {
-    const {value, id, onClick} = props;
+const ButtonShop = (props) => {
+    const {value, id} = props;
     const click = useRef()
 
     const handleOnClick = ()=>{
@@ -14,4 +14,4 @@ const ButtonSize = (props) => {
   );
 };
 
-export default ButtonSize;
+export default ButtonShop;

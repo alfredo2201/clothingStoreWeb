@@ -6645,7 +6645,7 @@ fieldset:disabled .btn {
   background-color: #dc3545 !important;
 }
 .bg-light {
-  background-color: #f8f9fa !important;
+  background-color: #EFEFEF !important;
 }
 .bg-dark {
   background-color: #212529 !important;
@@ -6741,6 +6741,13 @@ fieldset:disabled .btn {
 .rounded-start {
   border-bottom-left-radius: 0.25rem !important;
   border-top-left-radius: 0.25rem !important;
+}
+.rounded-form {
+  border-radius: 35px;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  -ms-border-radius: 35px;
+  -o-border-radius: 35px;
 }
 .visible {
   visibility: visible !important;

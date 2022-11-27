@@ -268,8 +268,7 @@ const ListProducts = (props) => {
             ))}
           </div>
           {title == "Categories" ? (
-            <div div="row">
-              <ul className="pagination pagination-lg justify-content-end"></ul>
+            <div className="d-flex justify-content-end m-3">              
               <Pagination>{itemsPages}</Pagination>
             </div>
           ) : (

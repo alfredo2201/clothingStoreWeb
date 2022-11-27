@@ -15,7 +15,7 @@ const TextNav = {
 const NavBar = () => {
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-light shadow">
+    <nav className="navbar navbar-expand-lg navbar-light  bg-white">
       <div className="container d-flex justify-content-between align-items-center">
         <Link className="img-fluid" to="">
           <img className="nav-image" src="../src/assets/img/dapi.png" />

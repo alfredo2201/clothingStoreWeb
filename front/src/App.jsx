@@ -13,7 +13,7 @@ import SingleShop from "./components/ShopSingle/ShopSingle";
 function App() {
   return (
 
-    <div >
+    <div>
       <NavBar />
       <ClientContextProvider>
       <Routes>
