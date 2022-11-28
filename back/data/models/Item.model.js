@@ -31,6 +31,10 @@ export const Item = sequelize.define(
       type: DataType.INTEGER,
       allowNull: false,
     },
+    img:{
+      type: DataType.STRING,
+      allowNull: false,
+    }
   },
   { timestamps: true }
 );

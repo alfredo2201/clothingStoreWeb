@@ -14,8 +14,8 @@ await executeAssociations();
 const app = express();
 
 app.use(cors());
-app.use(express.urlencoded());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 //whitelist, path publicos
 
 app.use(routerAdmin);
@@ -26,7 +26,7 @@ app.use(routerCard);
 app.use(routerClient);
 app.use(routerSale);
 app.use('/auth',routerLogin);
-
+app.use('/uploads', express.static('./uploads'))
 
 app.use(handleError)
 

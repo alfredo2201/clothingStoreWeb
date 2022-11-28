@@ -17,7 +17,7 @@ export const ClientContextProvider = ({ children }) => {
     const [client, setClient] = useState(null);
 
     (()=>{
-        const jsonDataClient = JSON.parse(window.localStorage.getItem('client'))
+        const jsonDataClient = JSON.parse(window.localStorage.getItem('user'))
         if(jsonDataClient !== null && client === null){
             setClient(jsonDataClient)
         }

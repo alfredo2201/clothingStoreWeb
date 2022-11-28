@@ -12,11 +12,11 @@ export const useLogin = () => {
         setPassword(event.target.value)
     }
 
-const handleChangeEmail = (event) => {
+    const handleChangeEmail = (event) => {
         setEmail(event.target.value);
     }
 
-const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const data = await login(email, password);
@@ -28,7 +28,7 @@ const handleSubmit = async (event) => {
             }
 
             const dataClient = {
-                idClient: data.data.idClient,
+                id: data.data.idClient,
                 userName: data.data.userName,
                 name: data.data.name,
                 email: data.data.email
@@ -37,10 +37,10 @@ const handleSubmit = async (event) => {
             const token = data.data.token
 
             window.localStorage.setItem('token', token);
-            window.localStorage.setItem('client', JSON.stringify(dataClient));
+            window.localStorage.setItem('user', JSON.stringify(dataClient));
             await loadClient(data.data);
-            // setPassword('');
-            // setEmail('');
+            setPassword('');
+            setEmail('');
         } catch (error) {
             console.log(error);
         }
@@ -54,12 +54,3 @@ const handleSubmit = async (event) => {
         handleSubmit
     }
 }
-
-// export default {
-//     client,
-//     email,
-//     password,
-//     handleChangeEmail,
-//     handleChangePassword,
-//     handleSubmit
-// }

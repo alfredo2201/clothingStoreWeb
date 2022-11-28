@@ -47,7 +47,11 @@ const login = async (req, res, next) => {
                 expiresIn: '1d'
             });
             return res.send({
-                message: 'successful Admin',
+                message: 'successful',
+                id: admin.idClient,
+                userName: admin.userName,
+                name: admin.name,
+                email: admin.email,
                 token: token
             })
         }

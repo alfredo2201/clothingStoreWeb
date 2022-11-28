@@ -1,18 +1,48 @@
 import { Item } from "../data/models/Item.model.js";
 import itemRepository from "../data/repositories/item.repository.js";
+import multer from 'multer'
+import path from 'path'
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb){
+//     cb(null, 'uploads')
+//   },
+//   filename: function(req, file, cb){
+//     cb(null,  `${Date.now()}-${file.originalname}`)
+//   }
+// })
+// const upload = multer({storage: storage})
+// const upload = multer({storage: storage,
+// limits: {fieldSize: '1000000'},
+// fileFilter: (req, file, cb) =>{
+//   const fileTypes = /jpeg|jpg|png|gif/;
+//   const mimeType = fileTypes.test(file.mimetype)
+//   const extName = fileTypes.test(path.extname(file.originalname))
+
+//   if(mimeType && extName){
+//     return cb(null, true);
+//   }
+//   cb('give proper files formate to upload')
+// }
+// });
 
 const registerItem = async (req, res, next) => {
   try {
-    const { name, category, size, price, stock } = req.body;
-
+    const { name, category, size, price, stock, img } = req.body;
     const newItem = Item.build({
       name,
       category,
       size,
       price,
       stock,
+      img
     });
     const item = await itemRepository.register(newItem);
+    if(!item){
+      const error = new Error("Item Bad request");
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+    }
 
     res.status(201).send(item);
   } catch (error) {
@@ -129,4 +159,5 @@ export default {
   deleteOneItem,
   updateItem,
   findItemsForPage,
+  // upload
 };

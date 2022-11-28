@@ -2,13 +2,14 @@ import { Item } from "../models/Item.model.js";
 
 const register = async (value) => {
   if (!value) return new Error("Item is required");
-  const { name, category, size, price, stock } = value;
+  const { name, category, size, price, stock, img } = value;
   return await Item.create({
     name,
     category,
     size,
     price,
     stock,
+    img
   }, {
     returning: true
   }

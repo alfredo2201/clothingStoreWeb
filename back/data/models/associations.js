@@ -23,6 +23,7 @@ export const executeAssociations = async () => {
   await Admin.sync();
   await Card.sync();
   await Sale.sync();
+  // await Item.sync({alter: true});
   await Item.sync();
   await ItemSale.sync();
 };
