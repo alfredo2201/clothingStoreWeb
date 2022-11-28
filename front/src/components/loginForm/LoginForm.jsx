@@ -13,7 +13,7 @@ const LoginForm = () => {
                     //redirecciona si hay un usuario
                     (client !== null) && (
                         // console.log('clientL ->', client)
-                        <Navigate to='/' replace={true} />
+                        <Navigate to='/perfil' replace={true} />
                     )
                 }
 

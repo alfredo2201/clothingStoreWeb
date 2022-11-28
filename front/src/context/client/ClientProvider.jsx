@@ -34,7 +34,7 @@ export const ClientContextProvider = ({ children }) => {
     }
 
     return <ClientContext.Provider value={{
-        client, updateClient, loadClient
+        client, updateClient, loadClient 
     }}>
         {children}
     </ClientContext.Provider>
