@@ -33,8 +33,13 @@ export const ClientContextProvider = ({ children }) => {
         console.log('updateing client...');
     }
 
+    const logOut = () =>{
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('user');
+        setClient(null);
+    }
     return <ClientContext.Provider value={{
-        client, updateClient, loadClient 
+        client, updateClient, loadClient, logOut 
     }}>
         {children}
     </ClientContext.Provider>

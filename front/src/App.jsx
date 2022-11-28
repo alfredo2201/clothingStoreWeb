@@ -14,7 +14,6 @@ import Perfil from "./pages/perfil";
 
 function App() {
   return (
-
     <div>
       <NavBar />
       <ClientContextProvider>
