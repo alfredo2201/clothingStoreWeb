@@ -31,7 +31,9 @@ export const useLogin = () => {
                 id: data.data.idClient,
                 userName: data.data.userName,
                 name: data.data.name,
-                email: data.data.email
+                lastName: data.data.lastName,
+                email: data.data.email,
+                address: data.data.address,
             }
 
             const token = data.data.token

@@ -1,45 +1,24 @@
-import React, { useState } from 'react'
-import { Navigate, redirect } from 'react-router-dom';
-import { useClient } from '../../context/client/ClientProvider';
+import React from 'react'
+import { Navigate } from 'react-router-dom';
 import BtnLogOut from '../btnLogOut';
-
+import { UseFormPerfil } from '../../hooks/useFormPerfil';
 
 const FormPerfil = () => {
-    const { client, updateClientContext } = useClient();
-    const [formUserName, setFormUserName] = useState(client.userName);
-    const [formName, setFormName] = useState(client.name);
-    const [formEmail, setFormEmail] = useState(client.email);
 
-    const handleChangeformUserName = (event) => {
-        setFormUserName(event.target.value);
-    }
-
-    const handleChangeFormName = (event) => {
-        setFormName(event.target.value)
-    }
-
-    const handleChangeFormEmail = (event) => {
-        setFormEmail(event.target.value)
-    }
-
-    const submitFormPerfil =async(event) =>{
-        event.preventDefault();
-        const newData = {
-            // idClient: client.id,
-            name: formName,
-            userName: formUserName,
-            email: formEmail
-        }
-
-        const updatedData = {...client, ...newData}
-
-        
-        // console.log(updatedData)
-        await updateClientContext(updatedData);
-        alert('Updated User')
-        // window.location.reload();
-    }
-
+    const {
+        client,
+        formUserName,
+        formName,
+        formLastName,
+        formEmail,
+        formAddress,
+        handleChangeFormAddress,
+        handleChangeFormEmail,
+        handleChangeFormLastName,
+        handleChangeFormName,
+        handleChangeformUserName,
+        submitFormPerfil
+    } = UseFormPerfil();
 
     return (
         <>
@@ -49,7 +28,6 @@ const FormPerfil = () => {
                         <Navigate to='/' replace={true} />
                     )
                 }
-
 
                 <div>
                     <h1>About You {client.name}</h1>
@@ -74,12 +52,28 @@ const FormPerfil = () => {
                         </div>
 
                         <div>
-                            <label>Email</label><br></br>
+                            <label>LastName</label><br></br>
                             <input type={'text'}
+                                value={formLastName}
+                                onChange={handleChangeFormLastName}
+                                placeholder='LastName' />
+                        </div>
+
+                        <div>
+                            <label>Email</label><br></br>
+                            <input type={'email'}
                                 value={formEmail}
                                 placeholder='Email'
                                 onChange={handleChangeFormEmail}
                             />
+                        </div>
+
+                        <div>
+                            <label>Address</label><br></br>
+                            <input type={'text'}
+                                value={formAddress}
+                                onChange={handleChangeFormAddress}
+                                placeholder='Address' />
                         </div>
 
                         <div>

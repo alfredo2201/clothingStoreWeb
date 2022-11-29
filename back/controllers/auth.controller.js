@@ -32,7 +32,9 @@ const login = async (req, res, next) => {
                 idClient: client.idClient,
                 userName: client.userName,
                 name: client.name,
+                lastName: client.lastName,
                 email: client.email,
+                address: client.address,
                 token: token
             })
         }

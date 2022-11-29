@@ -31,7 +31,7 @@ export const ClientContextProvider = ({ children }) => {
     const updateClientContext = async (data) => {
         try {
             const newClient = await updateClient(data)
-            // console.log('newClient ->', newClient.data)
+            console.log('newClient ->', newClient.data)
             window.localStorage.removeItem('user');
             window.localStorage.setItem('user', JSON.stringify(newClient.data));
             await setClient(newClient.data)
