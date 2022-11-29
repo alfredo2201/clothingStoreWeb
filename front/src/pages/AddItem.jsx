@@ -24,7 +24,7 @@ const {
         <div>
 
             <FormAddItem/>
-            
+
         </div>
     )
 }
