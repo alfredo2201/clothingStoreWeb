@@ -3,24 +3,24 @@ import { useAddItem } from '../../hooks/useAddItem'
 
 const FormAddItem = () => {
 
-  const {
-    nameItem,
-    sizeItem,
-    categoryItem,
-    priceItem,
-    stockITem,
-    imageItem,
-    handleChangeNameItem,
-    handleChangeSizeItem,
-    handleChangeCategoryItem,
-    handleChangePriceItem,
-    handleChangeStockItem,
-    handleChangeImageItem,
-    handleSubmit
-} = useAddItem()
-  return (
-    <div>
-      {
+    const {
+        nameItem,
+        sizeItem,
+        categoryItem,
+        priceItem,
+        stockITem,
+        imageItem,
+        handleChangeNameItem,
+        handleChangeSizeItem,
+        handleChangeCategoryItem,
+        handleChangePriceItem,
+        handleChangeStockItem,
+        handleChangeImageItem,
+        handleSubmit
+    } = useAddItem()
+    return (
+        <div>
+            {
                 (imageItem && (
                     <img src={imageItem} alt='' height={'200px'} width={'150'} />
                 ))
@@ -87,8 +87,8 @@ const FormAddItem = () => {
                     <button type={'submit'} >Add</button>
                 </div>
             </form>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default FormAddItem

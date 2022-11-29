@@ -1,21 +1,25 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom';
+import { useClient } from '../context/client/ClientProvider'
+import FormPerfil from '../components/FormPerfil';
 
 const Perfil = () => {
+    const {client} = useClient();
     return (
-        <div>
-            <div>
-                <h1>About You</h1>
-            </div>
+        <>
+        {
+            // (client === null) && (
+            //     <Navigate to='/' replace={true} />
+            // )
+            (client === null) ?
+            <Navigate to='/auth/login' replace={true} />
+            :
+            <FormPerfil/>
 
-            <div>
-                <form >
-                    <div>
-                        <label>UserName</label>
-                    </div>
-                </form>
-            </div>
-        </div>
+        }
+        </>
     )
+
 }
 
 export default Perfil

@@ -7,7 +7,6 @@ import Footer from "../components/Footer/Footer";
 const AboutUs = () => {
     return (
         <>
-            {/* <NavBar></NavBar> */}
             <section className="bg-success_gray py-5">
                 <div className="container">
                     <div className="row align-items-center py-5">

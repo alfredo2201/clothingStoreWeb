@@ -16,7 +16,6 @@ import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {
   return (
-
     <div>
       <NavBar />
       <ClientContextProvider>

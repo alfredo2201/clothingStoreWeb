@@ -107,7 +107,7 @@ const updateClient = async (req, res, next) => {
         }
 
         return res.send({
-            idClient: newClient.idClient,
+            id: newClient.idClient,
             userName: newClient.userName,
             name: newClient.name,
             address: newClient.address,
