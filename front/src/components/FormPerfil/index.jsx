@@ -5,10 +5,10 @@ import BtnLogOut from '../btnLogOut';
 
 
 const FormPerfil = () => {
-    const { client } = useClient();
+    const { client, updateClientContext } = useClient();
     const [formUserName, setFormUserName] = useState(client.userName);
-    const [formName, setFormName] = useState(client.Name);
-    const [formEmail, setFormEmail] = useState(client.Email);
+    const [formName, setFormName] = useState(client.name);
+    const [formEmail, setFormEmail] = useState(client.email);
 
     const handleChangeformUserName = (event) => {
         setFormUserName(event.target.value);
@@ -18,12 +18,26 @@ const FormPerfil = () => {
         setFormName(event.target.value)
     }
 
-    const handleChangeFormEmail = () => {
+    const handleChangeFormEmail = (event) => {
         setFormEmail(event.target.value)
     }
 
-    const submitFormPerfil = () =>{
-        console.log('actualizando...');
+    const submitFormPerfil =async(event) =>{
+        event.preventDefault();
+        const newData = {
+            // idClient: client.id,
+            name: formName,
+            userName: formUserName,
+            email: formEmail
+        }
+
+        const updatedData = {...client, ...newData}
+
+        
+        // console.log(updatedData)
+        await updateClientContext(updatedData);
+        alert('Updated User')
+        // window.location.reload();
     }
 
 
@@ -42,7 +56,7 @@ const FormPerfil = () => {
                 </div>
 
                 <div>
-                    <form >
+                    <form onSubmit={submitFormPerfil}>
                         <div>
                             <label>UserName</label><br></br>
                             <input type={'text'}

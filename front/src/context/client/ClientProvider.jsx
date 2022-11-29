@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ClientContext } from "./ClientContext";
-
+import { updateClient } from "../../api/client.api";
 /**
  * Custom hook para retornar el contexto
  * @returns retorna el contexto
@@ -16,9 +16,9 @@ export const useClient = () => {
 export const ClientContextProvider = ({ children }) => {
     const [client, setClient] = useState(null);
 
-    (()=>{
+    (() => {
         const jsonDataClient = JSON.parse(window.localStorage.getItem('user'))
-        if(jsonDataClient !== null && client === null){
+        if (jsonDataClient !== null && client === null) {
             setClient(jsonDataClient)
         }
         // setClient(JSON.parse(window.localStorage.getItem('client')))
@@ -28,18 +28,26 @@ export const ClientContextProvider = ({ children }) => {
         await setClient(client)
     }
 
-    const updateClient = () => {
-        //se actualiza el cliente
-        console.log('updateing client...');
+    const updateClientContext = async (data) => {
+        try {
+            const newClient = await updateClient(data)
+            // console.log('newClient ->', newClient.data)
+            window.localStorage.removeItem('user');
+            window.localStorage.setItem('user', JSON.stringify(newClient.data));
+            await setClient(newClient.data)
+            window.location.reload();
+        } catch (error) {
+            console.log('Error to Updated client')
+        }
     }
 
-    const logOut = () =>{
+    const logOut = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('user');
         setClient(null);
     }
     return <ClientContext.Provider value={{
-        client, updateClient, loadClient, logOut 
+        client, updateClientContext, loadClient, logOut
     }}>
         {children}
     </ClientContext.Provider>
