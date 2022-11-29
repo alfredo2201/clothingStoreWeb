@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingCart from "../ShoppingCart/shoppingCart";
+import CartIcon from "../CartInfo/CartIcon/CartIcon";
 import UserIcon from "../UserIcon/UserIcon";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const TextNav = {
 const NavBar = () => {
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-light  bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light shadow">
       <div className="container d-flex justify-content-between align-items-center">
         <Link className="img-fluid" to="">
           <img className="nav-image" src="../src/assets/img/dapi.png" />
@@ -79,7 +79,7 @@ const NavBar = () => {
             >
               <i className="fa fa-fw fa-search text-dark mr-2"></i>
             </a>
-            <ShoppingCart />
+            <CartIcon />
             <UserIcon />
           </div>
         </div>

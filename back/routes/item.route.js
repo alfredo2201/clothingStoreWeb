@@ -2,7 +2,7 @@ import { Router } from 'express';
 import itemController from '../controllers/item.controller.js';
 import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
 import validationItem from '../middlewares/validationItem.js';
-import multer from 'multer';
+// import multer from 'multer';
 const router = Router();
 
 // const storage = multer.diskStorage({

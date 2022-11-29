@@ -2674,7 +2674,6 @@ fieldset:disabled .btn {
   border-color: #146c43;
   box-shadow: 0 0 0 0 !important;
 }
-
 .btn-check:active + .btn-success,
 .btn-check:checked + .btn-success,
 .btn-success.active,
@@ -2856,18 +2855,17 @@ fieldset:disabled .btn {
 .btn-dark {
   color: #fff;
   background-color: #000000;
+  border-color: #212529;
+  border-radius: 0px;
 }
 .btn-dark:hover {
   color: #fff;
   background-color: #1c1f23;
-  border-radius: 0px;
 }
-
 .btn-check:focus + .btn-dark,
 .btn-dark:focus {
   color: #fff;
   background-color: #1c1f23;
-  border-color: #1a1e21;
   box-shadow: 0 0 0 0 !important;
 }
 .btn-check:active + .btn-dark,
@@ -6645,7 +6643,7 @@ fieldset:disabled .btn {
   background-color: #dc3545 !important;
 }
 .bg-light {
-  background-color: #EFEFEF !important;
+  background-color: #f8f9fa !important;
 }
 .bg-dark {
   background-color: #212529 !important;
@@ -6720,6 +6718,21 @@ fieldset:disabled .btn {
 .rounded-3 {
   border-radius: 0.3rem !important;
 }
+
+.rounded-5px{
+  border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
+}
+.rounded-form {
+  border-radius: 35px !important;
+  -webkit-border-radius: 35px !important;
+  -moz-border-radius: 35px !important;
+  -ms-border-radius: 35px !important;
+  -o-border-radius: 35px !important;
+}
 .rounded-circle {
   border-radius: 50% !important;
 }
@@ -6741,13 +6754,6 @@ fieldset:disabled .btn {
 .rounded-start {
   border-bottom-left-radius: 0.25rem !important;
   border-top-left-radius: 0.25rem !important;
-}
-.rounded-form {
-  border-radius: 35px;
-  -webkit-border-radius: 35px;
-  -moz-border-radius: 35px;
-  -ms-border-radius: 35px;
-  -o-border-radius: 35px;
 }
 .visible {
   visibility: visible !important;
@@ -9327,7 +9333,6 @@ fieldset:disabled .btn {
   padding-right: 12px;
   padding-left: 12px;
 }
-
 
 .img-round {
   border-radius: 50%;

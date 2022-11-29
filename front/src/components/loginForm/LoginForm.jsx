@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Navigate, redirect } from 'react-router-dom';
 // import { login } from '../../api/login';
 // import { useClient } from '../../context/client/ClientProvider';
+import { Link } from 'react-router-dom';
 import { useLogin } from '../../hooks/LoginHook';
 import TitleList from '../ListProducts/TitleList/TitleList'
 const LoginForm = () => {
@@ -50,8 +51,9 @@ const LoginForm = () => {
                     <div className="form-group m-3 text-center">                    
                         <button className="btn btn-dark w-75 py-2" type='submit'>Login</button>
                     </div>
-
                 </form>
+                <div className="text-center mt-2"><Link className="link-view" to="/noPage">Forgot Password?</Link></div>
+                <div className="text-center mt-2"><Link className="link-view" to="/auth/register">Create account</Link></div>
             </div>
     )
 }

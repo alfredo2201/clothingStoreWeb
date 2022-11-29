@@ -11,6 +11,8 @@ import Footer from "./components/Footer/Footer";
 import SingleShop from "./components/ShopSingle/ShopSingle";
 import AddItem from "./pages/AddItem";
 import Perfil from "./pages/perfil";
+import Register from "./pages/Register";
+import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
         <Route path="add-item" element={<AddItem/>}/>
         <Route path="perfil" element={<Perfil/>}/>
         <Route path="auth/login" element={<Login />} />
+        <Route path="auth/register" element={<Register />} />
         <Route path="singleShop" element={<SingleShop />} />
+        <Route path="cart" element={<ShoppingCart />} />
         <Route path="*" element={<NoPage />} />
         {/* </Route> */}
       </Routes>
