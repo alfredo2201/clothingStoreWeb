@@ -13,7 +13,7 @@ const BtnLogOut = () => {
     }
     return (
         <>
-            <button type={'button'} onClick={handleLogOut}>Log Out</button>
+            <button className="btn btn-dark w-100 py-2" type={'button'} onClick={handleLogOut}>Log Out</button>
             {/* {
                 ((client === null) && (
                     <Navigate to = '/' />

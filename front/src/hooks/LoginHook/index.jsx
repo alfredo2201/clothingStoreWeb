@@ -33,9 +33,10 @@ export const useLogin = () => {
                 name: data.data.name,
                 lastName: data.data.lastName,
                 email: data.data.email,
-                address: data.data.address,
+                address: data.data.address, 
+                role:data.data.role
             }
-
+            const typeUser = data.data.role
             const token = data.data.token
 
             window.localStorage.setItem('token', token);

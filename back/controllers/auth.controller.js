@@ -29,13 +29,14 @@ const login = async (req, res, next) => {
             });
             return res.send({
                 message: 'successful',
-                idClient: client.idClient,
+                id: client.idClient,
                 userName: client.userName,
                 name: client.name,
                 lastName: client.lastName,
                 email: client.email,
                 address: client.address,
-                token: token
+                token: token,
+                role: "c"
             })
         }
 
@@ -54,7 +55,8 @@ const login = async (req, res, next) => {
                 userName: admin.userName,
                 name: admin.name,
                 email: admin.email,
-                token: token
+                token: token,
+                role: "a"
             })
         }
         return res.status(404).send({

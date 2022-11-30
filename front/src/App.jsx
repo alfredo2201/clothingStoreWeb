@@ -14,10 +14,10 @@ import Perfil from "./pages/perfil";
 import Register from "./pages/Register";
 import ShoppingCart from "./pages/ShoppingCart";
 
-function App() {
+function App() {  
   return (
     <div>
-      <NavBar />
+      <NavBar/>      
       <ClientContextProvider>
       <Routes>
         {/* <Route path="/" element={<Layout />} /> */}

@@ -1,7 +1,8 @@
 import React from "react";
 import CartIcon from "../CartInfo/CartIcon/CartIcon";
 import UserIcon from "../UserIcon/UserIcon";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { useClient } from "../../context/client/ClientProvider";
 
 const TextNav = {
   HOME: "Home",
@@ -12,7 +13,8 @@ const TextNav = {
   ORDERS: "Orders",
 };
 
-const NavBar = () => {
+const NavBar = () => {  
+  // const {client} = useClient()
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light shadow">
@@ -79,6 +81,7 @@ const NavBar = () => {
             >
               <i className="fa fa-fw fa-search text-dark mr-2"></i>
             </a>
+            
             <CartIcon />
             <UserIcon />
           </div>

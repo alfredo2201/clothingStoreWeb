@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { fetchItems } from '../../services/items';
+import { fetchItems } from '../../api/items';
 
 const ITEMS_PER_PAGE = 8;
 //Este debe de ir exportado al componente de items

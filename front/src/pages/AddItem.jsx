@@ -23,8 +23,7 @@ const {
     return (
         <div>
 
-            <FormAddItem/>
-
+            <FormAddItem title="Add"/>
         </div>
     )
 }

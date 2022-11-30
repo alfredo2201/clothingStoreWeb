@@ -8,7 +8,7 @@ import { updateClient } from "../../api/client.api";
 export const useClient = () => {
     const context = useContext(ClientContext);
     if (!context) {
-        throw new Error("a")
+        throw new Error("Error ")
     }
     return context;
 }
@@ -18,14 +18,14 @@ export const ClientContextProvider = ({ children }) => {
 
     (() => {
         const jsonDataClient = JSON.parse(window.localStorage.getItem('user'))
-        if (jsonDataClient !== null && client === null) {
+        if (jsonDataClient !== null && client === null) {            
             setClient(jsonDataClient)
         }
         // setClient(JSON.parse(window.localStorage.getItem('client')))
     })();
 
-    const loadClient = async (client) => {
-        await setClient(client)
+    const loadClient = (client) => {
+        setClient(client)        
     }
 
     const updateClientContext = async (data) => {
@@ -34,7 +34,7 @@ export const ClientContextProvider = ({ children }) => {
             console.log('newClient ->', newClient.data)
             window.localStorage.removeItem('user');
             window.localStorage.setItem('user', JSON.stringify(newClient.data));
-            await setClient(newClient.data)
+            setClient(newClient.data)
             window.location.reload();
         } catch (error) {
             console.log('Error to Updated client')
