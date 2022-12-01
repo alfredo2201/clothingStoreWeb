@@ -2,6 +2,7 @@ import { Router } from 'express';
 import itemController from '../controllers/item.controller.js';
 import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
 import validationItem from '../middlewares/validationItem.js';
+import { uploads } from '../multer.js';
 // import multer from 'multer';
 const router = Router();
 
@@ -24,6 +25,8 @@ router.get('/item/:idItem', validationItem.validateidItem, itemController.findOn
 router.get('/item/page/:page', itemController.findItemsForPage);
 //upload.single('imgItem')
 router.post('/item', isAuthAdmin, validationItem.validateRegisterItem, itemController.registerItem);
+
+router.patch('/item/upload/:idItem', uploads.single('imgItem'), itemController.uploadItemImg)
 //isAdmin
 router.put('/item/:idItem', isAuthAdmin, validationItem.validationUpdateItem, itemController.updateItem);
 //isauthadmin

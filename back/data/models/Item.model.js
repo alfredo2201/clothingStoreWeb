@@ -33,7 +33,7 @@ export const Item = sequelize.define(
     },
     img:{
       type: DataType.STRING,
-      allowNull: false,
+      allowNull: true,
     }
   },
   { timestamps: true }

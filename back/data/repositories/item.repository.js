@@ -2,14 +2,13 @@ import { Item } from "../models/Item.model.js";
 
 const register = async (value) => {
   if (!value) return new Error("Item is required");
-  const { name, category, size, price, stock, img } = value;
+  const { name, category, size, price, stock} = value;
   return await Item.create({
     name,
     category,
     size,
     price,
     stock,
-    img
   }, {
     returning: true
   }
@@ -80,11 +79,21 @@ const update = async (newData, idItem) => {
   );
 };
 
+const updateImgItem = async(value) =>{
+  const {img, idItem} = value;
+  return await Item.update({
+    img
+  },{
+    where: {idItem} 
+  })
+}
+
 export default {
   register,
   findAll,
   findOne,
   deleteOne,
   update,
-  findAllForPage
+  findAllForPage,
+  updateImgItem
 };

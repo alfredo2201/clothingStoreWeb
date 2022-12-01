@@ -1,7 +1,17 @@
 import { Item } from "../data/models/Item.model.js";
 import itemRepository from "../data/repositories/item.repository.js";
-import multer from 'multer'
-import path from 'path'
+import { cloudinaryConfig } from "../cloudinary.js";
+import { v2 as cloudinary } from 'cloudinary'
+import dotenv from 'dotenv';
+dotenv.config();
+dotenv.config({path: '.env'});
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+})
 
 
 const registerItem = async (req, res, next) => {
@@ -15,9 +25,11 @@ const registerItem = async (req, res, next) => {
       stock,
       img
     });
+
+
     const item = await itemRepository.register(newItem);
-    // console.log(item)
-    if(!item){
+    console.log(item)
+    if (!item) {
       const error = new Error("Item Bad request");
       error.httpStatusCode = 400;
       next(error);
@@ -29,6 +41,31 @@ const registerItem = async (req, res, next) => {
     next(error);
   }
 };
+
+const uploadItemImg = async (req, res, next) => {
+  try {
+    const { idItem } = req.params;
+    const item = await itemRepository.findOne({ idItem });
+    if (!item) {
+      const error = new Error("Item not found");
+      error.httpStatusCode = 400;
+      next(error);
+    }
+    const upload = await cloudinary.uploader.upload(req.file.path,{
+      folder: 'imgItem'
+    })
+    const itemNewImage = await itemRepository.updateImgItem({img: upload.url, idItem})
+    console.log('->',itemNewImage);
+    if(itemNewImage != 1){
+      const error = new Error("Error to update item");
+      error.httpStatusCode = 400;
+      next(error);
+    }
+    return res.send({message: 'success'});
+  } catch (error) {
+    next(error);
+  }
+}
 
 const findAllItems = async (req, res, next) => {
   try {
@@ -45,7 +82,7 @@ const findItemsForPage = async (req, res, next) => {
   const offSet = page * perPage - perPage;
   console.log("offset ->", offSet);
   try {
-    const items = await itemRepository.findAllForPage({offSet,perPage});
+    const items = await itemRepository.findAllForPage({ offSet, perPage });
     if (!items) {
       const error = new Error("Item not fount");
       error.httpStatusCode = 400;
@@ -139,5 +176,6 @@ export default {
   deleteOneItem,
   updateItem,
   findItemsForPage,
+  uploadItemImg,
   // upload
 };
