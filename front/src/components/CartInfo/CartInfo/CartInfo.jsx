@@ -1,27 +1,13 @@
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 import CartItems from "../CartItems/CartItems";
-import { useEffect } from "react";
+import Banner from "../../Banner/Banner";
 
 const CartInfo = () => {    
-    const {cartItems,numberItemsCart,handleOnDelete, subtotal} = useCartItems()    
+    const {cartItems,numberItemsCart,handleOnDelete,total,subtotal} = useCartItems()    
 
     return (
         <>
-            {/* <!-- Close Header --> */}
-            <section className="bg-success_gray py-5">
-                <div className="container text-center">
-                    <div className="row align-items-center">
-                        <div className="list-inline">
-                            <h1 className="h1 list-inline-item"><b>Shopping Cart</b></h1>
-                            <p>
-                                It's so close but so far
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* <!-- Close Banner --> */}
-
+            <Banner titleDark="Shopping" titleGreen="Cart" description="It's so close but so far"></Banner>
             <section className="h-100 gradient-custom">
                 <div className="container py-5">
                     <div className="row d-flex justify-content-center my-4">
@@ -84,7 +70,7 @@ const CartInfo = () => {
                                             <div>
                                                 <strong>Total amount</strong>
                                             </div>
-                                            <span><strong>$53.98</strong></span>
+                                            <span><strong>${total}</strong></span>
                                         </li>
                                     </ul>
                                     <button type="button" className="btn btn-success">

@@ -1,5 +1,6 @@
-import React,{useState} from 'react'
-import { v4 as uuidv4 } from "uuid";
+import {useState} from 'react'
+// Agregar a carrito 
+// eliminar un item del carrito
 
 const useCartItems = () => {    
     const products = [
@@ -18,10 +19,11 @@ const useCartItems = () => {
             image: "../src/assets/img/shop_02.jpg"
         }
     ]    
-    window.localStorage.setItem("cartItems",JSON.stringify(products)) 
-    const [cartItems,setCartItems] = useState(JSON.parse(window.localStorage.getItem("cartItems")))
+    // window.localStorage.setItem("cartItems",JSON.stringify(products)) 
+    const [cartItems,setCartItems] = useState([])
     const [numberItemsCart, setNumberItemsCart] = useState(cartItems.length) 
     const [subtotal, setSubtotal] = useState(0)    
+    const [total, setTotal] = useState(0)
 
     const calculateSubtotal = (price, quantity) =>{
         let operationSubtotal = subtotal + (price * quantity)
@@ -44,7 +46,7 @@ const useCartItems = () => {
 
     
     
-    return {cartItems, numberItemsCart,handleOnDelete, subtotal, calculateSubtotal}
+    return {cartItems, numberItemsCart,handleOnDelete, subtotal,total, calculateSubtotal}
 }
 
 export default useCartItems

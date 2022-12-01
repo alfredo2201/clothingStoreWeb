@@ -14,8 +14,8 @@ const SelectSize = (props) => {
   // const {size} = props
   const [active, setActive] = useState()
 
-  const handleOnClick = () =>{
-
+  const handleOnClick = (e) =>{
+    console.log("")
   }
   return (
     <div className="col-auto">

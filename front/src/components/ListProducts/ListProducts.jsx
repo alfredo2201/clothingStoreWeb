@@ -36,7 +36,7 @@ const ListProducts = (props) => {
         key={i}
         active={i === currentPage}
         onClick={() => {
-          handleOnClick(i);
+          handleOnClick(i)          
         }}
       >
         {i + 1}
@@ -63,7 +63,7 @@ const ListProducts = (props) => {
           </div>
           {title == "Categories" ? (
             <div className="d-flex justify-content-end m-3">              
-              <Pagination>{itemsPages}</Pagination>
+              <Pagination className="bg-active">{itemsPages}</Pagination>
             </div>
           ) : (
             ""

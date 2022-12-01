@@ -16,9 +16,9 @@ import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {  
   return (
-    <div>
-      <NavBar/>      
+    <div>           
       <ClientContextProvider>
+      <NavBar/> 
       <Routes>
         {/* <Route path="/" element={<Layout />} /> */}
         <Route path="/" element={<Layout />} />

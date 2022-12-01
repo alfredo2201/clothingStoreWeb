@@ -1,29 +1,19 @@
 import React, { useState } from 'react'
-import { registerItem } from '../api/register.api';
-import { useAddItem } from '../hooks/useAddItem';
 import FormAddItem from '../components/FormAddItem';
+import { useClient } from "../context/client/ClientProvider";
+import { Navigate } from 'react-router-dom';
 const AddItem = () => {
-
-const {
-    nameItem,
-    sizeItem,
-    categoryItem,
-    priceItem,
-    stockITem,
-    imageItem,
-    handleChangeNameItem,
-    handleChangeSizeItem,
-    handleChangeCategoryItem,
-    handleChangePriceItem,
-    handleChangeStockItem,
-    handleChangeImageItem,
-    handleSubmit
-} = useAddItem()
-
-    return (
+    const { client } = useClient();  
+    console.log(client)
+    return (    
         <div>
-
-            <FormAddItem title="Add"/>
+            {
+                (client == null)? 
+                <Navigate to="*" replace={true} />:
+                (client.role == "admin")?
+                <FormAddItem title="Add"/>:
+                <Navigate to="*" replace={true} />
+            }            
         </div>
     )
 }

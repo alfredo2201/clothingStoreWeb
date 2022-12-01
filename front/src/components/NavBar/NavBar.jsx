@@ -1,20 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
 import CartIcon from "../CartInfo/CartIcon/CartIcon";
 import UserIcon from "../UserIcon/UserIcon";
 import { Link } from "react-router-dom";
-// import { useClient } from "../../context/client/ClientProvider";
-
-const TextNav = {
-  HOME: "Home",
-  ABOUTUS: "About Us",
-  SHOP: "Shop",
-  PRODUCTS: "Products",
-  CATEGORIES: "Categories",
-  ORDERS: "Orders",
-};
+import { useClient } from "../../context/client/ClientProvider";
+import LinksNavbar from "./LinksNavbar/LinksNavbar"
 
 const NavBar = () => {  
-  // const {client} = useClient()
+  const {client} = useClient()  
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light shadow">
@@ -37,28 +29,13 @@ const NavBar = () => {
 
         <div
           className="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-end"
-          id="templatemo_main_nav"
-        >
-          <div>
-            <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  {TextNav.HOME}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/aboutUs">
-                  {TextNav.ABOUTUS}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/shop">
-                  {TextNav.SHOP}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          id="templatemo_main_nav">
+            {
+              (client != null) ?
+              <LinksNavbar typeUser={client.role}></LinksNavbar>:
+              <LinksNavbar typeUser="client"></LinksNavbar>
 
+            }          
           <div className="navbar align-self-center d-flex">
             <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
               <div className="input-group">

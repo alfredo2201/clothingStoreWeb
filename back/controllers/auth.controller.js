@@ -36,7 +36,7 @@ const login = async (req, res, next) => {
                 email: client.email,
                 address: client.address,
                 token: token,
-                role: "c"
+                role: "client"
             })
         }
 
@@ -56,7 +56,7 @@ const login = async (req, res, next) => {
                 name: admin.name,
                 email: admin.email,
                 token: token,
-                role: "a"
+                role: "admin"
             })
         }
         return res.status(404).send({

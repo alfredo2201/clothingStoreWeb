@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import BtnLogOut from "../btnLogOut";
 import { UseFormPerfil } from "../../hooks/useFormPerfil";
-import Banner from "../Headers/Banner";
+import Banner from "../Banner/Banner";
 
 
 const FormPerfil = () => {
@@ -23,7 +23,7 @@ const FormPerfil = () => {
 
   return (
     <>
-    <Banner titleDark="About" titleGreen="You" description="It is important for us that you have a good experience"></Banner>
+      <Banner titleDark="About" titleGreen="You" description="It is important for us that you have a good experience"></Banner>
       <div className="container">
         {client === null && <Navigate to="/" replace={true} />}
         <div className="row mt-4">
@@ -42,10 +42,7 @@ const FormPerfil = () => {
                   <input id="file-input" type="file" />
                 </div>
                 <div className="col-md-6">
-                  <form
-                    onSubmit={submitFormPerfil}
-                    className="w-100"
-                    role="form"
+                  <form onSubmit={submitFormPerfil} className="w-100" role="form"
                     action="#"
                     method="post"
                     encType="multipart/form-data"

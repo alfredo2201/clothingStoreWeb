@@ -3,7 +3,7 @@ import useCartItems from "../../../hooks/useCartItems/useCartItems";
 
 const CartItems = (props) => {
     const { name, price, image, size, onClick } = props
-    const { calculateSubtotal, subtotal } = useCartItems()
+    const { calculateSubtotal} = useCartItems()
     const [quantity, setQuantity] = useState(1)
 
     const handleOnClickPlus = () => {
