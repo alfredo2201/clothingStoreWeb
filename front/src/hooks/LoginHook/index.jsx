@@ -24,7 +24,7 @@ export const useLogin = () => {
                 Swal.fire('Email or password is empty')                
                 return
             }            
-            const data = await login(email, password);            
+            const data = await login(email, password);          
             //debería entrar aquí si está mal la petición, pedir ayuda
             if (data.data.message !== 'successful' || data === undefined) {
                 Swal.fire('Error to login')                
@@ -38,13 +38,14 @@ export const useLogin = () => {
                 lastName: data.data.lastName,
                 email: data.data.email,
                 address: data.data.address, 
-                role:data.data.role
+                role:data.data.role,
+                img: data.data.imgPerfil
             }            
             const token = data.data.token
 
             window.localStorage.setItem('token', token);
             window.localStorage.setItem('user', JSON.stringify(dataClient));
-            await loadClient(data.data);
+            await loadClient(dataClient);
             setPassword('');
             setEmail('');
         } catch (error) {

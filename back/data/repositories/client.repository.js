@@ -52,7 +52,7 @@ const findOne = async (value) => {
   // if (!value) return new Error("Client is required");
     const {idClient} = value;
     const client = await Client.findOne({
-      attributes: ["idClient","username", "name","lastName","address","email"],
+      attributes: ["idClient","username", "name","lastName","address","email", "imgPerfil"],
       where: {
         idClient
       },
@@ -63,7 +63,7 @@ const findOne = async (value) => {
 const findOnebyEmail = async(value) =>{
   const {email} = value;
   return await Client.findOne({
-    attributes: ["idClient","username", "name","lastName","address","email"],
+    attributes: ["idClient","username", "name","lastName","address","email", "imgPerfil"],
     where: {
       email
     },

@@ -36,6 +36,7 @@ const login = async (req, res, next) => {
                 email: client.email,
                 address: client.address,
                 token: token,
+                imgPerfil: client.imgPerfil,
                 role: "client"
             })
         }

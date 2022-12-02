@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import BtnLogOut from "../btnLogOut";
 import { UseFormPerfil } from "../../hooks/useFormPerfil";
@@ -20,6 +20,11 @@ const FormPerfil = () => {
     handleChangeformUserName,
     submitFormPerfil,
   } = UseFormPerfil();
+  const [imgPer, setImgPer] = useState('');
+  useEffect(()=>{
+    // console.log('use',client);
+    setImgPer(client.img)
+  },[])
 
   return (
     <>
@@ -32,7 +37,12 @@ const FormPerfil = () => {
               <div className="row">
                 <div className="image-upload col-md-6 col-lg-5 col-xxl-4 text-center">
                   <label htmlFor="file-input">
-                    <img className="img-round" src="../src/assets/img/profile.png" />
+                    {
+                      (imgPer === '' || imgPer === undefined) ?
+                      <img className="img-round" src="../src/assets/img/image-add.png" alt='Load Page'/>
+                      :
+                      <img className="img-round" src={imgPer} alt='no image'/>
+                    }
                   </label>
                   <a className="nav-icon position-relative text-decoration-none">
                     <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
