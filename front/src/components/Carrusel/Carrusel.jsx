@@ -32,10 +32,10 @@ const Carrusel = () => {
     };
 
     return (
-        <div id="template-mo-zay-hero-carousel" className="carousel slide" data-bs-ride="carousel" onChange={handleSelect}>
-            <Carousel activeIndex={index} onSelect={handleSelect} className="p-5 ">
+        <div id="template-mo-zay-hero-carousel"  data-bs-ride="carousel" onChange={handleSelect}>
+            <Carousel activeIndex={index} onSelect={handleSelect} className="p-2 h-100">
                 {dataCarrusel.map((item) =>
-                    <Carousel.Item key={item.id}>
+                    <Carousel.Item key={item.id} className="p-3">
                         <div className="d-flex">
                             <div className="row p-5">
                                 <div className="mx-auto col-md-8 col-lg-6">
@@ -46,7 +46,7 @@ const Carrusel = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="col-lg-6 mb-0 d-flex align-items-center">
+                            <div className="col-lg-6  d-flex align-items-center">
                                 <div className="text-center">
                                     <h3 className="h3 text-success">{item.title} </h3>
                                     <h1 className="h1">{item.subtitle}</h1>

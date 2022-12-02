@@ -10,6 +10,7 @@ dotenv.config({path: '.env'});
 //   password: process.env.DB_PASS,
 //   dialect: "mysql",
 // });
+
 export const sequelize = new Sequelize({
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
