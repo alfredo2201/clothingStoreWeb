@@ -1,5 +1,5 @@
 
 export const handleError = (error, req, res, next)=>{
-    res.json({message: error.message});   
+    return res.status(error.httpStatusCode || 500).json({message: error.message});   
     next();
 }

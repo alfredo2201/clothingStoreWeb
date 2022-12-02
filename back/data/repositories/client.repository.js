@@ -2,7 +2,7 @@ import { Client } from "../models/Client.model.js";
 
 const register = async (value) => {
   if (!value) return new Error("Client is required");
-  const { userName, name, lastName, address, email, password } = value;
+  const { userName, name, lastName, address, email, password, imgPerfil } = value;
   const client = await Client.create({
     userName: userName,
     name: name,
@@ -10,6 +10,7 @@ const register = async (value) => {
     address: address,
     email: email,
     password: password,
+    imgPerfil: imgPerfil
   },{
     returning: true
   });
@@ -59,6 +60,16 @@ const findOne = async (value) => {
     return client;
 };
 
+const findOnebyEmail = async(value) =>{
+  const {email} = value;
+  return await Client.findOne({
+    attributes: ["idClient","username", "name","lastName","address","email"],
+    where: {
+      email
+    },
+  });
+}
+
 const findAll = async () => {
     const client = await Client.findAll({
       attributes: ["username", "name","lastName","address","email"]
@@ -71,5 +82,6 @@ export {
   update,
   deleteOne,
   findOne,
-  findAll
+  findAll,
+  findOnebyEmail
 };

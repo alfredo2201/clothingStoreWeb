@@ -9,3 +9,17 @@ export const updateClient = (data) => {
         headers: headers
     })
 }
+
+export const registerClient = async(data) =>{
+    const headers = {
+        'Content-Type': 'multipart/form-data',
+        "Accept": "application/json",
+        "type": "formData",
+    }
+    console.log(data)
+    return await axios.post('http://localhost:3000/client', data,
+    // {
+    //     headers: headers
+    // }
+    )
+}

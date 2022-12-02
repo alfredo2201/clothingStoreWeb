@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAddItem } from '../../hooks/useAddItem'
 import Banner from '../Banner/Banner'
 import CategoryInput from './CategoryInput/CategoryInput'
@@ -9,6 +9,24 @@ const FormAddItem = (props) => {
         stockITem,imageItem,handleChangeNameItem,
         handleChangePriceItem,handleChangeStockItem,
         handleChangeImageItem,handleSubmit} = useAddItem()
+
+    const [img, setImg] = useState();
+
+    const [previewSource,setPreviewSource] = useState();
+
+    const handleImgInputChance = (event) =>{
+        const file = event.target.files[0];
+        previewFile(file);
+    }
+
+    const previewFile = (file) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () =>{
+            setPreviewSource(reader.result)
+        }
+    }
+
     return (
         <>
             <Banner titleDark={title} titleGreen="Product" description="It is important for us that you have a good experience"></Banner>
@@ -17,11 +35,20 @@ const FormAddItem = (props) => {
                     <div className="container">
                         <div className="row">                            
                             <div className="image-upload col-md-6 col-lg-5 col-xxl-4 text-center">
-                                <label htmlFor="file-input">
+                                <label htmlFor="file-input"
+                                // onChange={handleImgInputChance}
+                                // value={previewSource}
+                                >
                                     {
-                                        (imageItem) ?
-                                            <img className="img-round" src={imageItem} alt='' height={'200px'} width={'150'} /> :
-                                            <img className="img-round" src="../src/assets/img/image-add.png" />
+                                        (previewSource) ?
+                                            <img className="img-round" src={previewSource} alt='' height={'200px'} width={'150'} /> :
+                                            // <img className="img-round" 
+                                            // src="../src/assets/img/image-add.png"
+                                            // />
+                                            <input type={'file'} id="file-input"
+                                            value={previewSource}
+                                            onChange={handleImgInputChance}
+                                            />
                                     }
                                 </label>
                                 <a className="nav-icon position-relative text-decoration-none">
@@ -66,7 +93,7 @@ const FormAddItem = (props) => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
+                                        {/* <div className="col-md-6">
                                             <div className="form-group mb-3">
                                                 <label className="form-label" name='imageURL'>
                                                     <strong>Image URL</strong>
@@ -77,7 +104,7 @@ const FormAddItem = (props) => {
                                                     required
                                                 />
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <SizeInput></SizeInput>
                                         <div className="container">
                                             <div className="row mt-4">

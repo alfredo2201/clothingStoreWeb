@@ -55,7 +55,6 @@ const uploadItemImg = async (req, res, next) => {
       folder: 'imgItem'
     })
     const itemNewImage = await itemRepository.updateImgItem({img: upload.url, idItem})
-    console.log('->',itemNewImage);
     if(itemNewImage != 1){
       const error = new Error("Error to update item");
       error.httpStatusCode = 400;

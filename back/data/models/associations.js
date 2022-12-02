@@ -20,6 +20,8 @@ export const executeAssociations = async () => {
   Sale.belongsTo(Card, { foreignKey: "idCard", allowNull: false });
 
   await Client.sync();
+  // await Client.sync({alter: true});
+
   await Admin.sync();
   await Card.sync();
   await Sale.sync();

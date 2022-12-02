@@ -33,9 +33,10 @@ export const useAddItem = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            console.log('c', categoryItem)
             if (!nameItem || !sizeItem || !categoryItem
                 || (!priceItem || priceItem <= 0)
-                || (!stockITem || stockITem <= 0) || !imageItem) {
+                || (!stockITem || stockITem <= 0)) {
                 alert('please fill out the form correctly')
             }
             const result = await registerItem({

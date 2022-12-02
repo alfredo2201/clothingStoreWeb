@@ -40,6 +40,10 @@ export const Client = sequelize.define(
       type: DataType.STRING(150),
       allowNull: false,
     },
+    imgPerfil: {
+      type: DataType.STRING(),
+      allowNull: false
+    }
   },
   {
     tableName: "clients",
