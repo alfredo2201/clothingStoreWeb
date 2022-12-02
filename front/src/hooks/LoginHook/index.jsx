@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 import { useClient } from '../../context/client/ClientProvider';
 import { login } from '../../api/login';
 
@@ -19,11 +20,14 @@ export const useLogin = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const data = await login(email, password);
-            console.log('->', data)
+            if(email =='' || password=='') {
+                Swal.fire('Email or password is empty')                
+                return
+            }            
+            const data = await login(email, password);            
             //debería entrar aquí si está mal la petición, pedir ayuda
             if (data.data.message !== 'successful' || data === undefined) {
-                alert('error to login');
+                Swal.fire('Error to login')                
                 return;
             }
 
@@ -35,8 +39,7 @@ export const useLogin = () => {
                 email: data.data.email,
                 address: data.data.address, 
                 role:data.data.role
-            }
-            const typeUser = data.data.role
+            }            
             const token = data.data.token
 
             window.localStorage.setItem('token', token);

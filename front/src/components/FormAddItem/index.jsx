@@ -5,24 +5,25 @@ import CategoryInput from './CategoryInput/CategoryInput'
 import SizeInput from './SizeInput/SizeInput'
 const FormAddItem = (props) => {
     const { title } = props
-    const {nameItem,categoryItem,priceItem,
-        stockITem,imageItem,handleChangeNameItem,
-        handleChangePriceItem,handleChangeStockItem,
-        handleChangeImageItem,handleSubmit} = useAddItem()
+    const { nameItem, categoryItem, priceItem,
+        stockITem, imageItem, handleChangeNameItem,
+        handleChangePriceItem, handleChangeStockItem,handleChangeCategoryItem,handleChangeSizeItem,
+        handleChangeImageItem, handleSubmit } = useAddItem()
 
     const [img, setImg] = useState();
 
-    const [previewSource,setPreviewSource] = useState();
+    const [previewSource, setPreviewSource] = useState();
 
-    const handleImgInputChance = (event) =>{
+    const handleImgInputChance = (event) => {
         const file = event.target.files[0];
         previewFile(file);
+        handleChangeImageItem(file)
     }
 
-    const previewFile = (file) =>{
+    const previewFile = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend = () =>{
+        reader.onloadend = () => {
             setPreviewSource(reader.result)
         }
     }
@@ -30,10 +31,10 @@ const FormAddItem = (props) => {
     return (
         <>
             <Banner titleDark={title} titleGreen="Product" description="It is important for us that you have a good experience"></Banner>
-            <div className="row mt-4">
-                <div className="col-xxl-12">
+            <div className="row py-5">
+                <div className="">
                     <div className="container">
-                        <div className="row">                            
+                        <div className="row">
                             <div className="image-upload col-md-6 col-lg-5 col-xxl-4 text-center">
                                 <label htmlFor="file-input"
                                 // onChange={handleImgInputChance}
@@ -41,22 +42,30 @@ const FormAddItem = (props) => {
                                 >
                                     {
                                         (previewSource) ?
-                                            <img className="img-round" src={previewSource} alt='' height={'200px'} width={'150'} /> :
-                                            // <img className="img-round" 
-                                            // src="../src/assets/img/image-add.png"
-                                            // />
-                                            <input type={'file'} id="file-input"
-                                            value={previewSource}
-                                            onChange={handleImgInputChance}
-                                            />
+                                            <>
+                                                <img className="img-round" src={previewSource} alt='' height={'200px'} width={'150'} />
+                                                <input type={'file'} id="file-input"                                                    
+                                                    onChange={handleImgInputChance}
+                                                    hidden
+                                                />
+                                            </>
+                                            :
+                                            <>
+                                                <img className="img-round" src="../src/assets/img/image-add.png" alt='' height={'200px'} width={'150'} />
+                                                <input type={'file'} id="file-input"
+                                                    value={previewSource}
+                                                    onChange={handleImgInputChance}
+                                                    hidden
+                                                />
+                                            </>
+
                                     }
                                 </label>
                                 <a className="nav-icon position-relative text-decoration-none">
                                     <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
                                         <i className="fa fa-edit"></i></span>
                                 </a>
-                                <input id="file-input" type="file" />
-                            </div>                            
+                            </div>
                             <div className="col-md-6">
                                 <form className="w-100" onSubmit={handleSubmit}>
                                     <div className="row">
@@ -69,7 +78,9 @@ const FormAddItem = (props) => {
                                             <input className="form-control" type="text" required autoComplete="off" placeholder="Name"
                                                 value={nameItem} onChange={handleChangeNameItem} />
                                         </div>
-                                        <CategoryInput></CategoryInput>
+                                        <div className="form-group mb-3">
+                                        <CategoryInput onChange={handleChangeCategoryItem}></CategoryInput>
+                                        </div>                                    
                                         <div className="col-md-6">
                                             <div className="form-group mb-3">
                                                 <label className="form-label" name='price'>
@@ -93,19 +104,7 @@ const FormAddItem = (props) => {
                                                 />
                                             </div>
                                         </div>
-                                        {/* <div className="col-md-6">
-                                            <div className="form-group mb-3">
-                                                <label className="form-label" name='imageURL'>
-                                                    <strong>Image URL</strong>
-                                                </label>
-                                                <input className="form-control" type={'text'} name='imgItem'
-                                                    value={imageItem}
-                                                    onChange={handleChangeImageItem}
-                                                    required
-                                                />
-                                            </div>
-                                        </div> */}
-                                        <SizeInput></SizeInput>
+                                        <SizeInput onChange={handleChangeSizeItem}></SizeInput>
                                         <div className="container">
                                             <div className="row mt-4">
                                                 <div className="col-md-3 col-xxl-6 offset-md-6 offset-lg-5 offset-xxl-4">
@@ -129,7 +128,7 @@ const FormAddItem = (props) => {
 export default FormAddItem
 
 
-                                        {/* <div onChange={handleChangeSizeItem}>
+{/* <div onChange={handleChangeSizeItem}>
                                             <label name='size'>Size</label><br></br>
                                             <span>S</span>
                                             <input type={'radio'} id='S' name='size' value={'S'} />

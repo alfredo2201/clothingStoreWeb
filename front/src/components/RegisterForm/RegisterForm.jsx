@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { registerClient } from "../../api/client.api";
+import Swal from 'sweetalert2'
 
 const RegisterForm = () => {
 
@@ -61,7 +62,8 @@ const RegisterForm = () => {
         //     password: passwordUser,
         //     imgPerfil: previewSource
         // }
-        if(passwordUser !== passwordUser2){
+        if (passwordUser !== passwordUser2) {
+            // Swal.fire('Passwords do not match')                                
             alert('Passwords do not match')
             return;
         }
@@ -76,8 +78,10 @@ const RegisterForm = () => {
 
         const result = registerClient(formData)
         if (!result) {
+            // Swal.fire('Error registering account')                                
             alert('chale no se registró')
         }
+        // Swal.fire('Account register successful')                                
         alert('Cuenta registrada');
         setRegisted(true)
 
@@ -98,24 +102,29 @@ const RegisterForm = () => {
                         </div>
                         <form className="user" onSubmit={handleSubmit}>
                             <div className="image-upload text-center">
-                                {
-                                    (!previewSource && (
-                                        <label htmlFor="file-input">
-                                            <img className="img-round" src="../src/assets/img/profile.png" />
-                                        </label>
-                                    ))
-                                }
-                                <a className="nav-icon position-relative text-decoration-none">
-                                    <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"><i className="fa fa-plus"></i></span>
-                                </a>
-                                <input id="file-input" type="file"
-                                    onChange={handleImgInputChance}
-                                />
-                                {
-                                    (previewSource && (
-                                        <img src={previewSource} alt='chales' />
-                                    ))
-                                }
+                                <label htmlFor="file-input"
+                                >
+                                    {
+                                        (previewSource) ?
+                                            <>
+                                                <img className="img-round" src={previewSource} alt='' height={'200px'} width={'150'} />
+                                                <input type={'file'} id="file-input"
+                                                    onChange={handleImgInputChance}
+                                                    hidden
+                                                />
+                                            </>
+                                            :
+                                            <>
+                                                <img className="img-round" src="../src/assets/img/image-add.png" alt='' height={'200px'} width={'150'} />
+                                                <input type={'file'} id="file-input"
+                                                    value={previewSource}
+                                                    onChange={handleImgInputChance}
+                                                    hidden
+                                                />
+                                            </>
+
+                                    }
+                                </label>
                             </div>
                             <div className="mb-3"><input className="form-control form-control-user mt-4" type="text" placeholder="Username" required
                                 value={userName} onChange={handleChangeUserName}
@@ -128,7 +137,7 @@ const RegisterForm = () => {
                                     value={passwordUser} onChange={handleChangePassUser}
                                 /></div>
                                 <div className="col-sm-6"><input id="verifyPassword" className="form-control form-control-user" type="password" placeholder="Repeat Password" required
-                                value={passwordUser2} onChange={handleChangePassUser2}
+                                    value={passwordUser2} onChange={handleChangePassUser2}
                                 /></div>
                             </div>
                             <div className="row mb-3">

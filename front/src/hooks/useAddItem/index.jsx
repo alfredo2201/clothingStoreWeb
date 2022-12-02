@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-
+import Swal from 'sweetalert2'
 import { registerItem } from '../../api/register.api';
 
 export const useAddItem = () => {
+    const sizes = []
     const [nameItem, setNameItem] = useState('');
-    const [sizeItem, setSizeItem] = useState('');
+    const [sizeItem, setSizeItem] = useState(sizes);
     const [priceItem, setPriceItem] = useState(0);
     const [stockITem, setStockITem] = useState(0);
     const [imageItem, setImageItem] = useState('');
@@ -14,8 +15,8 @@ export const useAddItem = () => {
         setNameItem(event.target.value);
     }
 
-    const handleChangeCategoryItem = (event) => {
-        setCategoryItem(event.target.value)
+    const handleChangeCategoryItem = (event) => {        
+        setCategoryItem(event.target.value)                
     }
 
     const handleChangeImageItem = (event) => {
@@ -30,14 +31,33 @@ export const useAddItem = () => {
         setPriceItem(event.target.value);
     }
 
+    const handleChangeSizeItem = (event) => {
+        if (sizes.length != 0) {
+            if (!event.target.checked) {
+                if (sizes.includes(event.target.value)) {
+                    let index = sizes.indexOf(event.target.value)
+                    sizes.splice(index, 1)
+                    setSizeItem(sizes)
+                    return
+                }
+            } else {
+                sizes.push(event.target.value)
+                setSizeItem(sizes)
+                return
+            }
+        }
+        sizes.push(event.target.value)
+        setSizeItem(sizes)
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log('c', categoryItem)
+            console.log('c ->', categoryItem)
+            console.log('s ->', sizeItem)
             if (!nameItem || !sizeItem || !categoryItem
                 || (!priceItem || priceItem <= 0)
                 || (!stockITem || stockITem <= 0)) {
-                alert('please fill out the form correctly')
+                Swal.fire('Please fill out the form correctly')                
             }
             const result = await registerItem({
                 name: nameItem,
@@ -48,11 +68,11 @@ export const useAddItem = () => {
                 img: imageItem
             })
             if (!result) {
-                alert('Error to Add Item')
+                Swal.fire('Error to Add Item')                                
                 return;
             }
 
-            alert('saved item correctly');
+            Swal.fire('Iten saved successfully')                                            
             setNameItem('');
             setSizeItem('');
             setCategoryItem('');
@@ -62,10 +82,6 @@ export const useAddItem = () => {
         } catch (error) {
             console.log(error);
         }
-    }
-
-    const handleChangeSizeItem = (event) => {
-        setSizeItem(event.target.value)
     }
     return {
         nameItem,

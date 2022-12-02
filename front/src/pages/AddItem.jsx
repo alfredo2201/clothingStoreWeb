@@ -3,8 +3,8 @@ import FormAddItem from '../components/FormAddItem';
 import { useClient } from "../context/client/ClientProvider";
 import { Navigate } from 'react-router-dom';
 const AddItem = () => {
-    const { client } = useClient();  
-    console.log(client)
+    const { client } = useClient();   
+       
     return (    
         <div>
             {
