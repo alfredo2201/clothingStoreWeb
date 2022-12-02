@@ -17,17 +17,26 @@ cloudinary.config({
 const registerItem = async (req, res, next) => {
   try {
     const { name, category, size, price, stock} = req.body;
+
+    if(!req.file){
+      const error = new Error('You most have a image');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+  }
+    const upload = await cloudinary.uploader.upload(req.file.path,{
+      folder: 'imgItem'
+    })
     const newItem = Item.build({
       name,
       category,
       size,
       price,
       stock,
+      img: upload.url,
     });
 
-
     const item = await itemRepository.register(newItem);
-    console.log(item)
     if (!item) {
       const error = new Error("Item Bad request");
       error.httpStatusCode = 400;
@@ -50,6 +59,13 @@ const uploadItemImg = async (req, res, next) => {
       error.httpStatusCode = 400;
       next(error);
     }
+
+    if(!req.file){
+      const error = new Error('You most have a image');
+      error.httpStatusCode = 400;
+      next(error);
+      return;
+  }
     const upload = await cloudinary.uploader.upload(req.file.path,{
       folder: 'imgItem'
     })

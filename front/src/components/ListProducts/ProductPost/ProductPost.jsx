@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductPost = (props) => {
-    const {srcImage, name, price} = props;
+    const {srcImage, name, price, size, stock} = props;
     return (
         <div className="col-md-3">
             <div className="card mb-4 product-wap rounded-0">
@@ -16,6 +16,8 @@ const ProductPost = (props) => {
                 </div>
                 <div className="card-body text-center">
                     <a href="shop-single.html" className="h3 text-decoration-none">{name}</a>
+                    <p className="h3 text-decoration-none">size: {size}</p>
+                    <p className="h3 text-decoration-none">stock: {stock}</p>
                     <p className=" mb-0">{price}</p>
                 </div>
             </div>

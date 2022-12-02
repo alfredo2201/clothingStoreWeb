@@ -56,27 +56,27 @@ export const useAddItem = () => {
                 || (!stockITem || stockITem <= 0)) {
                 Swal.fire('Please fill out the form correctly')
             }
-
-            const result = await registerItem({
-                name: nameItem,
-                size: sizeItem,
-                category: categoryItem,
-                price: priceItem,
-                stock: stockITem,
-                imageItem: imageItem
-            })
+            const formData = new FormData();
+            formData.append('name', nameItem);
+            formData.append('size', sizeItem);
+            formData.append('category', categoryItem);
+            formData.append('price', priceItem);
+            formData.append('stock', stockITem);
+            formData.append('imgItem', imageItem);
+            const result = await registerItem(formData)
             if (!result) {
-                Swal.fire('Error to Add Item')                                
+                Swal.fire('Error to Add Item')
                 return;
             }
-
-            Swal.fire('Iten saved successfully')
+            (await Swal.fire('Iten saved successfully')).isConfirmed
+            window.location.reload();
             setNameItem('');
             setSizeItem('');
             setCategoryItem('');
             setPriceItem(0);
             setStockITem(0);
             setImageItem('');
+            // window.location.reload();
         } catch (error) {
             console.log(error);
         }

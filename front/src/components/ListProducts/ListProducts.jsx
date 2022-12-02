@@ -55,8 +55,10 @@ const ListProducts = (props) => {
             {items.map((item) => (
               <ProductPost
                 key={item.idItem}
-                srcImage="../src/assets/img/shop_01.jpg"
+                srcImage={item.img}
                 name={item.name}
+                size={item.size}
+                stock={item.stock}
                 price={"$"+item.price}
               ></ProductPost>
             ))}
