@@ -3,9 +3,8 @@ import Swal from 'sweetalert2'
 import { registerItem } from '../../api/register.api';
 
 export const useAddItem = () => {
-    const sizes = []
     const [nameItem, setNameItem] = useState('');
-    const [sizeItem, setSizeItem] = useState(sizes);
+    const [sizeItem, setSizeItem] = useState([]);
     const [priceItem, setPriceItem] = useState(0);
     const [stockITem, setStockITem] = useState(0);
     const [imageItem, setImageItem] = useState('');
@@ -15,12 +14,12 @@ export const useAddItem = () => {
         setNameItem(event.target.value);
     }
 
-    const handleChangeCategoryItem = (event) => {        
-        setCategoryItem(event.target.value)                
+    const handleChangeCategoryItem = (event) => {
+        setCategoryItem(event.target.value)
     }
 
-    const handleChangeImageItem = (event) => {
-        setImageItem(event.target.value)
+    const handleChangeImageItem = (file) => {
+        setImageItem(file)
     }
 
     const handleChangeStockItem = (event) => {
@@ -32,47 +31,46 @@ export const useAddItem = () => {
     }
 
     const handleChangeSizeItem = (event) => {
-        if (sizes.length != 0) {
-            if (!event.target.checked) {
-                if (sizes.includes(event.target.value)) {
-                    let index = sizes.indexOf(event.target.value)
-                    sizes.splice(index, 1)
-                    setSizeItem(sizes)
-                    return
-                }
-            } else {
-                sizes.push(event.target.value)
-                setSizeItem(sizes)
+        const newsize = sizeItem;
+        if (!event.target.checked) {
+            if (newsize.includes(event.target.value)) {
+                let index = newsize.indexOf(event.target.value)
+                newsize.splice(index, 1)
+                setSizeItem(newsize)
+                console.log(sizeItem)
                 return
             }
+        } else {
+            newsize.push(event.target.value)
+            setSizeItem(newsize)
+            console.log(sizeItem)
+            return;
         }
-        sizes.push(event.target.value)
-        setSizeItem(sizes)
     }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log('c ->', categoryItem)
-            console.log('s ->', sizeItem)
             if (!nameItem || !sizeItem || !categoryItem
                 || (!priceItem || priceItem <= 0)
                 || (!stockITem || stockITem <= 0)) {
-                Swal.fire('Please fill out the form correctly')                
+                Swal.fire('Please fill out the form correctly')
             }
+
             const result = await registerItem({
                 name: nameItem,
                 size: sizeItem,
                 category: categoryItem,
                 price: priceItem,
                 stock: stockITem,
-                img: imageItem
+                imageItem: imageItem
             })
             if (!result) {
                 Swal.fire('Error to Add Item')                                
                 return;
             }
 
-            Swal.fire('Iten saved successfully')                                            
+            Swal.fire('Iten saved successfully')
             setNameItem('');
             setSizeItem('');
             setCategoryItem('');

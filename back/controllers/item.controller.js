@@ -16,14 +16,13 @@ cloudinary.config({
 
 const registerItem = async (req, res, next) => {
   try {
-    const { name, category, size, price, stock, img } = req.body;
+    const { name, category, size, price, stock} = req.body;
     const newItem = Item.build({
       name,
       category,
       size,
       price,
       stock,
-      img
     });
 
 

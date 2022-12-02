@@ -53,18 +53,9 @@ const RegisterForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // const data = {
-        //     userName: userName,
-        //     name: nameUser,
-        //     lastName: lastNameUser,
-        //     address: '',
-        //     email: emailUser,
-        //     password: passwordUser,
-        //     imgPerfil: previewSource
-        // }
         if (passwordUser !== passwordUser2) {
-            // Swal.fire('Passwords do not match')                                
-            alert('Passwords do not match')
+            Swal.fire('Passwords do not match')                                
+            // alert('Passwords do not match')
             return;
         }
         const formData = new FormData();
@@ -78,11 +69,11 @@ const RegisterForm = () => {
 
         const result = registerClient(formData)
         if (!result) {
-            // Swal.fire('Error registering account')                                
-            alert('chale no se registró')
+            Swal.fire('Error registering account')                                
+            // alert('chale no se registró')
         }
-        // Swal.fire('Account register successful')                                
-        alert('Cuenta registrada');
+        Swal.fire('Account register successful')                                
+        // alert('Cuenta registrada');
         setRegisted(true)
 
     }

@@ -1,8 +1,9 @@
 import { useAddItem } from "../../../hooks/useAddItem";
-const SizeInput = () => {
-    const { handleChangeSizeItem } = useAddItem()
+const SizeInput = (props) => {
+    const {onChangeSize} = props;
+    // const { handleChangeSizeItem } = useAddItem()
     return (
-        <div className="container" onChange={handleChangeSizeItem}>
+        <div className="container" onChange={onChangeSize}>
             <div className="row col-md-12">
                 <label className="form-label">
                     <strong>Size</strong>

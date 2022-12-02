@@ -10,8 +10,6 @@ const FormAddItem = (props) => {
         handleChangePriceItem, handleChangeStockItem,handleChangeCategoryItem,handleChangeSizeItem,
         handleChangeImageItem, handleSubmit } = useAddItem()
 
-    const [img, setImg] = useState();
-
     const [previewSource, setPreviewSource] = useState();
 
     const handleImgInputChance = (event) => {
@@ -79,7 +77,7 @@ const FormAddItem = (props) => {
                                                 value={nameItem} onChange={handleChangeNameItem} />
                                         </div>
                                         <div className="form-group mb-3">
-                                        <CategoryInput onChange={handleChangeCategoryItem}></CategoryInput>
+                                        <CategoryInput onChangeCategory={handleChangeCategoryItem}></CategoryInput>
                                         </div>                                    
                                         <div className="col-md-6">
                                             <div className="form-group mb-3">
@@ -104,7 +102,7 @@ const FormAddItem = (props) => {
                                                 />
                                             </div>
                                         </div>
-                                        <SizeInput onChange={handleChangeSizeItem}></SizeInput>
+                                        <SizeInput onChangeSize={handleChangeSizeItem}></SizeInput>
                                         <div className="container">
                                             <div className="row mt-4">
                                                 <div className="col-md-3 col-xxl-6 offset-md-6 offset-lg-5 offset-xxl-4">

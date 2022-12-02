@@ -26,7 +26,7 @@ router.get('/item/page/:page', itemController.findItemsForPage);
 //upload.single('imgItem')
 router.post('/item', isAuthAdmin, validationItem.validateRegisterItem, itemController.registerItem);
 
-router.patch('/item/upload/:idItem', uploads.single('imgItem'), itemController.uploadItemImg)
+router.patch('/item/upload/:idItem',isAuthAdmin ,uploads.single('imgItem'), itemController.uploadItemImg)
 //isAdmin
 router.put('/item/:idItem', isAuthAdmin, validationItem.validationUpdateItem, itemController.updateItem);
 //isauthadmin
