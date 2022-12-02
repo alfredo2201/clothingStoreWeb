@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const CartIcon = () => {
-  const [cart, setCart] = useState(2);
+  const [cart, setCart] = useState(0);
 
   return (
     <Link className="nav-icon position-relative text-decoration-none" to="/cart">

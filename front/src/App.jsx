@@ -13,6 +13,8 @@ import AddItem from "./pages/AddItem";
 import Perfil from "./pages/perfil";
 import Register from "./pages/Register";
 import ShoppingCart from "./pages/ShoppingCart";
+import OrdersAdmin from "./pages/OrdersAdmin";
+import ProductAdmin from "./components/ListProducts/ProductosAdmin/ProductAdmin";
 
 function App() {  
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="auth/register" element={<Register />} />
         <Route path="singleShop" element={<SingleShop />} />
         <Route path="cart" element={<ShoppingCart />} />
+        <Route path="orders" element={<OrdersAdmin />} />
+        <Route path="products" element={<ProductAdmin />} />
         <Route path="*" element={<NoPage />} />
         {/* </Route> */}
       </Routes>
