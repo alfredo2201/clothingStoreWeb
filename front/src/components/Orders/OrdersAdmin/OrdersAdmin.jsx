@@ -1,3 +1,4 @@
+import Banner from "../../Banner/Banner";
 const OrderAdmin = (props) => {
     const { title } = props;
     return (
@@ -12,6 +13,31 @@ const OrderAdmin = (props) => {
                             <div className="">
                                 <div className="car-example">
                                     <div>
+                                        <div className="p-4">
+                                            <div className="row d-flex justify-content-between align-items-center">
+                                                <div className="col-md-3 col-lg-3 col-xl-4">
+                                                    <p><span className="text-muted">No. Order: </span>021736201</p>
+                                                    <p><span className="text-muted">Order by: </span>Sussan12</p>
+                                                    <p><span className="text-muted">Name: </span>Sussan Smith</p>
+                                                </div>
+                                                <div className="col-md-3 col-lg-3 col-xl-4">
+                                                    <p><span className="text-muted">Email: </span>Sussan</p>
+                                                    <p><span className="text-muted">Address: </span>#203 Club</p>
+                                                    <p><span className="text-muted">Total: </span>$499.00</p>
+                                                </div>
+                                                <div className="col-md-3 col-lg-3 col-xl-4">
+                                                    <p>
+                                                        <span className="text-muted">Clothes: </span>
+                                                        <strong>
+                                                            <a className="link-view" href="order.html">View More</a>
+                                                        </strong>
+                                                    </p>
+                                                    <p><span className="text-muted">State: </span>Processing</p>
+                                                    <a href="index.html"><p className="text-danger"><strong>Cancel order</strong></p></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr></hr>
                                         <div className="p-4">
                                             <div className="row d-flex justify-content-between align-items-center">
                                                 <div className="col-md-3 col-lg-3 col-xl-4">
@@ -92,3 +118,5 @@ const OrderAdmin = (props) => {
     )
 
 }
+
+export default OrderAdmin
