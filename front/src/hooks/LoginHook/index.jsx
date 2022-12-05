@@ -32,7 +32,7 @@ export const useLogin = () => {
             }
 
             const dataClient = {
-                id: data.data.idClient,
+                id: data.data.id,
                 userName: data.data.userName,
                 name: data.data.name,
                 lastName: data.data.lastName,
@@ -49,7 +49,7 @@ export const useLogin = () => {
             setPassword('');
             setEmail('');
         } catch (error) {
-            console.log(error);
+            Swal.fire('Error to Log In');
         }
     }
     return {

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { useItem } from "../../../context/item/itemContext";
 import ButtonShop from "./ButtonSize/ButtonShop";
 
 const sizes = {
-    S:"S",
-    M:"M",
-    L:"L",
-    XL:"XL",
-    XXL:"XXL",
-    XXXL:"XXXL",
+  S: "S",
+  M: "M",
+  L: "L",
+  XL: "XL",
+  XXL: "XXL",
+  XXXL: "XXXL",
 }
 
 const SelectSize = (props) => {
   // const {size} = props
   const [active, setActive] = useState()
-
-  const handleOnClick = (e) =>{
+  const { item } = useItem();
+  const handleOnClick = (e) => {
     console.log("")
   }
   return (
@@ -34,11 +35,11 @@ const SelectSize = (props) => {
         {/* Hay que arreglar esto para que cuando seleccione
         una talla se deshabilite, pero cuando haga click en otra
         se deshabilite la otra y habilite la primera que toco */}
-         <ButtonShop value={sizes.S} onClick={handleOnClick}></ButtonShop>
-         <ButtonShop value={sizes.M} onClick={handleOnClick}></ButtonShop>
+        <ButtonShop value={item.size} onClick={handleOnClick}></ButtonShop>
+        {/* <ButtonShop value={sizes.M} onClick={handleOnClick}></ButtonShop>
          <ButtonShop value={sizes.L} onClick={handleOnClick}></ButtonShop>       
-         <ButtonShop value={sizes.XL}onClick={handleOnClick}></ButtonShop>
-      
+         <ButtonShop value={sizes.XL}onClick={handleOnClick}></ButtonShop> */}
+
       </ul>
     </div>
   );

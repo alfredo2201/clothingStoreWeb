@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Swal from 'sweetalert2';
 import { useClient } from '../../context/client/clientProvider';
 
 export const UseFormPerfil = () => {
@@ -46,11 +47,12 @@ export const UseFormPerfil = () => {
             email: formEmail,
             address: formAddress
         }
-
+        
         const updatedData = { ...client, ...newData }
-        // console.log(updatedData)
+        // console.log(upd)
+        console.log('->',updatedData);
         await updateClientContext(updatedData);
-        alert('Updated User')
+        Swal.fire('Updated User')
     }
     return {
         client,

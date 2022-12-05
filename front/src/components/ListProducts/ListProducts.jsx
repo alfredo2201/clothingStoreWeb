@@ -4,6 +4,7 @@ import ProductPost from "./ProductPost/ProductPost";
 // import { v4 as uuidv4 } from "uuid";
 import { Pagination, PageItem } from "react-bootstrap";
 import useFetchItems from "../../hooks/useItems/useFetchItems";
+import { ItemContextProvider } from "../../context/item/itemContext";
 
 const ListProducts = (props) => {
   const { numberPages, data, isFetching, ITEMS_PER_PAGE} = useFetchItems();  
@@ -52,16 +53,20 @@ const ListProducts = (props) => {
       <div className="row">
         <div className="col-lg-12">
           <div className="row">
+            
+            {/* <ItemContextProvider> */}
             {items.map((item) => (
               <ProductPost
                 key={item.idItem}
+                id={item.idItem}
                 srcImage={item.img}
                 name={item.name}
                 size={item.size}
                 stock={item.stock}
-                price={"$"+item.price}
+                price={item.price}
               ></ProductPost>
             ))}
+            {/* </ItemContextProvider> */}
           </div>
           {title == "Categories" ? (
             <div className="d-flex justify-content-end m-3">              

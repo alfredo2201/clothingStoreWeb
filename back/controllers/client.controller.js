@@ -48,6 +48,7 @@ const registerClient = async (req, res, next) => {
         const result = await register(newClient);
 
         return res.status(201).send({
+            id: result.idClient,
             userName: result.userName,
             name: result.name,
             lastName: result.lastName,
@@ -145,7 +146,8 @@ const updateClient = async (req, res, next) => {
             name: newClient.name,
             lastName: newClient.lastName,
             address: newClient.address,
-            email: newClient.email
+            email: newClient.email,
+            img:newClient.imgPerfil
         });
     } catch (error) {
         next(error);

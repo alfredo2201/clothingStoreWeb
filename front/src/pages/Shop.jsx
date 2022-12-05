@@ -3,17 +3,17 @@ import NavBar from "../components/NavBar/NavBar";
 import Carrusel from "../components/Carrusel/Carrusel";
 import ListProducts from "../components/ListProducts/ListProducts";
 import Footer from "../components/Footer/Footer";
-import { useClient } from "../context/client/ClientProvider";
 import TitleList from "../components/ListProducts/TitleList/TitleList";
 import Categories from "../components/ListProducts/Categories/Categories";
+import { ItemContextProvider } from "../context/item/itemContext";
 
 const Shop = () => {
-  const {client} = useClient();
   return (
     <div>
       <Carrusel></Carrusel>
-
+      {/* <ItemContextProvider> */}
       <ListProducts title="Categories"></ListProducts>
+      {/* </ItemContextProvider> */}
       
       {/* {        
         (client === null) ?
