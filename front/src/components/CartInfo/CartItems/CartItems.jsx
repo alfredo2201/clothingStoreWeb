@@ -2,24 +2,17 @@ import React, { useEffect, useState } from "react";
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 
 const CartItems = (props) => {
-    const { name, price, image, size, onClick } = props
-    const { calculateSubtotal} = useCartItems()
-    const [quantity, setQuantity] = useState(1)
+    const { name, price, image, size,originalQuantity, onClick } = props
+    const [quantity, setQuantity] = useState(originalQuantity)
 
     const handleOnClickPlus = () => {
-        setQuantity(quantity + 1)
-        calculateSubtotal(price * quantity)        
+        setQuantity(quantity + 1)               
     }
 
     const handleOnClickMinus = () => {
         if (quantity == 1) return
-        calculateSubtotal(quantity - 1)        
+        setQuantity(quantity - 1)        
     }
-
-    useEffect(() => {
-        calculateSubtotal(price * quantity)        
-    }, [quantity])
-
     return (
         <div className="car-example">
             <div>
@@ -33,7 +26,7 @@ const CartItems = (props) => {
                             <p className="lead fw-normal mb-2">{name}</p>
                             <p><span className="text-muted">Size: </span>{size}</p>
                         </div>
-                        <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <div className="col-md-3 col-lg-3 col-xl-2 d-flex p-1">
                             <button className="btn btn-dark px-2"
                                 onClick={handleOnClickMinus}>
                                 <i className="fas fa-minus"></i>

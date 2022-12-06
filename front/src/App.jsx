@@ -16,31 +16,33 @@ import Register from "./pages/Register";
 import ShoppingCart from "./pages/ShoppingCart";
 import OrdersAdmin from "./pages/OrdersAdmin";
 import ProductAdmin from "./components/ListProducts/ProductosAdmin/ProductAdmin";
+import { CartContextProvider } from "./context/cart/cartContext";
 
 function App() {
   return (
     <div>
       <ClientContextProvider>
-      <ItemContextProvider>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Layout />} />
-          <Route index element={<Home />} />
-          <Route path="aboutUs" element={<AboutUs />} />
+        <ItemContextProvider>
+          <CartContextProvider>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Layout />} />
+              <Route index element={<Home />} />
+              <Route path="aboutUs" element={<AboutUs />} />
+              <Route path="shop" element={<Shop />} />
+              <Route path="singleShop" element={<SingleShop />} />
 
-          <Route path="shop" element={<Shop />} />
-          <Route path="singleShop" element={<SingleShop/>} />
+              <Route path="add-item" element={<AddItem />} />
+              <Route path="perfil" element={<Perfil />} />
+              <Route path="auth/login" element={<Login />} />
+              <Route path="auth/register" element={<Register />} />
 
-          <Route path="add-item" element={<AddItem />} />
-          <Route path="perfil" element={<Perfil />} />
-          <Route path="auth/login" element={<Login />} />
-          <Route path="auth/register" element={<Register />} />
-
-          <Route path="cart" element={<ShoppingCart />} />
-          <Route path="orders" element={<OrdersAdmin />} />
-          <Route path="products" element={<ProductAdmin />} />
-          <Route path="*" element={<NoPage />} />
-        </Routes>
+              <Route path="cart" element={<ShoppingCart />} />
+              <Route path="orders" element={<OrdersAdmin />} />
+              <Route path="products" element={<ProductAdmin />} />
+              <Route path="*" element={<NoPage />} />
+            </Routes>
+          </CartContextProvider>
         </ItemContextProvider>
       </ClientContextProvider>
 

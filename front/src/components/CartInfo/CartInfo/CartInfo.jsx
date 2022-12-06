@@ -1,11 +1,10 @@
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 import CartItems from "../CartItems/CartItems";
 import Banner from "../../Banner/Banner";
-
 const CartInfo = () => {    
-    const {cartItems,numberItemsCart,handleOnDelete,total,subtotal} = useCartItems()    
+    const {cartItems,numberItemsCart,handleOnDelete,total,subtotal} = useCartItems()
 
-    return (
+        return (
         <>
             <Banner titleDark="Shopping" titleGreen="Cart" description="It's so close but so far"></Banner>
             <section className="h-100 gradient-custom">
@@ -20,8 +19,9 @@ const CartInfo = () => {
                                     <CartItems key={product.id} 
                                     name={product.name} 
                                     price={product.price} 
-                                    image={product.image} 
+                                    image={product.srcImage} 
                                     size={product.size}
+                                    originalQuantity={product.quantity}
                                     onClick={handleOnDelete.bind(this,product.id)}>
                                     </CartItems>                                    
                                 ))}

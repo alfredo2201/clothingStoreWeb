@@ -1,52 +1,67 @@
-import {useState} from 'react'
+import { useState, useEffect } from 'react'
+import { useItem } from '../../context/item/itemContext';
+import Swal from 'sweetalert2';
+import { useCart } from '../../context/cart/cartContext';
 // Agregar a carrito 
 // eliminar un item del carrito
 
-const useCartItems = () => {    
-    const products = [
-        {
-            id: "QWERT1",
-            name: "Basic T-shirt White",
-            size: "M",
-            price: 499,
-            image: "../src/assets/img/shop_01.jpg"
-        },
-        {
-            id: "QWERT2",
-            name: "Basic T-shirt Gray",
-            size: "M",
-            price: 499,
-            image: "../src/assets/img/shop_02.jpg"
-        }
-    ]    
-    // window.localStorage.setItem("cartItems",JSON.stringify(products)) 
-    const [cartItems,setCartItems] = useState([])
-    const [numberItemsCart, setNumberItemsCart] = useState(cartItems.length) 
-    const [subtotal, setSubtotal] = useState(0)    
+const useCartItems = () => {
+    const { item } = useItem();
+    const { cart, loadCart, numberItemsCart, removeCartItem } = useCart();
+    const [cartItems, setCartItems] = useState([])
+    const [numberItems, setNumberItems] = useState(numberItemsCart)
+    const [formQuantity, setFormQuantity] = useState(1);
+    const [subtotal, setSubtotal] = useState(0)
     const [total, setTotal] = useState(0)
 
-    const calculateSubtotal = (price, quantity) =>{
-        let operationSubtotal = subtotal + (price * quantity)
-        setSubtotal(operationSubtotal)            
-    }
-    
-    const handleOnDelete = (key) => {            
-        let auxItems = {}
-        cartItems.forEach(element => {
-            if (element.id === key) {
-                auxItems = element
-            }
-        });           
-        let item = cartItems.indexOf(auxItems)        
-        const newData = cartItems.splice((item+1), 1)                    
-        window.localStorage.setItem("cartItems",JSON.stringify(newData))  
-        setNumberItemsCart(newData.length)
-        setCartItems(newData)
+
+    const calculateSubtotal = async () => {
+        let price = 0
+        cartItems.forEach((i) => {
+            price += i.price * i.quantity
+        })
+        await setSubtotal(price)
     }
 
-    
-    
-    return {cartItems, numberItemsCart,handleOnDelete, subtotal,total, calculateSubtotal}
+    const handleOnDelete = async (key) => {
+        removeCartItem(key)
+        calculateSubtotal()
+    }
+
+    const submitAddProduct = async (e) => {
+        e.preventDefault()
+        try {
+            let newItem = {
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                size: item.size,
+                srcImage: item.srcImage,
+                quantity: formQuantity
+            }
+            if (await loadCart(newItem)) {
+                setCartItems(cartItems)
+                setNumberItems(numberItemsCart)
+                // console.log("before cart ->",cartItems) 
+                Swal.fire("Product added to cart")
+            }
+        } catch (error) {
+            Swal.fire(error.message)
+        }
+    }
+
+
+    const handleChangeQuantityItem = (quanity) => {
+        setFormQuantity(quanity);
+    }
+
+    useEffect(() => {
+        setCartItems(cart)
+        setNumberItems(cart.length)
+        calculateSubtotal()
+    }, [cartItems])
+
+    return { handleChangeQuantityItem, cartItems, handleOnDelete, numberItemsCart, subtotal, total, calculateSubtotal, submitAddProduct }
 }
 
 export default useCartItems
