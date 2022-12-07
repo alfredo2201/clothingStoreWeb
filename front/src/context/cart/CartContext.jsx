@@ -27,7 +27,7 @@ export const CartContextProvider = ({ children }) => {
     let exist = false;
     cart.map((item) => {
       if (item.id == newItem.id) {
-        item.quantity = item.quantity + newItem.quantity;    
+        item.quantity = item.quantity + newItem.quantity;
         exist = true;
       }
       list.push(item);
@@ -38,23 +38,22 @@ export const CartContextProvider = ({ children }) => {
     setCart(list);
     setNumberItems(list.length);
     window.localStorage.setItem("cartItems", JSON.stringify(list));
-    return exist;
+    return true;
   };
 
-  const updateQuantity = (key,num) => {
+  const updateQuantity = (key, num) => {
     const list = cart;
     let exist = false;
     list.map((item) => {
       if (item.id == key) {
-        item.quantity = num;   
-
-      }      
+        item.quantity = num;
+      }
     });
     setCart(list);
     setNumberItems(list.length);
     window.localStorage.setItem("cartItems", JSON.stringify(list));
     return exist;
-  }
+  };
 
   const removeCartItem = async (key) => {
     let auxItems = {};
@@ -66,10 +65,11 @@ export const CartContextProvider = ({ children }) => {
     let item = cart.indexOf(auxItems);
     const newData = cart;
     newData.splice(item, 1);
-    console.log(newData.length);
     if (newData.length === 0) {
-        await window.localStorage.removeItem("cartItems");
-        return
+      setCart([]);
+      setNumberItems(0);
+      await window.localStorage.removeItem("cartItems");
+      return;
     }
     setCart(newData);
     window.localStorage.setItem("cartItems", JSON.stringify(newData));
@@ -83,7 +83,7 @@ export const CartContextProvider = ({ children }) => {
         loadCart,
         removeCartItem,
         numberItemsCart,
-        updateQuantity
+        updateQuantity,
       }}
     >
       {children}

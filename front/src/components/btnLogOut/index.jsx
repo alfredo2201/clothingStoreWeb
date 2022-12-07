@@ -7,9 +7,8 @@ const BtnLogOut = () => {
     const {logOut, client} = useClient()
 
     const handleLogOut = () =>{
+        // window.location.reload();
         logOut();
-        window.location.reload();
-        // return <Navigate to='/' />
     }
     return (
         <>

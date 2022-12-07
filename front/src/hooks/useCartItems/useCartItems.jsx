@@ -10,23 +10,23 @@ const useCartItems = () => {
     const { cart, loadCart, numberItemsCart, updateQuantity, removeCartItem} = useCart();
     const [cartItems, setCartItems] = useState([])
     const [numberItems, setNumberItems] = useState(numberItemsCart)
+    const [lastUpdated, setLastUpdated] = useState(0)
     const [formQuantity, setFormQuantity] = useState(1);
     const [subtotal, setSubtotal] = useState(0)
     const [total, setTotal] = useState(0)
 
-
-    const calculateSubtotal = async () => {
+    
+    const calculateSubtotal = () => {
         let price = 0
         cartItems.forEach((i) => {
             price += i.price * i.quantity
         })
-        await setTotal(price)
-        await setSubtotal(price)
-    }
+        setTotal(price)
+        setSubtotal(price)
+    }    
 
     const handleOnDelete = async (key) => {
-        removeCartItem(key)
-        calculateSubtotal()
+        removeCartItem(key)        
     }
 
     const submitAddProduct = async (e) => {
@@ -43,6 +43,7 @@ const useCartItems = () => {
             if (await loadCart(newItem)) {
                 setCartItems(cartItems)
                 setNumberItems(numberItemsCart) 
+                calculateSubtotal()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -50,8 +51,7 @@ const useCartItems = () => {
                     showConfirmButton: false,
                     timer: 1500
                   })                        
-                window.scrollTo(0, 0);
-                
+                window.scrollTo(0, 0);                
             }
         } catch (error) {
             Swal.fire(error.message)
@@ -63,18 +63,17 @@ const useCartItems = () => {
         setFormQuantity(quanity);
     }
 
-    const update = (key,num) => {
+    const update = async (key,num) => {        
         if(!updateQuantity(key,num)) 
-        loadCart(newItem)     
-        setCartItems(cartItems)
-        setNumberItems(cartItems.length)
-        calculateSubtotal()
+        setLastUpdated(num)   
+        setCartItems([])
+        await calculateSubtotal()
     }
 
     useEffect(() => {
-        setCartItems(cart)
-        setNumberItems(cart.length)
-        calculateSubtotal()
+        console.log("Subtotal",subtotal)        
+        setCartItems(cart)                
+        setNumberItems(cart.length)        
     }, [cartItems])
 
     return { handleChangeQuantityItem,setNumberItems, cartItems, handleOnDelete,update, numberItemsCart, subtotal, total, calculateSubtotal, submitAddProduct }

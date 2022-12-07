@@ -4,7 +4,7 @@ import useCartItems from "../../../hooks/useCartItems/useCartItems";
 const CartItems = (props) => {
     const { id,name, price, image, size,originalQuantity, onClick } = props
     const {update} = useCartItems()
-    const [quantity, setQuantity] = useState(originalQuantity || 0)
+    const [quantity, setQuantity] = useState(originalQuantity)
 
     const handleOnClickPlus = () => {
         let newQuantity = quantity + 1
