@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 
 const CartItems = (props) => {
-    const { name, price, image, size,originalQuantity, onClick } = props
-    const [quantity, setQuantity] = useState(originalQuantity)
+    const { id,name, price, image, size,originalQuantity, onClick } = props
+    const {update} = useCartItems()
+    const [quantity, setQuantity] = useState(originalQuantity || 0)
 
     const handleOnClickPlus = () => {
-        setQuantity(quantity + 1)               
+        let newQuantity = quantity + 1
+        setQuantity(newQuantity)           
+        update(id,newQuantity)            
     }
 
     const handleOnClickMinus = () => {
         if (quantity == 1) return
-        setQuantity(quantity - 1)        
+        let newQuantity = quantity-1
+        setQuantity(newQuantity)        
+        update(id,newQuantity)          
     }
     return (
         <div className="car-example">
@@ -32,8 +37,8 @@ const CartItems = (props) => {
                                 <i className="fas fa-minus"></i>
                             </button>
 
-                            <input id="form1" min="0" name="quantity" value={quantity} type="number"
-                                className="form-control" readOnly />
+                            <span id="form-cart" min="0" name="quantity" value={quantity} type="number"
+                                className="form-control">{quantity}</span>
 
                             <button className="btn btn-dark px-2"
                                 onClick={handleOnClickPlus}>

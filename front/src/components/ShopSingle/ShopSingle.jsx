@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import AddQuantity from "./AddQuantity/AddQuantity";
 import SelectSize from "./SelectSize/SelectSize";
-import PhotoCarousel from "./PhotoCarousel/PhotoCarousel";
+// import PhotoCarousel from "./PhotoCarousel/PhotoCarousel";
 import { useItem } from "../../context/item/itemContext";
 import useCartItems from "../../hooks/useCartItems/useCartItems";
 const SingleShop = () => {
@@ -9,6 +9,7 @@ const SingleShop = () => {
 
   const { submitAddProduct, handleChangeSizeItem, handleChangeQuantityItem } =
     useCartItems();
+    window.scrollTo(0, 0);
   return (
     <section className="bg-light">
       <div className="container pb-5">
@@ -23,16 +24,6 @@ const SingleShop = () => {
               />
             </div>
             <div className="row">
-              <div className="col-1 align-self-center">
-                <a
-                  href="#multi-item-example"
-                  role="button"
-                  data-bs-slide="prev"
-                >
-                  <i className="text-dark fas fa-chevron-left"></i>
-                  <span className="sr-only">Previous</span>
-                </a>
-              </div>
               <div
                 id="multi-item-example"
                 className="col-10 carousel slide carousel-multi-item"

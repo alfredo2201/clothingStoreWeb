@@ -7,7 +7,7 @@ import { useCart } from '../../context/cart/cartContext';
 
 const useCartItems = () => {
     const { item } = useItem();
-    const { cart, loadCart, numberItemsCart, removeCartItem } = useCart();
+    const { cart, loadCart, numberItemsCart, updateQuantity, removeCartItem} = useCart();
     const [cartItems, setCartItems] = useState([])
     const [numberItems, setNumberItems] = useState(numberItemsCart)
     const [formQuantity, setFormQuantity] = useState(1);
@@ -20,6 +20,7 @@ const useCartItems = () => {
         cartItems.forEach((i) => {
             price += i.price * i.quantity
         })
+        await setTotal(price)
         await setSubtotal(price)
     }
 
@@ -41,9 +42,16 @@ const useCartItems = () => {
             }
             if (await loadCart(newItem)) {
                 setCartItems(cartItems)
-                setNumberItems(numberItemsCart)
-                // console.log("before cart ->",cartItems) 
-                Swal.fire("Product added to cart")
+                setNumberItems(numberItemsCart) 
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Product added to cart',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })                        
+                window.scrollTo(0, 0);
+                
             }
         } catch (error) {
             Swal.fire(error.message)
@@ -55,13 +63,21 @@ const useCartItems = () => {
         setFormQuantity(quanity);
     }
 
+    const update = (key,num) => {
+        if(!updateQuantity(key,num)) 
+        loadCart(newItem)     
+        setCartItems(cartItems)
+        setNumberItems(cartItems.length)
+        calculateSubtotal()
+    }
+
     useEffect(() => {
         setCartItems(cart)
         setNumberItems(cart.length)
         calculateSubtotal()
     }, [cartItems])
 
-    return { handleChangeQuantityItem, cartItems, handleOnDelete, numberItemsCart, subtotal, total, calculateSubtotal, submitAddProduct }
+    return { handleChangeQuantityItem,setNumberItems, cartItems, handleOnDelete,update, numberItemsCart, subtotal, total, calculateSubtotal, submitAddProduct }
 }
 
 export default useCartItems

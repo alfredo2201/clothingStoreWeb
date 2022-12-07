@@ -1,8 +1,10 @@
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 import CartItems from "../CartItems/CartItems";
 import Banner from "../../Banner/Banner";
+import useShop from "../../../hooks/useShop/useShop"
 const CartInfo = () => {    
     const {cartItems,numberItemsCart,handleOnDelete,total,subtotal} = useCartItems()
+    const {submitShop} = useShop()
 
         return (
         <>
@@ -17,6 +19,7 @@ const CartInfo = () => {
                                 </div>
                                 {cartItems.map((product) => (
                                     <CartItems key={product.id} 
+                                    id={product.id}
                                     name={product.name} 
                                     price={product.price} 
                                     image={product.srcImage} 
@@ -73,7 +76,7 @@ const CartInfo = () => {
                                             <span><strong>${total}</strong></span>
                                         </li>
                                     </ul>
-                                    <button type="button" className="btn btn-success">
+                                    <button type="button" className="btn btn-success" onClick={submitShop}>
                                         Go to checkout
                                     </button>
                                 </div>

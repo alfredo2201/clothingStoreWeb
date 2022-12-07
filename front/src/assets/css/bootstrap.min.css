@@ -57,6 +57,9 @@ body {
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
+#form-cart{
+  width: 50px;
+}
 hr {
   margin: 1rem 0;
   color: inherit;
