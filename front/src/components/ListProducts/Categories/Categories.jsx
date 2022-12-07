@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import useAllProducts from "../../../hooks/useSingleShop/useAllProducts";
+import useAllProducts from "../../../hooks/useAllProducts/useAllProducts";
 const Categories = () => {   
     const {handleOnChangeCategory,categories,filterProducts} = useAllProducts()
     // const handleOnChangeCategory = (e) =>{        

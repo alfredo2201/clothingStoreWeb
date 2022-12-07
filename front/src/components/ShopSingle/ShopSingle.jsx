@@ -3,13 +3,12 @@ import AddQuantity from "./AddQuantity/AddQuantity";
 import SelectSize from "./SelectSize/SelectSize";
 // import PhotoCarousel from "./PhotoCarousel/PhotoCarousel";
 import { useItem } from "../../context/item/itemContext";
-import useCartItems from "../../hooks/useCartItems/useCartItems";
+import useSingleShop from "../../hooks/useSingleShop/useSingleShop";
 const SingleShop = () => {
   const { item } = useItem();
-
   const { submitAddProduct, handleChangeSizeItem, handleChangeQuantityItem } =
-    useCartItems();
-    window.scrollTo(0, 0);
+    useSingleShop()
+  window.scrollTo(0, 0);
   return (
     <section className="bg-light">
       <div className="container pb-5">

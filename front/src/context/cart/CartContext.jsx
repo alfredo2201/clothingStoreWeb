@@ -55,6 +55,16 @@ export const CartContextProvider = ({ children }) => {
     return exist;
   };
 
+  const calculateSubtotal = () => {
+    let price = 0;
+    cart.forEach((i) => {
+      price += i.price * i.quantity;      
+    });    
+    // setTotal(price);
+    // setSubtotal(price);  
+    return price  
+  };
+
   const removeCartItem = async (key) => {
     let auxItems = {};
     cart.forEach((element) => {
@@ -68,7 +78,7 @@ export const CartContextProvider = ({ children }) => {
     if (newData.length === 0) {
       setCart([]);
       setNumberItems(0);
-      await window.localStorage.removeItem("cartItems");
+      window.localStorage.removeItem("cartItems");
       return;
     }
     setCart(newData);
@@ -84,6 +94,7 @@ export const CartContextProvider = ({ children }) => {
         removeCartItem,
         numberItemsCart,
         updateQuantity,
+        calculateSubtotal
       }}
     >
       {children}

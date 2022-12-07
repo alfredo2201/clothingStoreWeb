@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TitleList from "./TitleList/TitleList";
 import ProductPost from "./ProductPost/ProductPost";
 import { Pagination, PageItem } from "react-bootstrap";
-import useAllProducts from "../../hooks/useSingleShop/useAllProducts";
+import useAllProducts from "../../hooks/useAllProducts/useAllProducts";
 
 const ListProducts = (props) => {
   const {items, itemsPages, isFetching} = useAllProducts()
   const { title } = props;
-  useEffect(()=>{
-    console.log("Cargando....")
-  },[items])
   if(isFetching) return <p>...Cargando</p> 
   return (
     <div className="container">

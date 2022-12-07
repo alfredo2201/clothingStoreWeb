@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 
 const CartItems = (props) => {
-    const { id,name, price, image, size,originalQuantity, onClick } = props
+    const { id,name, price, image, size,originalQuantity, onDelete } = props
     const {update} = useCartItems()
     const [quantity, setQuantity] = useState(originalQuantity)
 
     const handleOnClickPlus = () => {
         let newQuantity = quantity + 1
         setQuantity(newQuantity)           
-        update(id,newQuantity)            
+        update(id,newQuantity)           
     }
 
     const handleOnClickMinus = () => {
         if (quantity == 1) return
         let newQuantity = quantity-1
         setQuantity(newQuantity)        
-        update(id,newQuantity)          
+        update(id,newQuantity)           
     }
     return (
         <div className="car-example">
@@ -49,7 +49,7 @@ const CartItems = (props) => {
                             <h5 className="mb-0">${price}.00</h5>
                         </div>
                         <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                            <a href="#!" className="text-danger" onClick={onClick}><i className="fas fa-trash fa-lg"></i></a>
+                            <a href="#!" className="text-danger" onClick={onDelete}><i className="fas fa-trash fa-lg"></i></a>
                         </div>
                     </div>
                 </div>

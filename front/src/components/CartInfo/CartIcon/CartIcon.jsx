@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useCartItems from "../../../hooks/useCartItems/useCartItems";
+import { useCart } from "../../../context/cart/cartContext";
 const CartIcon = () => {
-  const { numberItemsCart} = useCartItems();  
+  const { numberItemsCart} = useCart();  
 
   return (
     <Link className="nav-icon position-relative text-decoration-none" to="/cart">

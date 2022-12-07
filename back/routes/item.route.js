@@ -27,7 +27,7 @@ router.get('/item/page/:page', itemController.findItemsForPage);
 router.post('/item',isAuthAdmin,uploads.single('imgItem') ,validationItem.validateRegisterItem, itemController.registerItem);
 
 router.patch('/item/upload/:idItem' ,uploads.single('imgItem'), itemController.uploadItemImg)
-//isAdmin
+//isAdminm
 router.put('/item/:idItem', isAuthAdmin, validationItem.validationUpdateItem, itemController.updateItem);
 //isauthadmin
 router.delete('/item/:idItem', isAuthAdmin, validationItem.validateidItem, itemController.deleteOneItem);

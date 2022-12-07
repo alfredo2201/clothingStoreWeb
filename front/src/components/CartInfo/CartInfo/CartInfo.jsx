@@ -1,10 +1,10 @@
 import useCartItems from "../../../hooks/useCartItems/useCartItems";
 import CartItems from "../CartItems/CartItems";
 import Banner from "../../Banner/Banner";
-import useShop from "../../../hooks/useShop/useShop"
+import { useEffect, useState } from "react";
+import CartSummary from "../CartSummary/CartSummry";
 const CartInfo = () => {    
-    const {cartItems,numberItemsCart,handleOnDelete,total,subtotal} = useCartItems()
-    const {submitShop} = useShop()
+    const {cartItems,numberItems,handleOnDelete,subtotal} = useCartItems()
 
         return (
         <>
@@ -15,7 +15,7 @@ const CartInfo = () => {
                         <div className="col-md-8">
                             <div className="card mb-4">
                                 <div className="card-header py-3">
-                                    <h3 className="title-left mb-0">Cart - {numberItemsCart} items</h3>
+                                    <h3 className="title-left mb-0">Cart - {numberItems} items</h3>
                                 </div>
                                 {cartItems.map((product) => (
                                     <CartItems key={product.id} 
@@ -25,7 +25,7 @@ const CartInfo = () => {
                                     image={product.srcImage} 
                                     size={product.size}
                                     originalQuantity={product.quantity}
-                                    onClick={handleOnDelete.bind(this,product.id)}>
+                                    onDelete={handleOnDelete.bind(this,product.id)}>
                                     </CartItems>                                    
                                 ))}
                             </div>
@@ -48,46 +48,14 @@ const CartInfo = () => {
                                     <img className="me-2" width="45px"
                                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
                                         alt="Mastercard" />
-
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
-                            <div className="card mb-4">
-                                <div className="card-header py-3">
-                                    <h3 className="title-left mb-0">Summary</h3>
-                                </div>
-                                <div className="card-body">
-                                    <ul className="list-group list-group-flush">
-                                        <li
-                                            className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                            <strong>Products</strong>
-                                            <span>${subtotal}</span>
-                                        </li>
-                                        <li className="list-group-item d-flex justify-content-between align-items-center px-0">
-                                            <strong>Shipping</strong>
-                                            <span>Free</span>
-                                        </li>
-                                        <li
-                                            className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                            <div>
-                                                <strong>Total amount</strong>
-                                            </div>
-                                            <span><strong>${total}</strong></span>
-                                        </li>
-                                    </ul>
-                                    <button type="button" className="btn btn-success" onClick={submitShop}>
-                                        Go to checkout
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <CartSummary></CartSummary>
                     </div>
                 </div>
             </section>
-
         </>
-
     )
 }
 
