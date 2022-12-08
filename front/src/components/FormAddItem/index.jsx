@@ -5,8 +5,8 @@ import CategoryInput from './CategoryInput/CategoryInput'
 import SizeInput from './SizeInput/SizeInput'
 const FormAddItem = (props) => {
     const { title } = props
-    const { nameItem, categoryItem, priceItem,
-        stockITem, imageItem, handleChangeNameItem,
+    const { nameItem, priceItem,
+        stockITem ,handleChangeNameItem,
         handleChangePriceItem, handleChangeStockItem,handleChangeCategoryItem,handleChangeSizeItem,
         handleChangeImageItem, handleSubmit } = useAddItem()
 
@@ -34,10 +34,7 @@ const FormAddItem = (props) => {
                     <div className="container">
                         <div className="row">
                             <div className="image-upload col-md-6 col-lg-5 col-xxl-4 text-center">
-                                <label htmlFor="file-input"
-                                // onChange={handleImgInputChance}
-                                // value={previewSource}
-                                >
+                                <label htmlFor="file-input">
                                     {
                                         (previewSource) ?
                                             <>

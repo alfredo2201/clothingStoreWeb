@@ -9,7 +9,7 @@ const useCartItems = () => {
   const [numberItems, setNumberItems] = useState(numberItemsCart);
   const [lastUpdated, setLastUpdated] = useState(0);
   const [subtotal, setSubtotal] = useState(calculateSubtotal);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(calculateSubtotal);
 
   const calculateSubtotalS = () => {
     let price = 0;

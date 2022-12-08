@@ -1,83 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Navigate } from "react-router-dom";
-import { registerClient } from "../../api/client.api";
-import Swal from 'sweetalert2'
+import useRegisterForm from "../../hooks/useRegisteForm/useRegisterForm";
 
 const RegisterForm = () => {
-
-    const [previewSource, setPreviewSource] = useState();
-    const [userName, setUserName] = useState();
-    const [emailUser, setEmailUser] = useState();
-    const [passwordUser, setPasswordUser] = useState();
-    const [passwordUser2, setPasswordUser2] = useState();
-    const [nameUser, setNameUser] = useState();
-    const [lastNameUser, setLastNameUSer] = useState();
-    const [file, setFile] = useState();
-    const [registed, setRegisted] = useState(false);
-    const handleChangeUserName = (event) => {
-        setUserName(event.target.value)
-    }
-
-    const handleChangeEmailUser = (event) => {
-        setEmailUser(event.target.value);
-    }
-
-    const handleChangePassUser = (event) => {
-        setPasswordUser(event.target.value);
-    }
-
-    const handleChangePassUser2 = (event) => {
-        setPasswordUser2(event.target.value);
-    }
-    const handleChangeNameUser = (event) => {
-        setNameUser(event.target.value);
-    }
-
-    const handleChangeLastName = (event) => {
-        setLastNameUSer(event.target.value);
-    }
-
-    const handleImgInputChance = (event) => {
-        const file = event.target.files[0];
-        setFile(file)
-        previewFile(file);
-    }
-
-    const previewFile = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setPreviewSource(reader.result)
-        }
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (passwordUser !== passwordUser2) {
-            Swal.fire('Passwords do not match')                                
-            // alert('Passwords do not match')
-            return;
-        }
-        const formData = new FormData();
-        formData.append('userName', userName);
-        formData.append('name', nameUser);
-        formData.append('lastName', lastNameUser);
-        formData.append('address', 'mi casa');
-        formData.append('email', emailUser);
-        formData.append('password', passwordUser);
-        formData.append('imgPerfil', file);
-
-        const result = registerClient(formData)
-        if (!result) {
-            Swal.fire('Error registering account')                                
-            // alert('chale no se registró')
-        }
-        Swal.fire('Account register successful')                                
-        // alert('Cuenta registrada');
-        setRegisted(true)
-
-    }
-
+    const { handleChangeUserName,
+        handleChangeEmailUser,
+        handleChangePassUser,
+        handleChangePassUser2,
+        handleChangeNameUser,
+        handleChangeLastName,
+        handleImgInputChance,
+        handleSubmit,
+        previewSource,
+        registed,
+        userName,
+        emailUser,
+        passwordUser,
+        passwordUser2,
+        nameUser,
+        lastNameUser } = useRegisterForm()
     return (
         <div className="container mb-4 mt-4">
             {

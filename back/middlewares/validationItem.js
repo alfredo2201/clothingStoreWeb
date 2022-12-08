@@ -36,8 +36,18 @@ const validateidItem = async(req, res, next) =>{
     next();
 }
 
+const validateCategoryItem = async(req, res, next) =>{
+    await check('category', 'invalid category').optional().isLength({max: 30}).isString().run(req);
+    let result = validationResult(req);
+    if(!result.isEmpty()){
+        return res.status(400).send(result);
+    }
+    next();
+}
+
 export default {
     validateRegisterItem,
     validationUpdateItem,
-    validateidItem
+    validateidItem,
+    validateCategoryItem
 }

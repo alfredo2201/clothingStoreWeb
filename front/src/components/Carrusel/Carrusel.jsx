@@ -32,7 +32,7 @@ const Carrusel = () => {
     };
 
     return (
-        <div id="template-mo-zay-hero-carousel"  data-bs-ride="carousel" onChange={handleSelect}>
+        <div id="template-mo-zay-hero-carousel" data-bs-ride="carousel" onChange={handleSelect}>
             <Carousel activeIndex={index} onSelect={handleSelect} className="p-2 h-100">
                 {dataCarrusel.map((item) =>
                     <Carousel.Item key={item.id} className="p-3">
@@ -54,7 +54,7 @@ const Carrusel = () => {
                                 </div>
                             </div>
                         </div>
-                    </Carousel.Item>                
+                    </Carousel.Item>
                 )
                 }
             </Carousel >

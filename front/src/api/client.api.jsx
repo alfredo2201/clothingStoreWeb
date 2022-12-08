@@ -17,9 +17,5 @@ export const registerClient = async(data) =>{
         "type": "formData",
     }
     // console.log(data)
-    return await axios.post('http://localhost:3000/client', data,
-    // {
-    //     headers: headers
-    // }
-    )
+    return await axios.post('http://localhost:3000/client', data)
 }

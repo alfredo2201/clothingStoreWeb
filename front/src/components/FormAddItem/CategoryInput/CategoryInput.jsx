@@ -1,9 +1,6 @@
 import { useAddItem } from "../../../hooks/useAddItem"
 const CategoryInput = (props) => {
     const {onChangeCategory} = props;
-    // const { 
-        // handleChangeCategoryItem
-        //  } = useAddItem()
     return (
         <div>
             <label className="form-label mt-2">

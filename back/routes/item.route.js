@@ -6,19 +6,8 @@ import { uploads } from '../multer.js';
 // import multer from 'multer';
 const router = Router();
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'uploads')
-//     },
-//     filename: function (req, file, cb) {
-//         // const extension = file.mimetype.split('/')[1];
-//         cb(null, `${Date.now()}-${file.originalname}`)
-//     }
-// })
-
-// const upload = multer({ storage: storage });
-
 router.get('/items', itemController.findAllItems);
+router.get('/items/:category',validationItem.validateidItem,itemController.findAllItemsByCategory);
 //itemController.upload.none()
 router.get('/item/:idItem', validationItem.validateidItem, itemController.findOneItem);
 

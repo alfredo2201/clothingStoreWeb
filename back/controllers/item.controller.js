@@ -90,6 +90,16 @@ const findAllItems = async (req, res, next) => {
   }
 };
 
+const findAllItemsByCategory = async (req, res, next) => {
+  try {
+    const {category} =req.params
+    const items = await itemRepository.findAllByCategory({category});
+    res.send(items);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const findItemsForPage = async (req, res, next) => {
   const perPage = 4;
   const { page } = req.params;
@@ -191,5 +201,5 @@ export default {
   updateItem,
   findItemsForPage,
   uploadItemImg,
-  // upload
+  findAllItemsByCategory  
 };

@@ -7,14 +7,13 @@ import useAllProducts from "../../hooks/useAllProducts/useAllProducts";
 const ListProducts = (props) => {
   const {items, itemsPages, isFetching} = useAllProducts()
   const { title } = props;
-  if(isFetching) return <p>...Cargando</p> 
+  if(isFetching) return <p className="text-center h1 p-5">...Cargando</p> 
   return (
     <div className="container">
-      <TitleList title={title}></TitleList>
+      {(items.length > 0) ? <TitleList title={title}></TitleList>:<p className="text-center h1 p-5">...Cargando</p>}
       <div className="row">
         <div className="col-lg-12">
           <div className="row">
-            
             
             {items.map((item) => (
               <ProductPost

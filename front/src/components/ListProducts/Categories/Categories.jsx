@@ -2,16 +2,6 @@ import React, {useState} from "react";
 import useAllProducts from "../../../hooks/useAllProducts/useAllProducts";
 const Categories = () => {   
     const {handleOnChangeCategory,categories,filterProducts} = useAllProducts()
-    // const handleOnChangeCategory = (e) =>{        
-    //     switch (e.target.innerText) {
-    //         case categories.All:
-                
-    //             break;
-        
-    //         default:
-    //             break;
-    //     }
-    // }
     return (
         <div className="row">
             <div className="col-md-6">
