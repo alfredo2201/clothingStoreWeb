@@ -21,11 +21,10 @@ export const executeAssociations = async () => {
 
   await Client.sync();
   // await Client.sync({alter: true});
-
   await Admin.sync();
   await Card.sync();
   await Sale.sync();
-  // await Item.sync({alter: true});
+  await Item.sync();
   await Item.sync();
   await ItemSale.sync();
 };

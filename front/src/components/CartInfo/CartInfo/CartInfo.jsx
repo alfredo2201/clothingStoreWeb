@@ -28,14 +28,7 @@ const CartInfo = () => {
                                     onDelete={handleOnDelete.bind(this,product.id)}>
                                     </CartItems>                                    
                                 ))}
-                            </div>
-                            <div className="card mb-lg-0 card-body">
-                                <div className="col-md-12">
-                                    <div className="form-group mb-3"><label className="form-label">
-                                        <strong>Write your address</strong>
-                                        <br /></label><input className="form-control" type="input" required autoComplete="off" placeholder="Address" /></div>
-                                </div>
-                            </div>
+                            </div>                            
                             <div className="card mb-4 mb-lg-0 mt-4">
                                 <div className="card-body">
                                     <p><strong>We accept</strong></p>

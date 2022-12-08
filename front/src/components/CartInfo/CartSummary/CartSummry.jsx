@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react"
 import useCartItems from "../../../hooks/useCartItems/useCartItems"
-import useShop from "../../../hooks/useShop/useShop"
 import CardInfo from "../CardInfo/CardInfo"
 const CartSummary = () => {
-    // const {sub, total} = props
-    const { subtotal, total } = useCartItems()
-    const { submitShop } = useShop()
+    const { subtotal, total } = useCartItems()    
 
     return (<div className="col-md-4">
         <div className="card mb-4">
@@ -33,10 +29,6 @@ const CartSummary = () => {
                 </ul>
 
                 <CardInfo />
-
-                <button type="button" className="btn btn-success" onClick={submitShop}>
-                    Go to checkout
-                </button>
             </div>
         </div>
     </div>)

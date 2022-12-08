@@ -1,80 +1,35 @@
 import React from 'react'
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { saleItems } from '../../../api/sale.api';
-import { useCart } from '../../../context/cart/cartContext';
+import { Elements, CardElement } from '@stripe/react-stripe-js';
 import { useClient } from '../../../context/client/ClientProvider';
 import Swal from 'sweetalert2';
-import useCartItems from '../../../hooks/useCartItems/useCartItems';
-const stripePromise = loadStripe('pk_test_51MCUiwA7VCVs4t0KNOmcuHbJnOpcmrPmi91TvEnZGrWwGonfciuLrFGILU9a2AepzRBjVAsIc3CKsDyLEQeNOLVS00MBcBPqWm')
+import useCardInfo from '../../../hooks/useCardInfo/useCardInfo';
+const stripePromise = loadStripe('pk_test_51MC5YVJB2L5P0F8YoynEekwVoXf7MZCnxQY43HmELJQmBiMwNXr5ohIEhXSfMGawjI7gyzKASm58n5T7Hz2sbQvv00JRLmyxD7')
 
 const CheckoutForm = () => {
-    const { client } = useClient();
-    const { cart, emptyCart } = useCart();
-
-    const stripe = useStripe();
-    const elements = useElements();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (!client) {
-            Swal.fire('Please Start Session to Buy');
-        }
-
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: elements.getElement(CardElement)
-        })
-        if (!error) {
-            const card = paymentMethod.card.last4;
-            const company = paymentMethod.card.brand;
-            const { funding } = paymentMethod.card;
-            const { id } = paymentMethod;
-            
-            const newSale = {
-                idStripe: id,
-                idClient: client.id,
-                paymentMethod: funding,
-                card: card,
-                brand: company,
-                items: cart
-            }
-            const {data} = await saleItems(newSale);
-            (await Swal.fire({
-                text: 'Successful Payment',
-                timer: 2000,
-            })).isConfirmed
-
-            emptyCart();
-            window.location.reload();
-            // elements.getElement(CardElement).clear();
-            return;
-        }
-        Swal.fire({
-            text: 'Card Error',
-            timer: 2000,
-        })
-    }
-
+    const {handleSubmit} = useCardInfo()
     return (
         <form onSubmit={handleSubmit}>
-            <CardElement />
-            <button type={'submit'} className="btn btn-success">
+            <CardElement className='bg-checkout p-4 rounded' />
+            <button type={'submit'} className="btn btn-success mt-4">
                 Buy
             </button>
-            {/* <h1>hola mundo</h1> */}
         </form>
     )
 }
 
 const CardInfo = () => {
+    const { client } = useClient();    
     return (
-        <div className='container p-4'>
-
-            <Elements stripe={stripePromise}>
+        <div className='container p-1'>
+            {(client != null) ? 
+            <Elements className="m-2" stripe={stripePromise}>
                 <CheckoutForm />
-            </Elements>
+            </Elements> :
+            <button type="button" className="btn btn-success " onClick={()=>Swal.fire('Please Start Session to Buy')}>
+                  Go to checkout
+            </button>
+            }
         </div>
     )
 }

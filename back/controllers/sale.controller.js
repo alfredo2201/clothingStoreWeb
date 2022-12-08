@@ -47,24 +47,6 @@ const registerSale = async (req, res, next) => {
     })
 
     res.status(201).send({ message: 'sucessful' });
-
-
-    // res.status(201).send(req.body)
-    // const { paymentMethod, idClient, idCard, items } = req.body;
-    // let total = 0
-    // for (let item of items) {
-    //   total += item.amount * item.price
-    // }
-    // const sale = await register({ paymentMethod, total, idClient, idCard });
-    // for (let object of items) {
-    //   ItemSale.register({        
-    // price: object.price,
-    // amount: object.amount,
-    // idSale: sale.dataValues.idSale,
-    // idItem: object.idItem,      
-    //   });
-    // }
-    // res.status(201).send(sale);
   } catch (error) {
     next(error);
     console.log(error.message);

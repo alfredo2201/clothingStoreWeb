@@ -6639,6 +6639,9 @@ fieldset:disabled .btn {
 .bg-info {
   background-color: #0dcaf0 !important;
 }
+.bg-checkout{
+  background-color: #caf0c4 !important;
+}
 .bg-warning {
   background-color: #ffc107 !important;
 }

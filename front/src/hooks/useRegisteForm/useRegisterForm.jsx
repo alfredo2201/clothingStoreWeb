@@ -53,7 +53,11 @@ const useRegisterForm = () => {
     const regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
     event.preventDefault();
     if (passwordUser !== passwordUser2) {
-      Swal.fire("Passwords do not match");
+      Swal.fire({
+        icon: 'error',
+        text: 'Passwords are differents',
+        timer: 2500,
+      });
       return;
     }
     if (!regex.test(passwordUser)) {
@@ -83,12 +87,6 @@ const useRegisterForm = () => {
       .catch((error) => {
         Swal.fire("Error registering account", error);
       });
-    // if (!result) {
-    //   Swal.fire("Error registering account");
-    // }
-    // console.log(result)
-    // Swal.fire("Account register successful");
-    // alert('Cuenta registrada');    
   };
 
   return {
