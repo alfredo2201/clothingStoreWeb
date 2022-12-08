@@ -152,6 +152,7 @@ const deleteOneItem = async (req, res, next) => {
       const error = new Error("Item not deleted");
       error.httpStatusCode = 400;
       next(error);
+      return;
     }
 
     res.send({ message: "Deleted Item", item: item });
