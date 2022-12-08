@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const saleItems = async(data) =>{
-
+    
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': window.localStorage.getItem('token')

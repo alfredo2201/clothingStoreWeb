@@ -1,5 +1,14 @@
+import Swal from "sweetalert2";
+import { deleteProduct } from "../../../../api/items";
+
 const ProductInfo = (props) => {
-    const {idProduct, name, price, quantity, size, img} = props;
+    const {idProduct, name, price, stock, size, img} = props;
+
+    const handleDelete = async() =>{
+        await deleteProduct(idProduct);
+        (await Swal.fire('Deleted Product')).isConfirmed
+        window.location.reload();
+    }
     return (
     <div className="row d-flex justify-content-between align-items-center">
         <div className="col-md-2 col-lg-2 col-xl-2">
@@ -11,14 +20,13 @@ const ProductInfo = (props) => {
             <p><span className="text-muted">Price: </span>${price}</p>
         </div>
         <div className="col-md-3 col-lg-3 col-xl-3">
-            <p><span className="text-muted">Quantity: </span>{quantity}</p>
+            <p><span className="text-muted">Stock: </span>{stock}</p>
             <p><span className="text-muted">Size: </span>{size}</p>
         </div>
         <div className="col-md-3 col-lg-3 col-xl-3">
-            <button type="button" className="btn btn-dark">
-                EDIT
-            </button>
-            <button type="button" className="btn btn-delete">
+            <button type="button" className="btn btn-delete"
+            onClick={handleDelete}
+            >
                 DELETE
             </button>
         </div>

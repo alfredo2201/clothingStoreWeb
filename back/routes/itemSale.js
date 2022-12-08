@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import itemSaleController from '../controllers/itemSale.controller.js';
+import { isAuthAdmin } from '../middlewares/isAuthAdmin.js';
 import { isAuthClient } from '../middlewares/isAuthClient.js';
 import validationItemSale from '../middlewares/validationItemSale.js';
 
@@ -13,6 +14,6 @@ router.post('/itemSale' ,isAuthClient, validationItemSale.validateidItemSale, it
 
 router.put('/itemSale', isAuthClient, validationItemSale.validationUpdateItemSale, itemSaleController.updateItemSale);
 
-router.delete('/itemSale/:idItemSale', isAuthClient, validationItemSale.validateidItemSale, itemSaleController.deleteOneItemSale);
+router.delete('/itemSale/:idItemSale', isAuthAdmin, validationItemSale.validateidItemSale, itemSaleController.deleteOneItemSale);
 
 export default router;
