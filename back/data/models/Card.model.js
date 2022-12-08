@@ -41,3 +41,11 @@ export const Card = sequelize.define(
     }
   }
 );
+
+Card.prototype.verifyCardNumber = function(card){
+  return bcrypt.compareSync(card, this.cardNumber);
+}
+
+Card.prototype.verifyExpirationDate = function(exDate){
+  return bcrypt.compareSync(exDate, this.expirationDate);
+}

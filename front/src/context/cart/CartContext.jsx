@@ -41,6 +41,13 @@ export const CartContextProvider = ({ children }) => {
     return true;
   };
 
+  const emptyCart = () =>{
+    setCart([]);
+    setNumberItems(0);
+    // window.localStorage.setItem("cartItems", JSON.stringify(cart));
+    window.localStorage.removeItem('cartItems');
+  }
+
   const updateQuantity = (key, num) => {
     const list = cart;
     let exist = false;
@@ -90,11 +97,12 @@ export const CartContextProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cart,
+        emptyCart,
         loadCart,
         removeCartItem,
         numberItemsCart,
         updateQuantity,
-        calculateSubtotal
+        calculateSubtotal,
       }}
     >
       {children}

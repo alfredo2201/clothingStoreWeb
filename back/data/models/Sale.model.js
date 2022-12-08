@@ -19,6 +19,14 @@ export const Sale = sequelize.define(
       type: DataType.FLOAT,
       allowNull: false,
     },
+    brand: {
+      type: DataType.STRING,
+      allowNull: false
+    },
+    card:{
+      type: DataType.STRING(4),
+      allowNull: false
+    }
   },
   { timestamps: true }
 );

@@ -35,7 +35,7 @@ export const ClientContextProvider = ({ children }) => {
             window.localStorage.removeItem('user');
             window.localStorage.setItem('user', JSON.stringify(newClient.data));
             setClient(newClient.data)
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             console.log('Error to Updated client')
         }

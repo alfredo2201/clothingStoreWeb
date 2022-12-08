@@ -12,14 +12,14 @@ const login = async (req, res, next) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.send({ message: 'bad request' });
+            return resres.status(400).send({ message: 'bad request' });
         }
 
         const client = await Client.findOne({ where: { email } });
         if (client) {
 
             if (!client.verifyPassword(password)) {
-                return res.send({ message: 'incorrect password' });
+                return res.status(401).send({ message: 'incorrect password' });
             }
 
             //generar token
@@ -44,7 +44,7 @@ const login = async (req, res, next) => {
         const admin = await Admin.findOne({ where: { email } });
         if (admin) {
             if (!admin.verifyPassword(password)) {
-                return res.send({ message: 'incorrect password' });
+                return res.status(401).send({ message: 'incorrect password' });
             }
             const token = jwt.sign({ idAdmin: admin.idAdmin, useraName: admin.userName },
                 process.env.SECRET_KEY_ADMIN, {
@@ -60,7 +60,7 @@ const login = async (req, res, next) => {
                 role: "admin"
             })
         }
-        return res.status(404).send({
+        return res.status(401).send({
             message: 'Unsuccess login'
         })
     } catch (error) {

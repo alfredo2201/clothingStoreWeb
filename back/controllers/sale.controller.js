@@ -1,4 +1,3 @@
-
 import {
   deleteOne,
   findAll,
@@ -6,26 +5,69 @@ import {
   register
 } from "../data/repositories/Sale.repository.js";
 import * as ItemSale from "../data/repositories/itemSales.repository.js";
+import Stripe from "stripe";
+import { Sale } from "../data/models/Sale.model.js";
+
+const stripe = new Stripe(process.env.STRIPE);
 
 const registerSale = async (req, res, next) => {
   try {
-    const { paymentMethod, idClient, idCard, items } = req.body;
+    const { idStripe, paymentMethod, items, idClient, brand, card } = req.body;
+
     let total = 0
-    for (let item of items) {
-      total += item.amount * item.price
+
+    items.map(it => {
+      total += it.quantity * it.price
+    })
+    console.log(total);
+    const newSale = {
+      paymentMethod,
+      total,
+      idClient,
+      brand,
+      card
     }
-    const sale = await register({ paymentMethod, total, idClient, idCard });
-    for (let object of items) {
-      ItemSale.register({        
-        price: object.price,
-        amount: object.amount,
+
+    const sale = await register(newSale);
+
+    items.map(it =>
+      ItemSale.register({
+        price: it.price,
+        amount: it.quantity,
         idSale: sale.dataValues.idSale,
-        idItem: object.idItem,      
-      });
-    }
-    res.status(201).send(sale);
+        idItem: it.id,
+      })
+    )
+
+    const r = await stripe.paymentIntents.create({
+      amount: total*100,
+      currency: "USD", 
+      payment_method: idStripe,
+      confirm: true,
+    })
+
+    res.status(201).send({ message: 'sucessful' });
+
+
+    // res.status(201).send(req.body)
+    // const { paymentMethod, idClient, idCard, items } = req.body;
+    // let total = 0
+    // for (let item of items) {
+    //   total += item.amount * item.price
+    // }
+    // const sale = await register({ paymentMethod, total, idClient, idCard });
+    // for (let object of items) {
+    //   ItemSale.register({        
+    // price: object.price,
+    // amount: object.amount,
+    // idSale: sale.dataValues.idSale,
+    // idItem: object.idItem,      
+    //   });
+    // }
+    // res.status(201).send(sale);
   } catch (error) {
     next(error);
+    console.log(error.message);
   }
 };
 

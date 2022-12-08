@@ -58,12 +58,13 @@ const NavBar = () => {
             >
               <i className="fa fa-fw fa-search text-dark mr-2"></i>
             </a>
-            {
-              (client != null) ?
-              "":
+            {/* {
+              (client !== null) ?
+              <CartIcon />:
               <CartIcon />
 
-            } 
+            }  */}
+            <CartIcon />
             <UserIcon />
           </div>
         </div>

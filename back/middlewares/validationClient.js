@@ -2,7 +2,7 @@ import {check, validationResult} from 'express-validator';
 
 const validationRegisterClient = async(req, res, next) =>{
     try {
-        await check('email', 'invalid email').isEmail().notEmpty().run(req);
+    await check('email', 'invalid email').isEmail().notEmpty().run(req);
     await check('name', 'invalid name').notEmpty().isLength({max: 30}).isString().run(req);
     await check('lastName', 'invalid lastname').notEmpty().isLength({max: 30}).isString().run(req);
     await check('userName', 'invalid userName').notEmpty().isLength({max: 50}).isString().run(req);

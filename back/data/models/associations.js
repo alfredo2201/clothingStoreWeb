@@ -16,8 +16,8 @@ export const executeAssociations = async () => {
   Client.hasMany(Sale, { foreignKey: "idClient", allowNull: false});
   Sale.belongsTo(Client, { foreignKey: "idClient", allowNull: false});
   //Relacion entre Cards y Sales
-  Card.hasMany(Sale, { foreignKey: "idCard", allowNull: false, onDelete: 'CASCADE'});
-  Sale.belongsTo(Card, { foreignKey: "idCard", allowNull: false });
+  // Card.hasMany(Sale, { foreignKey: "idCard", allowNull: false, onDelete: 'CASCADE'});
+  // Sale.belongsTo(Card, { foreignKey: "idCard", allowNull: false });
 
   await Client.sync();
   // await Client.sync({alter: true});

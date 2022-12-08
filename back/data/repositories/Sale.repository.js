@@ -1,16 +1,11 @@
 import { Sale } from "../models/Sale.model.js";
-import {Item}  from "../models/Item.model.js";
+import { Item } from "../models/Item.model.js";
 
 const register = async (value) => {
   if (!value) return new Error("values are required");
-  const { paymentMethod, total, idClient, idCard} = value;
-
-  const sale = await Sale.create({
-    idCard,
-    idClient,
-    paymentMethod,
-    total
-  })
+  // const { paymentMethod, total, idClient, idCard } = value;
+  // console.log(value);
+  const sale = await Sale.create(value)
   return sale
 }
 
@@ -22,7 +17,7 @@ const findAll = async (value) => {
       idClient
     },
     include: [{
-      model:Item
+      model: Item
     }]
   });
   return sales;
@@ -39,7 +34,7 @@ const findOne = async (value) => {
         idClient,
       },
       include: [{
-        model:Item
+        model: Item
       }],
     });
     return sale;

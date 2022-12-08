@@ -24,10 +24,15 @@ export const useLogin = () => {
                 Swal.fire('Email or password is empty')                
                 return
             }            
-            const data = await login(email, password);          
+            const data = await login(email, password);
+            
+            if(!data){
+                Swal.fire('Error to LogIn1')                
+                return;
+            }         
             //debería entrar aquí si está mal la petición, pedir ayuda
             if (data.data.message !== 'successful' || data === undefined) {
-                Swal.fire('Error to login')                
+                Swal.fire('Error to LogIn2')                
                 return;
             }
 
@@ -49,7 +54,8 @@ export const useLogin = () => {
             setPassword('');
             setEmail('');
         } catch (error) {
-            Swal.fire('Error to Log In');
+            Swal.fire('Error to LogIn');
+            // console.log(error)
         }
     }
     return {

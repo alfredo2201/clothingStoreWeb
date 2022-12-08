@@ -50,9 +50,9 @@ export const UseFormPerfil = () => {
         
         const updatedData = { ...client, ...newData }
         // console.log(upd)
-        console.log('->',updatedData);
         await updateClientContext(updatedData);
-        Swal.fire('Updated User')
+        (await Swal.fire('Updated User')).isConfirmed
+        window.location.reload();
     }
     return {
         client,

@@ -1,5 +1,7 @@
 
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
 export const isAuthClient = async (req, res, next) => {
     try {
         let token = req.headers['x-access-token'] || req.headers['authorization'];
