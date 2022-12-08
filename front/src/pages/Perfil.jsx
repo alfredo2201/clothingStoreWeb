@@ -16,7 +16,7 @@ const Perfil = () => {
           <Navigate to="/auth/login" replace={true} />
         ) : (
           <>          
-          <FormPerfil /><OrdersProfile />
+          <FormPerfil />
           </>
         )
       }
